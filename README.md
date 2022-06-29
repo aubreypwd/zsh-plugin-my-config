@@ -1,24 +1,11 @@
-# ``
-
-Description
-
-## Usage
-
-```bash
-```
-
-## Requires
-
-- `...`<sup>*</sup>
-
-<sup>*</sup> If using [homebrew](https://brew.sh) on macOS, these will automatically be installed.
+Just my own ZSH configs in a plugin :)
 
 ## Install
 
 Using [antigen](https://github.com/zsh-users/antigen):
 
 ```bash
-antigen bundle aubreypwd/zsh-plugin-NAME@1.0.0
+antigen bundle aubreypwd/zsh-plugin-aubreypwd
 ```
 
 ## Development
@@ -26,15 +13,7 @@ antigen bundle aubreypwd/zsh-plugin-NAME@1.0.0
 Install the package on `master`:
 
 ```bash
-antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-NAME
+antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-aubreypwd
 ```
 
-...and contribute upstream by working in `$HOME/.antigen/bundles/aubreypwd/zsh-plugin-NAME`.
-
----
-
-## Changelog
-
-### 1.0.0
-
-- First version
+...and contribute upstream by working in `$HOME/.antigen/bundles/aubreypwd/zsh-plugin-aubreypwd`.
