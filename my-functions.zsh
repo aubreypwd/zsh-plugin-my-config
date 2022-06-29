@@ -22,6 +22,22 @@ function lwpcliconfig {
 }
 
 ###
+ # Easy way to archive a repo and transfer it to 4ubr3ypwd.
+ #
+ # E.g: gharchive
+ #
+ # @since Wednesday, June 29, 2022
+ ##
+function gharchive {
+
+	gh repo archive -y
+	gh api "repos/aubreypwd/${PWD##*/}/transfer" -f new_owner=4ubr3ypwd
+	rm -Rf $(pwd)
+
+	exit
+}
+
+###
  # Export a DB using WP-CLI.
  #
  # ...and compress.
