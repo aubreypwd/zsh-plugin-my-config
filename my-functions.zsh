@@ -94,10 +94,9 @@ function newphpswp {
 
 	composer init --name "aurbeypwd/$(nwd)" --require spatie/ray:^1.0 --require aubreypwd/php-s-wp:dev-main@dev --no-interaction
 	composer install --no-interaction
+	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
 
 	iwpdebug
-
-	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
 }
 
 ###
