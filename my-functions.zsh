@@ -22,6 +22,60 @@ function lwpcliconfig {
 }
 
 ###
+ # Get the name of the current directory.
+ #
+ # @since Thursday, June 30, 2022
+ ##
+function nwd {
+	echo "${PWD##*/}";
+}
+
+###
+ # New php -S WordPress site.
+ #
+ # Create a directory and run this command inside it.
+ #
+ # @since Thursday, June 30, 2022
+ ##
+function newphpswp {
+
+	wp core download
+	wp config create --dbname="$(nwd)" --dbuser="root"
+	wp db create
+	wp core install --url="http://localhost" --title="$(nwd)" --admin_email="code@aubreypwd.com" --admin_user="admin"
+	wp user update admin --user_pass="password"
+
+	composer init --name "aurbeypwd/$(nwd)" --require spatie/ray:^1.0 --require aubreypwd/php-s-wp:dev-main@dev --no-interaction
+	composer install --no-interaction
+
+	wp config set BP_DEFAULT_COMPONENT 'staging-area'
+	wp config set BP_XPROFILE_SLUG 'staging-area'
+	wp config set COMPRESS_CSS false --raw
+	wp config set COMPRESS_SCRIPTS false --raw
+	wp config set CONCATENATE_SCRIPTS false --raw
+	wp config set DISABLE_WP_CRON true --raw
+	wp config set ENFORCE_GZIP false --raw
+	wp config set EP_DASHBOARD_SYNC false --raw
+	wp config set EP_HOST 'http://failed.tld/'
+	wp config set FS_CHMOD_DIR 0775 --raw
+	wp config set FS_CHMOD_FILE 0664 --raw
+	wp config set FS_METHOD 'direct'
+	wp config set JETPACK_DEV_DEBUG true --raw
+	wp config set SAVE_QUERIES true --raw
+	wp config set SCRIPT_DEBUG true --raw
+	wp config set WP_AUTO_UPDATE_CORE false --raw
+	wp config set WP_CACHE false --raw
+	wp config set WP_DEBUG true --raw
+	wp config set WP_DEBUG_DISPLAY false --raw
+	wp config set WP_DEBUG_LOG true --raw
+	wp config set WP_ENVIRONMENT_TYPE local
+	wp config set WP_LOCAL_DEV true --raw
+	wp config set WP_MAX_MEMORY_LIMIT 4096 --raw
+	wp config set WP_MEMORY_LIMIT 4096 --raw
+	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
+}
+
+###
  # Easy way to archive a repo and transfer it to 4ubr3ypwd.
  #
  # E.g: gharchive
