@@ -31,23 +31,13 @@ function nwd {
 }
 
 ###
- # New php -S WordPress site.
- #
- # Create a directory and run this command inside it.
+ # Install debugging tools for WordPress.
  #
  # @since Thursday, June 30, 2022
  ##
-function newphpswp {
+function iwpdebug {
 
-	wp core download
-	wp config create --dbname="$(nwd)" --dbuser="root"
-	wp db create
-	wp core install --url="http://localhost" --title="$(nwd)" --admin_email="code@aubreypwd.com" --admin_user="admin"
-	wp user update admin --user_pass="password"
-
-	composer init --name "aurbeypwd/$(nwd)" --require spatie/ray:^1.0 --require aubreypwd/php-s-wp:dev-main@dev --no-interaction
-	composer install --no-interaction
-
+	# Debugging constants.
 	wp config set BP_DEFAULT_COMPONENT 'staging-area'
 	wp config set BP_XPROFILE_SLUG 'staging-area'
 	wp config set COMPRESS_CSS false --raw
@@ -72,6 +62,41 @@ function newphpswp {
 	wp config set WP_LOCAL_DEV true --raw
 	wp config set WP_MAX_MEMORY_LIMIT 4096 --raw
 	wp config set WP_MEMORY_LIMIT 4096 --raw
+
+	# Debugging plugins.
+	wp plugin install --activate debug-bar
+	wp plugin install --activate debug-bar-console
+	wp plugin install --activate debug-bar-shortcodes
+	wp plugin install --activate debug-bar-constants
+	wp plugin install --activate debug-bar-post-types
+	wp plugin install --activate debug-bar-cron
+	wp plugin install --activate debug-bar-actions-and-filters-addon
+	wp plugin install --activate debug-bar-transients
+	wp plugin install --activate debug-bar-list-dependencies
+	wp plugin install --activate debug-bar-remote-requests
+	wp plugin install --activate query-monitor
+}
+
+###
+ # New php -S WordPress site.
+ #
+ # Create a directory and run this command inside it.
+ #
+ # @since Thursday, June 30, 2022
+ ##
+function newphpswp {
+
+	wp core download
+	wp config create --dbname="$(nwd)" --dbuser="root"
+	wp db create
+	wp core install --url="http://localhost" --title="$(nwd)" --admin_email="code@aubreypwd.com" --admin_user="admin"
+	wp user update admin --user_pass="password"
+
+	composer init --name "aurbeypwd/$(nwd)" --require spatie/ray:^1.0 --require aubreypwd/php-s-wp:dev-main@dev --no-interaction
+	composer install --no-interaction
+
+	iwpdebug
+
 	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
 }
 
