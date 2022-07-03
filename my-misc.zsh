@@ -33,4 +33,4 @@
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
 
-} &> /dev/null &
+} &> /dev/null &!

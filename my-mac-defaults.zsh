@@ -35,4 +35,4 @@ setopt no_monitor
 	defaults write defaults write com.apple.finder CreateDesktop true # Do or don't show desktop icons.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
 
-} &> /dev/null &
+} &> /dev/null &!

@@ -6,10 +6,9 @@
  # @since Tuesday, April 19, 2022
  ##
 
-###
- # Enable history between panels.
- #
- # @since Thursday, 10/1/2020
- ##
-unsetopt inc_append_history
-unsetopt share_history
+unsetopt INC_APPEND_HISTORY # Append history to new shells.
+unsetopt SHARE_HISTORY
+
+setopt MONITOR
+setopt POSIX_JOBS
+setopt LONG_LIST_JOBS

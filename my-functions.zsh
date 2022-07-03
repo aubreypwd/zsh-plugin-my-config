@@ -78,6 +78,19 @@ function iwpdebug {
 }
 
 ###
+ # Setup composer for WordPress.
+ #
+ # @since Thursday, June 30, 2022
+ ##
+function scomposerwp {
+
+	composer init --name "aubreypwd/$(nwd)" --require "spatie/ray:^1.0" --require "aubreypwd/php-s-wp:dev-main@dev" --no-interaction
+	composer install --no-interaction
+
+	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
+}
+
+###
  # New php -S WordPress site.
  #
  # Create a directory and run this command inside it.
@@ -92,10 +105,7 @@ function newphpswp {
 	wp core install --url="http://localhost" --title="$(nwd)" --admin_email="code@aubreypwd.com" --admin_user="admin"
 	wp user update admin --user_pass="password"
 
-	composer init --name "aurbeypwd/$(nwd)" --require spatie/ray:^1.0 --require aubreypwd/php-s-wp:dev-main@dev --no-interaction
-	composer install --no-interaction
-	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
-
+	scomposerwp
 	iwpdebug
 }
 
@@ -229,5 +239,54 @@ function serve {
 			;;
 	esac
 
-	sudo "$version" -S "$domain:80"
+	"$version" -S "$domain:8000"
+}
+
+###
+ # Background Job
+ #
+ # @since Sunday, July 3, 2022
+ ##
+function bg {
+	builtin bg %"$@"
+}
+
+###
+ # Foreground Job
+ #
+ # @since Sunday, July 3, 2022
+ ##
+function fg {
+	builtin fg %"$@"
+}
+
+###
+ # Suspend Job
+ #
+ # @since Sunday, July 3, 2022
+ ##
+function sus {
+	kill -STOP "$@"
+}
+
+###
+ # Jobs
+ #
+ # @since Sunday, July 3, 2022
+ ##
+function jobs {
+	if [ -z "$1" ]; then
+		builtin jobs -l
+	else
+		builtin jobs -l %"$@"
+	fi
+}
+
+###
+ # Continue Job
+ #
+ # @since Sunday, July 3, 2022
+ ##
+function cont {
+	kill -CONT "$@"
 }

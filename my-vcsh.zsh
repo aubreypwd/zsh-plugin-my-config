@@ -19,4 +19,4 @@
 	vcsh write-gitignore pub # Ignore files by default.
 	vcsh write-gitignore priv # Ignore files by default.
 
-} &> /dev/null &
+} &> /dev/null &!
