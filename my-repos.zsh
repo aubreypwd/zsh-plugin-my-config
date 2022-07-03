@@ -14,9 +14,13 @@
 function __dirty_message {
 
 	full="\e[31m⑂\e[0m \e[33m$1\e[0m is dirty"
+	macos="$1 is dirty!"
 	tilde="~"
 
-	echo -e "${full/$HOME/$tilde}"
+	# Only show if opening new terminal session at ~
+	if [[ $(pwd) == $HOME ]]; then
+		echo -e "${full/$HOME/$tilde}"
+	fi
 }
 
 ###
@@ -51,7 +55,7 @@ function checkmyrepos {
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/subl-snippets"
 
 	# My ZSH plugins/configurations.
-	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-aubreypwd"
+	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config"
 
 	if [[ ! $( command -v vcsh ) ]]; then
 
