@@ -204,42 +204,14 @@ function showindock {
 }
 
 ###
- # Serve a website using PHP -S
+ # Run a command in a detached screen.
  #
- # E.g: serve "domain.tld" 7.4
+ # E.g:
  #
- # @since Thursday, June 23, 2022
+ # @since Sunday, July 3, 2022
  ##
-function serve {
-
-	domain="$1"
-
-	if [ -z "$1" ]; then
-		domain="localhost"
-	fi
-
-	version="$2"
-
-	if [ -z "$2" ]; then
-		version="8.1"
-	fi
-
-	case $version in
-
-		7.4)
-			version="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
-			;;
-
-		8.1)
-			version="/opt/homebrew/Cellar/php/8.1.7/bin/php"
-			;;
-
-		*)
-			version=$(which php)
-			;;
-	esac
-
-	"$version" -S "$domain:8000"
+function screenc {
+	screen -S "$@" -d -m zsh -c "$@"
 }
 
 ###
