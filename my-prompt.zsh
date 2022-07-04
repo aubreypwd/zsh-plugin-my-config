@@ -15,5 +15,5 @@ precmd() {
 
 	setopt localoptions nopromptsubst
 	print -P "%F{yellow}$(cmd_exec_time)%f"
-	unset cmd_timestamp #Reset cmd exec time.
+	unset cmd_timestamp # Reset cmd exec time.
 }
