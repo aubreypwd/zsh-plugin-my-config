@@ -59,6 +59,7 @@ if [[ $(pwd) == "$HOME" ]]; then
 			require "watchexec" "brew reinstall watchexec" "brew"
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
+
 		} &> /dev/null &!
 	fi
 
