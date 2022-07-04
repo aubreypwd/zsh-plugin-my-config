@@ -6,9 +6,7 @@
  # @since Tuesday, April 19, 2022
  ##
 
-setopt no_monitor
-
-() {
+if [[ $(pwd) == "$HOME" ]]; then
 
 	###
 	 # macOS Default Flags
@@ -32,7 +30,5 @@ setopt no_monitor
 	defaults write com.apple.dock static-only -bool false # Only show running apps in Dock (when set to true)
 	defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
-	defaults write defaults write com.apple.finder CreateDesktop true # Do or don't show desktop icons.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
-
-} &> /dev/null &!
+fi

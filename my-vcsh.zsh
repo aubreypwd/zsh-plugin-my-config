@@ -11,6 +11,10 @@
  ##
 () {
 
+	if [[ $(pwd) != "$HOME" ]]; then
+		return
+	fi
+
 	###
 	 # vcsh Repos
 	 #

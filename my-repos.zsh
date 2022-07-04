@@ -17,10 +17,7 @@ function __dirty_message {
 	macos="$1 is dirty!"
 	tilde="~"
 
-	# Only show if opening new terminal session at ~
-	if [[ $(pwd) == $HOME ]]; then
-		echo -e "${full/$HOME/$tilde}"
-	fi
+	echo -e "${full/$HOME/$tilde}"
 }
 
 ###

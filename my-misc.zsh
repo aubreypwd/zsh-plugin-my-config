@@ -6,8 +6,7 @@
  # @since Wednesday, June 29, 2022
  ##
 
-# Quietly, and in the background...
-() {
+if [[ $(pwd) == "$HOME" ]]; then
 
 	touch "$HOME/.hushlogin" # Don't show last login message, e.g. you have mail, etc.
 
@@ -32,5 +31,4 @@
 
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
-
-} &> /dev/null &!
+fi
