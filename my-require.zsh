@@ -59,9 +59,7 @@ if [[ $(pwd) == "$HOME" ]]; then
 			require "watchexec" "brew reinstall watchexec" "brew"
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
-			require "pfetch" "brew reinstall pfetch" "brew" # it's in my .zshrc file.
 
 		} &> /dev/null &!
 	fi
-
 fi

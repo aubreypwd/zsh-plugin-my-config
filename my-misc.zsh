@@ -6,7 +6,18 @@
  # @since Wednesday, June 29, 2022
  ##
 
-if [[ $(pwd) == "$HOME" ]]; then
+
+() {
+
+	# Directories I want to exist.
+	mkdir -p "$HOME/Pictures/Screenshots"
+
+	# Make sure keys and identities make it into keychain.
+	ssh-add -q --apple-load-keychain -k
+
+	if [[ $(pwd) != "$HOME" ]]; then
+		return
+	fi
 
 	touch "$HOME/.hushlogin" # Don't show last login message, e.g. you have mail, etc.
 
@@ -26,9 +37,4 @@ if [[ $(pwd) == "$HOME" ]]; then
 	chflags nohidden "$HOME/Sites/Local"
 	chflags hidden "$HOME/Applications (Parallels)"
 
-	# Make sure keys and identities make it into keychain.
-	ssh-add -q --apple-load-keychain -k
-
-	# Directories I want to exist.
-	mkdir -p "$HOME/Pictures/Screenshots"
-fi
+} &> /dev/null &!

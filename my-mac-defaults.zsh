@@ -6,7 +6,11 @@
  # @since Tuesday, April 19, 2022
  ##
 
-if [[ $(pwd) == "$HOME" ]]; then
+() {
+
+	if [[ $(pwd) != "$HOME" ]]; then
+		return
+	fi
 
 	###
 	 # macOS Default Flags
@@ -31,4 +35,5 @@ if [[ $(pwd) == "$HOME" ]]; then
 	defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
-fi
+
+} &> /dev/null &!
