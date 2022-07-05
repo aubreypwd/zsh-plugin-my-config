@@ -112,6 +112,10 @@ alias serve="sudo php -S localhost:80"
 alias serve@7.4="sudo php@7.4 -S localhost:80"
 alias serve@8.1="sudo php@8.1 -S localhost:80"
 
+# Screens
 alias screens="screen -ls"
 alias ns="screen" # New screen
 alias nS="screen -S" # New screen by name
+
+# Antigen
+alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
