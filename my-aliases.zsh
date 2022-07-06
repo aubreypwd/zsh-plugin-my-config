@@ -86,11 +86,6 @@ alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each su
 # xattr
 alias clearatts="xattr -cr"
 
-# curl
-if [[ $( command -v http ) ]]; then
-	alias curl='http'
-fi
-
 # Valet
 alias db='mycli -u root -h 127.0.0.1'
 
