@@ -108,9 +108,15 @@ alias php@7.4="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
 alias php@8.1="/opt/homebrew/Cellar/php/8.1.7/bin/php"
 
 # PHP -S
-alias serve="sudo php -S localhost:80"
-alias serve@7.4="sudo php@7.4 -S localhost:80"
-alias serve@8.1="sudo php@8.1 -S localhost:80"
+alias serve="php -S localhost:8000"
+alias serve@7x="php@7.4 -S localhost:8000"
+alias serve@8x="php@8.1 -S localhost:8000"
+
+	# Multisite
+	alias servemu="php -S mu.localhost:8000"
+	alias serve@7xmu="php@7.4 -S mu.localhost:8000"
+	alias serve@8xmu="php@8.1 -S mu.localhost:8000"
+
 
 # Screens
 alias screens="screen -ls"
