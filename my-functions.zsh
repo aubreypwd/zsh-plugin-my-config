@@ -146,6 +146,41 @@ function wpdbx {
 }
 
 ###
+ # Switch databases.
+ #
+ # E.g: wpdbs DB_NAME
+ #
+ # @since Wednesday, July 6, 2022
+ ##
+function wpdbs {
+	wp config set DB_NAME "$1" && \
+		wp option get home
+}
+
+###
+ # wp core install (Automated)
+ #
+ # E.g: wpci "name-of-database"
+ #
+ # @since Wednesday, July 6, 2022
+ ##
+function wpci {
+
+	if [[ ! -e "wp-config.php" ]]; then
+
+		echo "Not an active WordPress install, use wp config create first."
+		return
+	fi
+
+	wpdbs "$1"
+
+	wp db create && \
+		wp core install --title="$1" --url="https://$(nwd).test" --admin_user="admin" --admin_email="aubreypwd@icloud.com" && \
+			wp user update admin --user_pass=password && \
+				wp option get home
+}
+
+###
  # Import a DB using WP-CLI.
  #
  # ...that's compressed.
