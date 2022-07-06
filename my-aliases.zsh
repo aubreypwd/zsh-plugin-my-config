@@ -88,6 +88,7 @@ alias clearatts="xattr -cr"
 
 # Valet
 alias db='mycli -u root -h 127.0.0.1'
+alias dbs="mysql -u root -e 'show databases;'"
 
 # Finder
 alias finder='open -F -a Finder' # Open Finder but remember the window size when you open.
