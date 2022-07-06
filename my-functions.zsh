@@ -7,6 +7,15 @@
  ##
 
 ###
+ # Valet use
+ #
+ # @since Wednesday, July 6, 2022
+ ##
+function vu {
+	valet use "$1" && composer global update
+}
+
+###
  # Easy way to configure WP CLI in LocalWP.
  #
  # E.g: lwpcliconfig ".../Library/Application Support/Local/run/6vRk6evkc/mysql/mysqld.sock"

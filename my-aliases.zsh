@@ -117,7 +117,6 @@ alias serve@8x="php@8.1 -S localhost:8000"
 	alias serve@7xmu="php@7.4 -S mu.localhost:8000"
 	alias serve@8xmu="php@8.1 -S mu.localhost:8000"
 
-
 # Screens
 alias screens="screen -ls"
 alias ns="screen" # New screen
