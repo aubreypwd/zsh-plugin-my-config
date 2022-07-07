@@ -26,8 +26,16 @@ function __dirty_message {
  # @since Friday, August 27, 2021
  ##
 function __watchrepo {
-	git-is-clean "$1" || ( __dirty_message "$1" )
+
+	# Configs & Repos
+	alias "$2"="git -C $1"
+
+	git-is-clean "$1" || ( __dirty_message "$2" )
 }
+
+# vcsh
+alias pub='vcsh pub'
+alias priv='vcsh priv'
 
 ###
  # Call this function to watch these repos.
@@ -40,19 +48,15 @@ function __watchrepo {
  ##
 function checkmyrepos {
 
-	# Send updates upstream for these before we check them.
-	git --git-dir ~/Repos/github.com/aubreypwd/Alfred.alfredpreferences/.git pew &> /dev/null
-	git --git-dir ~/Repos/github.com/aubreypwd/iTerm2/.git pew &> /dev/null
-
 	# Watch these repositories for dirtiness.
-	__watchrepo "$HOME/iCloud/Profile Photos"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/Alfred.alfredpreferences"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/iTerm2"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/safari-user-scripts"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/subl-snippets"
+	__watchrepo "$HOME/iCloud/Profile Photos" "photos"
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/Alfred.alfredpreferences" "alfred"
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/iTerm2" "iterm"
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/safari-user-scripts" "safari"
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/subl-snippets" "snippets"
 
 	# My ZSH plugins/configurations.
-	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config"
+	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config" "config"
 
 	if [[ ! $( command -v vcsh ) ]]; then
 

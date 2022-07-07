@@ -73,12 +73,7 @@ alias b="bell"
 # diff folders
 alias diffd="diff -rq" # Diff a directory.
 
-# vcsh
-alias pub='vcsh pub'
-alias priv='vcsh priv'
-
-# Configs
-alias config="git -C $HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config"
+# There are aliases in my-repos.zsh
 
 # Misc
 alias matrix='cmatrix'
