@@ -13,7 +13,7 @@
  ##
 function __dirty_message {
 
-	full="\e[31m⑂\e[0m \e[33m$1\e[0m is dirty"
+	full="\e[31m⑂\e[0m \e[33m$1\e[0m is dirty, use \e[32m$2\e[0m to access git."
 	macos="$1 is dirty!"
 	tilde="~"
 
@@ -30,7 +30,7 @@ function __watchrepo {
 	# Configs & Repos
 	alias "$2"="git -C $1"
 
-	git-is-clean "$1" || ( __dirty_message "$2" )
+	git-is-clean "$1" || ( __dirty_message "$1" "$2" )
 }
 
 # vcsh
