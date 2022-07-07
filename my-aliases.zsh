@@ -82,6 +82,7 @@ alias matrix='cmatrix'
 
 # WP-CLI
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
+alias wpdbn="wp config get DB_NAME" # What is the database name
 
 # xattr
 alias clearatts="xattr -cr"
