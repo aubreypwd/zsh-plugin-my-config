@@ -77,6 +77,9 @@ alias diffd="diff -rq" # Diff a directory.
 alias pub='vcsh pub'
 alias priv='vcsh priv'
 
+# Configs
+alias config="git -C $HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config"
+
 # Misc
 alias matrix='cmatrix'
 
