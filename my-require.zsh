@@ -60,6 +60,11 @@ if [[ $(pwd) == "$HOME" ]]; then
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
 
+			# PHP Versions
+			require "/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php" "brew reinstall php@7.4" "brew"
+			require "/opt/homebrew/Cellar/php/8.1.7/bin/php" "brew reinstall php@8.1" "brew"
+			require "/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php" "brew tap shivammathur/php && brew reinstall php@5.6" "brew"
+
 		} &> /dev/null &!
 	fi
 fi
