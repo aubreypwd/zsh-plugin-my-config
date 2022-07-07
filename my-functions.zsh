@@ -40,6 +40,19 @@ function nwd {
 }
 
 ###
+ # System information.
+ #
+ # @since Thursday, July 7, 2022
+ ##
+function sysinfo() {
+
+	echo "\e[35mƤ PHP:\e[0m   \e[37m$(phpv)\e[0m" # Show the current working directory.
+	echo "\e[32m⊔ Node:\e[0m  \e[37m$(node --version)\e[0m" # Show the current working directory.
+	echo "\e[31m℣ Valet:\e[0m \e[37m$(basename $(readlink $HOME/.config/valet/valet.sock))\e[0m" # Show the current working directory.
+	echo "\e[37m $(pwd)\e[0m" # Show the current working directory.
+}
+
+###
  # Install debugging tools for WordPress.
  #
  # @since Thursday, June 30, 2022
