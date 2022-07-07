@@ -114,6 +114,7 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	# Switch valet to version, but keep system at 8.
 	alias valet@7="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force && php@most"
 	alias valet@8="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force && php@most"
+	alias valetv="basename $(readlink $HOME/.config/valet/valet.sock)" # A way to see what version valet is running at.
 
 # PHP -S
 alias serve="php -S localhost:8000"
