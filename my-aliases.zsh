@@ -113,21 +113,22 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	alias php@most="php@8" # The latest PHP version.
 
 	# Switch valet to version, but keep system at 8.
-	alias valet@7="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force && php@most"
-	alias valet@8="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force && php@most"
+	alias valet@5="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@5.6 --force || true && php@most"
+	alias valet@7="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@most"
+	alias valet@8="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@most"
 	alias valetv="basename $(readlink $HOME/.config/valet/valet.sock)" # A way to see what version valet is running at.
 
-# PHP -S
-alias serve="php -S localhost:8000"
-alias serve5="php5 -S localhost:8000"
-alias serve7="php7 -S localhost:8000"
-alias serve8="php8 -S localhost:8000"
+	# PHP -S
+	alias serve="sudo php -S localhost:80"
+	alias serve5="sudo /opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php -S localhost:80"
+	alias serve7="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S localhost:80"
+	alias serve8="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S localhost:80"
 
-	# Multisite
-	alias servemu="php -S mu.localhost:8000"
-	alias serve5mu="php5 -S mu.localhost:8000"
-	alias serve7mu="php7 -S mu.localhost:8000"
-	alias serve8mu="php8 -S mu.localhost:8000"
+		# Multisite
+		alias servemu="sudo php -S mu.localhost:80"
+		alias serve5mu="sudo /opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php -S mu.localhost:80"
+		alias serve7mu="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S mu.localhost:80"
+		alias serve8mu="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S mu.localhost:80"
 
 # Screens
 alias screens="screen -ls"
