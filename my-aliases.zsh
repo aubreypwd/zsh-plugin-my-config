@@ -100,6 +100,10 @@ alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 # AwesomeMotive / AffiliateWP
 alias affwp:build='composer install || composer update && na && npm ci || npm i && npm run build'
 
+# Valet
+alias valetv="basename $(readlink $HOME/.config/valet/valet.sock)" # A way to see what version valet is running at.
+alias valets='lt -p 60 --local-host "$(nwd).test" --print-requests --subdomain aubreypwd-"$(nwd)"' # valet share, but just with localtunnel.
+
 # PHP
 alias php5="/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php"
 alias php7="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
@@ -116,7 +120,6 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	alias valet@5="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@5.6 --force || true && php@most"
 	alias valet@7="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@most"
 	alias valet@8="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@most"
-	alias valetv="basename $(readlink $HOME/.config/valet/valet.sock)" # A way to see what version valet is running at.
 
 	# PHP -S
 	alias serve="sudo php -S localhost:80"
