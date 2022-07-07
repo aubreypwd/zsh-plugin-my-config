@@ -7,6 +7,24 @@
  ##
 
 ###
+ # Open a new screen by session name.
+ #
+ # @since Thursday, July 7, 2022
+ ##
+function oscreen {
+	screen -r "$ITERM_SESSION_ID" || screen -S "$ITERM_SESSION_ID"
+}
+
+###
+ # Open a new screen by name.
+ #
+ # @since Thursday, July 7, 2022
+ ##
+function oScreen {
+	screen -r "$1" || screen -S "$1"
+}
+
+###
  # Valet use
  #
  # @since Wednesday, July 6, 2022

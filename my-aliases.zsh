@@ -133,10 +133,9 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 		alias serve7mu="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S mu.localhost:80"
 		alias serve8mu="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S mu.localhost:80"
 
-# Screens
-alias screens="screen -ls"
-alias ns="screen" # New screen
-alias nS="screen -S" # New screen by name
-
 # Antigen
 alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
+
+# Screens
+alias screens="screen -ls"
+alias xd="screen -d" # Just detach from the screen.
