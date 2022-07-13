@@ -5,8 +5,7 @@
  #
  # @since Wednesday, June 29, 2022
  ##
-source "my-aliases.zsh"
-source "my-functions.zsh"
+source "my-functions-aliases.zsh"
 source "my-mac-defaults.zsh"
 source "my-misc.zsh"
 source "my-opts.zsh"
