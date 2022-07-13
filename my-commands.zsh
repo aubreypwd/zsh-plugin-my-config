@@ -1,11 +1,13 @@
 #!/bin/zsh
 
 ###
- # Aliases
+ # My Commands
  #
- # @since Thursday, 10/1/2020 Moved over from .config
- # @since Apr 19, 2022        Move to own plugin.
+ # @since Thursday, 10/1/2020      Moved over from .config
+ # @since Apr 19, 2022             Move to own plugin.
+ # @since Wednesday, July 13, 2022 Combined with Aliases + Functions.
  ##
+
 alias cat="bat"
 alias edit="subl -n"
 alias e="edit"
