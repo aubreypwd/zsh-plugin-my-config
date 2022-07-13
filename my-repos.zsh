@@ -64,7 +64,7 @@ function checkmyrepos {
 	else
 
 		# Then check if we have anything else after that going on with vcsh.
-		vcsh pub diff-index --quiet --ignore-submodules HEAD || __dirty_message "pub"
-		vcsh priv diff-index --quiet --ignore-submodules HEAD || __dirty_message "priv"
+		vcsh pub diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh pub" "pub"
+		vcsh priv diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh priv" "priv"
 	fi
 }
