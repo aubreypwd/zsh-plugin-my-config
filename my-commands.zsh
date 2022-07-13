@@ -8,27 +8,34 @@
  # @since Wednesday, July 13, 2022 Combined with Aliases + Functions.
  ##
 
-alias cat="bat"
+# Editor
 alias edit="subl -n"
-alias e="edit"
-alias editzsh="subl -n ~/.zshrc"
-alias editgit="subl -n ~/.gitconfig"
-alias editssh="subl -n ~/.ssh/config"
+	alias e="edit"
+
+# Editing Config Files
+alias edit-zsh="edit ~/.zshrc"
+	alias ezsh="edit-zsh"
+alias edit-git="edit ~/.gitconfig"
+	alias egit="edit-git"
+alias edit-ssh="edit ~/.ssh/config"
+	alias essh="edit-ssh"
+
+# Basics
+alias cat="bat"
 alias nw='ttab -w' # New window.
 alias nt='ttab ' # New tab.
+alias ntx="nt && x"
 alias c=clear
 alias tower='gittower'
-alias ntx="nt && x"
-alias na="n auto" # Install the preferred version.
 alias fakedata="fakedata --limit 1"
-alias golive="ngrok http -host-header=rewrite $1:443"
+alias na="n auto" # Install the preferred version.
 
 # Easy composer commands.
-alias cu="composer uninstall"
-alias cis="composer install --prefer-source" # source install.
-alias cid="composer install --prefer-dist" # dist install.
-alias crd="composer uninstall && composer install --prefer-dist" # reinstall with dist.
-alias crs="composer uninstall && composer install --prefer-source" # reinstall with source.
+#alias cu="composer uninstall"
+alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
+alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install.
+# alias crd="composer uninstall && composer install --prefer-dist" # reinstall with dist.
+# alias crs="composer uninstall && composer install --prefer-source" # reinstall with source.
 alias ccc="composer clearcache && composer global clearcache"
 
 # Composer versions
