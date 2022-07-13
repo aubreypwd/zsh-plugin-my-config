@@ -85,7 +85,7 @@ alias wpdbn="wp config get DB_NAME" # What is the database name
 # xattr
 alias clearatts="xattr -cr"
 
-# Valet
+# Databases
 alias db='mycli -u root -h 127.0.0.1'
 alias dbs="mysql -u root -e 'show databases;'"
 
@@ -137,6 +137,31 @@ alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
 # Screens
 alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
+
+###
+ # Execute SQL in MySQL.
+ #
+ # @since Wednesday, July 13, 2022
+ ##
+function mysql-exec {
+	mysql -u root -e "$@"
+}
+
+	# Shortcuts
+	alias mysqlx='mysql-exec'
+	alias dbx='mysql-exec'
+
+###
+ # Delete a databse.
+ #
+ # @since Wednesday, July 13, 2022
+ ##
+function mysql-dropdb {
+	mysql-exec "DROP DATABASE $1;"
+}
+
+	# Shortcuts
+	alias dbd='mysql-dropdb'
 
 ###
  # Open a new screen by session name.
