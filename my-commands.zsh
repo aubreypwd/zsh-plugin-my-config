@@ -503,3 +503,26 @@ function jobs {
 function cont {
 	kill -CONT "$@"
 }
+
+###
+ # Find the folder where a file is.
+ #
+ # @since Thursday, July 14, 2022
+ ##
+function fdf () {
+	if ! [[ -x $(command -v fzf) ]]; then
+		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
+	fi
+
+	if ! [[ -x $(command -v find) ]]; then
+		echo "Requires find command." >&2 && return
+	fi
+
+	local DEPTH=1000
+
+	if [ -n "$1" ]; then
+		DEPTH="$1"
+	fi
+
+	local FILE=`find -L * -maxdepth $DEPTH -type f -print 2> /dev/null | fzf-tmux`  && cd $(dirname "$FILE") && ls -lh $(basename "$FILE")
+}
