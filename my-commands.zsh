@@ -9,7 +9,7 @@
  ##
 
 # Editor
-alias edit="subl -n"
+alias edit="vim"
 	alias e="edit"
 
 # Editing Config Files
