@@ -121,12 +121,12 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	alias php@5="brew unlink php && brew unlink php@5.6 && brew link --overwrite php@5.6 --force && composer global update && php --version"
 	alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
 	alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
-	alias php@most="php@8" # The latest PHP version.
+	alias php@sys="php@7" # The version I want to use on my system.
 
 	# Switch valet to version, but keep system at 8.
-	alias valet@5="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@5.6 --force || true && php@most"
-	alias valet@7="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@most"
-	alias valet@8="php@most && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@most"
+	alias valet@5="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@5.6 --force || true && php@sys"
+	alias valet@7="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@sys"
+	alias valet@8="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@sys"
 
 	# PHP -S
 	alias serve="sudo php -S localhost:80"
