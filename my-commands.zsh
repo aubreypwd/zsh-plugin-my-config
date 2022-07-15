@@ -509,7 +509,7 @@ function cont {
  #
  # @since Thursday, July 14, 2022
  ##
-function fdf () {
+function fd-f () {
 	if ! [[ -x $(command -v fzf) ]]; then
 		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
 	fi
@@ -526,3 +526,5 @@ function fdf () {
 
 	local FILE=`find -L * -maxdepth $DEPTH -type f -print 2> /dev/null | fzf-tmux`  && cd $(dirname "$FILE") && ls -lh $(basename "$FILE")
 }
+
+	alias fdf="fd-f"
