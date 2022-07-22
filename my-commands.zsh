@@ -29,9 +29,6 @@ alias c=clear
 alias tower='gittower'
 alias fakedata="fakedata --limit 1"
 
-# Node
-alias na="n auto" # Install the preferred version.
-
 # Easy composer commands.
 #alias cu="composer uninstall"
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
@@ -155,6 +152,8 @@ function npmx {
 	n lts
 }
 
+	alias nx='npmx'
+
 	###
 	 # Use npm on Node in .nvmrc
 	 #
@@ -169,6 +168,8 @@ function npmx {
 
 		n lts
 	}
+
+		alias na='npma'
 
 ###
  # Execute SQL in MySQL.
