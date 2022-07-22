@@ -137,39 +137,26 @@ alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
 alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
 
+# Node
+alias na='n auto'
+alias nl='n lts'
+
 ###
- # Use npm on Node version
+ # Run npm command after asking for a version.
  #
- # E.g: npmx 12 install
+ # E.g: nx install
  #
  # @since Friday, July 22, 2022
  ##
-function npmx {
+function nx {
 
-	n "$1" && \
-		npm "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+	vared -p 'Node Version?: ' -c node_ver
+
+	n "$node_ver" && \
+		npm "$@"
 
 	n lts &> /dev/null
 }
-
-	alias nx='npmx'
-
-	###
-	 # Use npm on Node in .nvmrc
-	 #
-	 # E.g: npm install
-	 #
-	 # @since Friday, July 22, 2022
-	 ##
-	function npma {
-
-		n auto && \
-			npm "$@"
-
-		n lts &> /dev/null
-	}
-
-		alias na='npma'
 
 ###
  # Execute SQL in MySQL.
