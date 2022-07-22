@@ -28,6 +28,8 @@ alias ntx="nt && x"
 alias c=clear
 alias tower='gittower'
 alias fakedata="fakedata --limit 1"
+
+# Node
 alias na="n auto" # Install the preferred version.
 
 # Easy composer commands.
@@ -137,6 +139,36 @@ alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
 # Screens
 alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
+
+###
+ # Use npm on Node version
+ #
+ # E.g: npmx 12 install
+ #
+ # @since Friday, July 22, 2022
+ ##
+function npmx {
+
+	n "$1" && \
+		npm "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+
+	n lts
+}
+
+	###
+	 # Use npm on Node in .nvmrc
+	 #
+	 # E.g: npm install
+	 #
+	 # @since Friday, July 22, 2022
+	 ##
+	function npma {
+
+		n auto && \
+			npm "$@"
+
+		n lts
+	}
 
 ###
  # Execute SQL in MySQL.
