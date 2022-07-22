@@ -124,7 +124,6 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	alias php@sys="php@7" # The version I want to use on my system.
 
 	# Switch valet to version, but keep system at 8.
-	alias valet@5="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@5.6 --force || true && php@sys"
 	alias valet@7="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@sys"
 	alias valet@8="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@sys"
 
