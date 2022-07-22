@@ -425,6 +425,7 @@ function hideindock {
 function showindock {
 	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" &> /dev/null
 }
+	alias show-in-dock="showindock"
 
 ###
  # Run a command in a detached screen.
