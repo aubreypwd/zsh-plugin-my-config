@@ -107,10 +107,6 @@ alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 # AwesomeMotive / AffiliateWP
 alias affwp:build='composer install || composer update && na && npm ci || npm i && npm run build'
 
-# Valet
-alias valetv="basename $(readlink $HOME/.config/valet/valet.sock)" # A way to see what version valet is running at.
-alias valets='lt -p 60 --local-host "$(nwd).test" --print-requests --subdomain aubreypwd-"$(nwd)"' # valet share, but just with localtunnel.
-
 # PHP
 alias php5="/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php"
 alias php7="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
@@ -122,10 +118,6 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 	alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
 	alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
 	alias php@sys="php@7" # The version I want to use on my system.
-
-	# Switch valet to version, but keep system at 8.
-	alias valet@7="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@7.4 --force || true && php@sys"
-	alias valet@8="php@sys && unlink $HOME/.config/valet/valet.sock || true && valet use php@8.1 --force || true && php@sys"
 
 	# PHP -S
 	alias serve="sudo php -S localhost:80"
@@ -190,15 +182,6 @@ function oScreen {
 }
 
 ###
- # Valet use
- #
- # @since Wednesday, July 6, 2022
- ##
-function vu {
-	valet use "$1" && composer global update
-}
-
-###
  # Easy way to configure WP CLI in LocalWP.
  #
  # E.g: lwpcliconfig ".../Library/Application Support/Local/run/6vRk6evkc/mysql/mysqld.sock"
@@ -231,7 +214,6 @@ function sysinfo() {
 
 	echo "\e[35mƤ PHP:\e[0m   \e[37m$(phpv)\e[0m" # Show the current working directory.
 	echo "\e[32m⊔ Node:\e[0m  \e[37m$(node --version)\e[0m" # Show the current working directory.
-	echo "\e[31m℣ Valet:\e[0m \e[37m$(valetv)\e[0m" # Show the current working directory.
 	echo "\e[37m $(pwd)\e[0m" # Show the current working directory.
 }
 
