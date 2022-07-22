@@ -413,6 +413,7 @@ function watchf {
 function hideindock {
 	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" &> /dev/null
 }
+	alias hide-in-dock='hideindock'
 
 ###
  # Show an app in the Dock.
