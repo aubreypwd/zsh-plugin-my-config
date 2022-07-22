@@ -149,7 +149,7 @@ function npmx {
 	n "$1" && \
 		npm "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
 
-	n lts
+	n lts &> /dev/null
 }
 
 	alias nx='npmx'
@@ -166,7 +166,7 @@ function npmx {
 		n auto && \
 			npm "$@"
 
-		n lts
+		n lts &> /dev/null
 	}
 
 		alias na='npma'
