@@ -150,9 +150,9 @@ alias nl='n lts'
  ##
 function nx {
 
-	vared -p 'Node Version?: ' -c node_ver
+	vared -p 'Node Version?: ' -c n_ver
 
-	n "$node_ver" && \
+	n "$n_ver" && \
 		npm "$@"
 
 	n lts &> /dev/null
