@@ -140,23 +140,10 @@ alias xd="screen -d" # Just detach from the screen.
 # Node
 alias na='n auto'
 alias nl='n lts'
-
-###
- # Run npm command after asking for a version.
- #
- # E.g: nx install
- #
- # @since Friday, July 22, 2022
- ##
-function nx {
-
-	vared -p 'Node Version?: ' -c n_ver
-
-	n "$n_ver" && \
-		npm "$@"
-
-	n lts &> /dev/null
-}
+alias n12='n 12'
+alias n10='n 10'
+alias n14='n 14'
+alias n16='n 16'
 
 ###
  # Execute SQL in MySQL.
