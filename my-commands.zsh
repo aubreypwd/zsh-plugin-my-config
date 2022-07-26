@@ -152,7 +152,7 @@ alias n16='n 14'
  #
  # @since Wednesday, July 13, 2022
  ##
-function mysql-exec {
+mysql-exec() {
 	mysql -u root -e "$@"
 }
 
@@ -165,7 +165,7 @@ function mysql-exec {
  #
  # @since Wednesday, July 13, 2022
  ##
-function mysql-dropdb {
+mysql-dropdb() {
 	mysql-exec "DROP DATABASE $1;"
 }
 
@@ -177,7 +177,7 @@ function mysql-dropdb {
  #
  # @since Thursday, July 7, 2022
  ##
-function oscreen {
+oscreen() {
 	screen -r "$ITERM_SESSION_ID" || screen -S "$ITERM_SESSION_ID"
 }
 
@@ -186,7 +186,7 @@ function oscreen {
  #
  # @since Thursday, July 7, 2022
  ##
-function oScreen {
+oScreen() {
 	screen -r "$1" || screen -S "$1"
 }
 
@@ -197,7 +197,7 @@ function oScreen {
  #
  # @since Thursday, April 7, 2022
  ##
-function lwpcliconfig {
+lwpcliconfig() {
 
 	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.php" "./"
 	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.yml" "./"
@@ -210,7 +210,7 @@ function lwpcliconfig {
  #
  # @since Thursday, June 30, 2022
  ##
-function nwd {
+nwd() {
 	echo "${PWD##*/}";
 }
 
@@ -219,7 +219,7 @@ function nwd {
  #
  # @since Thursday, July 7, 2022
  ##
-function sysinfo() {
+sysinfo()() {
 
 	echo "\e[35mƤ PHP:\e[0m   \e[37m$(phpv)\e[0m" # Show the current working directory.
 	echo "\e[32m⊔ Node:\e[0m  \e[37m$(node --version)\e[0m" # Show the current working directory.
@@ -231,7 +231,7 @@ function sysinfo() {
  #
  # @since Thursday, June 30, 2022
  ##
-function iwpdebug {
+iwpdebug() {
 
 	# Debugging constants.
 	wp config set BP_DEFAULT_COMPONENT 'staging-area'
@@ -278,7 +278,7 @@ function iwpdebug {
  #
  # @since Thursday, June 30, 2022
  ##
-function scomposerwp {
+scomposerwp() {
 
 	composer init --name "aubreypwd/$(nwd)" --require "spatie/ray:^1.0" --require "aubreypwd/php-s-wp:dev-main@dev" --no-interaction
 	composer install --no-interaction
@@ -293,7 +293,7 @@ function scomposerwp {
  #
  # @since Thursday, June 30, 2022
  ##
-function newphpswp {
+newphpswp() {
 
 	wp core download
 	wp config create --dbname="$(nwd)" --dbuser="root"
@@ -312,7 +312,7 @@ function newphpswp {
  #
  # @since Wednesday, June 29, 2022
  ##
-function gharchive {
+gharchive() {
 
 	gh repo archive -y
 	gh api "repos/aubreypwd/${PWD##*/}/transfer" -f new_owner=4ubr3ypwd
@@ -328,7 +328,7 @@ function gharchive {
  #
  # @since Monday, April 25, 2022
  ##
-function wpdbx {
+wpdbx() {
 	wp db export - | gzip -9 -f > "$1.tar.gz"
 }
 
@@ -337,7 +337,7 @@ function wpdbx {
  #
  # @since Tuesday, July 26, 2022
  ##
-function wpdbsw {
+wpdbsw() {
 
 	dbs
 	echo "Current DB_NAME: $(wpdbn)"
@@ -353,7 +353,7 @@ function wpdbsw {
  #
  # @since Wednesday, July 6, 2022
  ##
-function wpdbs {
+wpdbs() {
 	wp config set DB_NAME "$1" && \
 		wp option get home
 }
@@ -365,7 +365,7 @@ function wpdbs {
  #
  # @since Wednesday, July 6, 2022
  ##
-function wpci {
+wpci() {
 
 	if [[ ! -e "wp-config.php" ]]; then
 
@@ -388,7 +388,7 @@ function wpci {
  #
  # @since Tuesday, April 26, 2022
  ##
-function wpdbi {
+wpdbi() {
 	gzip -c -d "$1" | wp db import -
 }
 
@@ -399,7 +399,7 @@ function wpdbi {
  #
  # @since
  ##
-function -- {
+--() {
 	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop"
 }
 
@@ -410,7 +410,7 @@ function -- {
  #
  # @since Tuesday, December 21, 2021
  ##
-function rfinder {
+rfinder() {
 	find "$HOME" -name ".DS_Store" -depth -exec rm {} \;
 }
 
@@ -421,7 +421,7 @@ function rfinder {
  #
  # @since Monday, October 11, 2021
  ##
-function watchf {
+watchf() {
 	clear
 	watchexec --watch "$1" -e "$2" "$3" -c -p
 }
@@ -433,7 +433,7 @@ function watchf {
  #
  # @since Monday, October 11, 2021
  ##
-function hideindock {
+hideindock() {
 	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" &> /dev/null
 }
 	alias hide-in-dock='hideindock'
@@ -445,7 +445,7 @@ function hideindock {
  #
  # @since Monday, October 11, 2021
  ##
-function showindock {
+showindock() {
 	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" &> /dev/null
 }
 	alias show-in-dock="showindock"
@@ -457,7 +457,7 @@ function showindock {
  #
  # @since Sunday, July 3, 2022
  ##
-function screenc {
+screenc() {
 	screen -S "$@" -d -m zsh -c "$@"
 }
 
@@ -466,7 +466,7 @@ function screenc {
  #
  # @since Sunday, July 3, 2022
  ##
-function bg {
+bg() {
 	builtin bg %"$@"
 }
 
@@ -475,7 +475,7 @@ function bg {
  #
  # @since Sunday, July 3, 2022
  ##
-function fg {
+fg() {
 	builtin fg %"$@"
 }
 
@@ -484,7 +484,7 @@ function fg {
  #
  # @since Sunday, July 3, 2022
  ##
-function sus {
+sus() {
 	kill -STOP "$@"
 }
 
@@ -493,7 +493,7 @@ function sus {
  #
  # @since Sunday, July 3, 2022
  ##
-function jobs {
+jobs() {
 	if [ -z "$1" ]; then
 		builtin jobs -l
 	else
@@ -506,7 +506,7 @@ function jobs {
  #
  # @since Sunday, July 3, 2022
  ##
-function cont {
+cont() {
 	kill -CONT "$@"
 }
 
@@ -515,7 +515,7 @@ function cont {
  #
  # @since Thursday, July 14, 2022
  ##
-function fd-f () {
+fd-f() {
 	if ! [[ -x $(command -v fzf) ]]; then
 		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
 	fi
