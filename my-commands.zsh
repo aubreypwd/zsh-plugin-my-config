@@ -9,8 +9,13 @@
  ##
 
 # Editor
-alias edit="vim"
-	alias e="edit"
+if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
+	alias edit="subl -n -w"
+else
+	alias edit="vim"
+fi
+
+alias e="edit"
 
 # Editing Config Files
 alias edit-zsh="edit ~/.zshrc"
