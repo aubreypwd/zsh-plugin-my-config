@@ -336,7 +336,21 @@ function wpdbx {
 }
 
 ###
- # Switch databases.
+ # Switch database (interactive)
+ #
+ # @since Tuesday, July 26, 2022
+ ##
+function wpdbsw {
+
+	dbs
+	echo "Current DB_NAME: $(wpdbn)"
+
+	vared -p 'Which DB?: ' -c wpdbsw_db && \
+		wpdbs $wpdbsw_db
+}
+
+###
+ # Switch databases (by name).
  #
  # E.g: wpdbs DB_NAME
  #
