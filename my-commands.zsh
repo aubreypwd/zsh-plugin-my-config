@@ -545,6 +545,7 @@ sysnpm() {
 }
 
 	alias npm@sys='sysnpm'
+	alias sys-npm='sysnpm'
 
 ###
  # Build AffiliateWP
