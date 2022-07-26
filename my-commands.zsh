@@ -108,9 +108,6 @@ alias finder='open -F -a Finder' # Open Finder but remember the window size when
 # DNS
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
-# AwesomeMotive / AffiliateWP
-alias affwp:build='composer install || composer update && na && npm ci || npm i && npm run build'
-
 # PHP
 alias php5="/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php"
 alias php7="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
