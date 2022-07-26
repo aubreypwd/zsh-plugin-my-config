@@ -143,7 +143,7 @@ alias nl='n lts'
 alias n12='n 12'
 alias n10='n 10'
 alias n14='n 14'
-alias n16='n 16'
+alias n16='n 14'
 
 ###
  # Execute SQL in MySQL.
