@@ -534,3 +534,40 @@ function fd-f () {
 }
 
 	alias fdf="fd-f"
+
+###
+ # Switch to the system preferred npm.
+ #
+ # @since Tuesday, July 26, 2022
+ ##
+sysnpm() {
+	( cd "$HOME" && n auto )
+}
+
+	alias npm@sys='sysnpm'
+
+###
+ # Build AffiliateWP
+ #
+ # @since Tuesday, July 26, 2022
+ ##
+affwprb() {
+
+	if [ ! -e "affiliate-wp.php" ]; then
+
+		echo "Not the AffiliateWP repository"
+		return
+	fi
+
+	n 12 || nvm use 12
+
+	if [ ! -e "node_modules" ]; then
+		( npm ci || npm i ) # Install with npm 12.
+	fi
+
+	# Build
+	npm run build
+
+	# Switch back to system npm
+	sysnpm
+}
