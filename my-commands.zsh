@@ -367,7 +367,7 @@ wpdbs() {
  ##
 wpci() {
 
-	if [[ ! -e "wp-config.php" ]]; then
+	if [ ! -e "wp-config.php" ]; then
 
 		echo "Not an active WordPress install, use wp config create first."
 		return
@@ -467,7 +467,7 @@ screenc() {
  # @since Sunday, July 3, 2022
  ##
 bg() {
-	builtin bg %"$@"
+	builtin bg % "$@"
 }
 
 ###
@@ -476,7 +476,7 @@ bg() {
  # @since Sunday, July 3, 2022
  ##
 fg() {
-	builtin fg %"$@"
+	builtin fg % "$@"
 }
 
 ###
@@ -497,7 +497,7 @@ jobs() {
 	if [ -z "$1" ]; then
 		builtin jobs -l
 	else
-		builtin jobs -l %"$@"
+		builtin jobs -l % "$@"
 	fi
 }
 
@@ -515,25 +515,27 @@ cont() {
  #
  # @since Thursday, July 14, 2022
  ##
-fd-f() {
-	if ! [[ -x $(command -v fzf) ]]; then
+fdf() (
+
+	if ! [ -x "$(command -v fzf)" ]; then
 		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
 	fi
 
-	if ! [[ -x $(command -v find) ]]; then
+	if ! [ -x "$(command -v find)" ]; then
 		echo "Requires find command." >&2 && return
 	fi
 
-	local DEPTH=1000
+	DEPTH=1000
 
 	if [ -n "$1" ]; then
 		DEPTH="$1"
 	fi
 
-	local FILE=`find -L * -maxdepth $DEPTH -type f -print 2> /dev/null | fzf-tmux`  && cd $(dirname "$FILE") && ls -lh $(basename "$FILE")
-}
+	FILE=$( find -L ./* -maxdepth "$DEPTH" -type f -print 2> /dev/null | fzf-tmux ) && cd "$(dirname "$FILE")" && ls -lh "$(basename "$FILE")"
+)
 
-	alias fdf="fd-f"
+	# Aliases for fdf
+	alias fd-f="fdf"
 
 ###
  # Switch to the system preferred npm.
@@ -544,6 +546,7 @@ sysnpm() {
 	( cd "$HOME" && n auto )
 }
 
+	# Aliases for sysnpm
 	alias npm@sys='sysnpm'
 	alias sys-npm='sysnpm'
 
