@@ -75,9 +75,6 @@ alias npmid="npmai && npmrd"
 alias npmibd="npmai && npmrb && npmrd"
 alias npmrd="npm run dev || npm run watch || npm run start || true"
 
-# Homebrew
-alias brewd="brew bundle dump --file=$HOME/.Brewfile --verbose --all --describe --force --no-lock" # Dump what's installed to my Brewfile
-
 # Sounds
 alias bell="tput bel"
 alias beep="bell"
@@ -132,9 +129,6 @@ alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just th
 		alias serve7mu="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S mu.localhost:80"
 		alias serve8mu="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S mu.localhost:80"
 
-# Antigen
-alias	plugin="cd $HOME/.antigen/bundles/aubreypwd && fd"
-
 # Screens
 alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
@@ -146,6 +140,24 @@ alias n12='n 12'
 alias n10='n 10'
 alias n14='n 14'
 alias n16='n 14'
+
+###
+ # Go to one of my plugins (Antigen)
+ #
+ # @since Tuesday, July 26, 2022
+ ##
+plugin() {
+	cd "$HOME/.antigen/bundles/aubreypwd" || false && fd
+}
+
+###
+ # Dump .Brewfile
+ #
+ # @since Tuesday, July 26, 2022
+ ##
+brewd() {
+	brew bundle dump --file="$HOME/.Brewfile" --verbose --all --describe --force --no-lock "$@"
+}
 
 ###
  # Execute SQL in MySQL.
