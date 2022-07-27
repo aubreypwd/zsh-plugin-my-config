@@ -561,9 +561,6 @@ cont () {
  ##
 fdf () {
 
-	local depth
-	local file
-
 	if ! [ -x "$(command -v fzf)" ]; then
 		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
 	fi
@@ -572,13 +569,17 @@ fdf () {
 		echo "Requires find command." >&2 && return
 	fi
 
-	depth=1000
+	local depth=1000
 
 	if [ -n "$1" ]; then
 		depth="$1"
 	fi
 
-	file=$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux ) && cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
+	local file=''
+
+	file=$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux )
+
+	cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
 }
 
 	# Aliases for fdf
