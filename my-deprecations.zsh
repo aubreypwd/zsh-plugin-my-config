@@ -5,7 +5,7 @@
  #
  # @since Wednesday, July 27, 2022
  ##
-useinstead() {
+useinstead () {
 
 	echo "Use [$1] instead, this command has been deprecated."
 	return 1
@@ -23,5 +23,5 @@ alias valets="echo 'localtunnel is unreliable, use [valet share] instead' && (ex
 ###
  # Functions
  ##
-vu() { useinstead "valet isolate php@x.x"; }
-watchf() { useinstead "watchfext"; }
+vu () { useinstead "valet isolate php@x.x"; }
+watchf () { useinstead "watchfext"; }

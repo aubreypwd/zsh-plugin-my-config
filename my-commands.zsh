@@ -146,7 +146,7 @@ alias n16='n 14'
  #
  # @since Tuesday, July 26, 2022
  ##
-plugin() {
+plugin () {
 	cd "$HOME/.antigen/bundles/aubreypwd" || false && fd
 }
 
@@ -155,7 +155,7 @@ plugin() {
  #
  # @since Tuesday, July 26, 2022
  ##
-brewd() {
+brewd () {
 	brew bundle dump --file="$HOME/.Brewfile" --verbose --all --describe --force --no-lock "$@"
 }
 
@@ -164,7 +164,7 @@ brewd() {
  #
  # @since Wednesday, July 13, 2022
  ##
-mysql-exec() {
+mysql-exec () {
 	mysql -u root -e "$@"
 }
 
@@ -177,7 +177,7 @@ mysql-exec() {
  #
  # @since Wednesday, July 13, 2022
  ##
-mysql-dropdb() {
+mysql-dropdb () {
 	mysql-exec "DROP DATABASE $1;"
 }
 
@@ -189,7 +189,7 @@ mysql-dropdb() {
  #
  # @since Thursday, July 7, 2022
  ##
-oscreen() {
+oscreen () {
 	screen -r "$ITERM_SESSION_ID" || screen -S "$ITERM_SESSION_ID"
 }
 
@@ -198,7 +198,7 @@ oscreen() {
  #
  # @since Thursday, July 7, 2022
  ##
-oScreen() {
+oScreen () {
 	screen -r "$1" || screen -S "$1"
 }
 
@@ -209,7 +209,7 @@ oScreen() {
  #
  # @since Thursday, April 7, 2022
  ##
-lwpcliconfig() {
+lwpcliconfig () {
 
 	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.php" "./"
 	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.yml" "./"
@@ -222,7 +222,7 @@ lwpcliconfig() {
  #
  # @since Thursday, June 30, 2022
  ##
-nwd() {
+nwd () {
 	echo "${PWD##*/}";
 }
 
@@ -231,7 +231,7 @@ nwd() {
  #
  # @since Thursday, July 7, 2022
  ##
-sysinfo() {
+sysinfo () {
 
 	echo "\e[35mƤ PHP:\e[0m   \e[37m$(phpv)\e[0m" # Show the current working directory.
 	echo "\e[32m⊔ Node:\e[0m  \e[37m$(node --version)\e[0m" # Show the current working directory.
@@ -243,7 +243,7 @@ sysinfo() {
  #
  # @since Thursday, June 30, 2022
  ##
-iwpdebug() {
+iwpdebug () {
 
 	# Debugging constants.
 	wp config set BP_DEFAULT_COMPONENT 'staging-area'
@@ -290,7 +290,7 @@ iwpdebug() {
  #
  # @since Thursday, June 30, 2022
  ##
-scomposerwp() {
+scomposerwp () {
 
 	composer init --name "aubreypwd/$(nwd)" --require "spatie/ray:^1.0" --require "aubreypwd/php-s-wp:dev-main@dev" --no-interaction
 	composer install --no-interaction
@@ -305,7 +305,7 @@ scomposerwp() {
  #
  # @since Thursday, June 30, 2022
  ##
-newphpswp() {
+newphpswp () {
 
 	wp core download
 	wp config create --dbname="$(nwd)" --dbuser="root"
@@ -324,7 +324,7 @@ newphpswp() {
  #
  # @since Wednesday, June 29, 2022
  ##
-gharchive() {
+gharchive () {
 
 	gh repo archive -y
 	gh api "repos/aubreypwd/${PWD##*/}/transfer" -f new_owner=4ubr3ypwd
@@ -341,7 +341,7 @@ gharchive() {
  #
  # @since Monday, April 25, 2022
  ##
-wpdbx() {
+wpdbx () {
 	wp db export - | gzip -9 -f > "$1.tar.gz"
 }
 
@@ -350,7 +350,7 @@ wpdbx() {
  #
  # @since Tuesday, July 26, 2022
  ##
-wpdbsw() {
+wpdbsw () {
 
 	dbs
 	echo "Current DB_NAME: $(wpdbn)"
@@ -375,7 +375,7 @@ wpdbsw() {
  #
  # @since Wednesday, July 6, 2022
  ##
-wpdbs() {
+wpdbs () {
 	wp config set DB_NAME "$1" && \
 		wp option get home
 }
@@ -387,7 +387,7 @@ wpdbs() {
  #
  # @since Wednesday, July 6, 2022
  ##
-wpci() {
+wpci () {
 
 	if [ ! -e "wp-config.php" ]; then
 
@@ -410,7 +410,7 @@ wpci() {
  #
  # @since Tuesday, April 26, 2022
  ##
-wpdbi() {
+wpdbi () {
 	gzip -c -d "$1" | wp db import -
 }
 
@@ -421,7 +421,7 @@ wpdbi() {
  #
  # @since
  ##
---() {
+-- () {
 	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop"
 }
 
@@ -432,7 +432,7 @@ wpdbi() {
  #
  # @since Tuesday, December 21, 2021
  ##
-rfinder() {
+rfinder () {
 	find "$HOME" -name ".DS_Store" -depth -exec rm {} \;
 }
 
@@ -441,7 +441,7 @@ rfinder() {
  #
  # @since Wednesday, July 27, 2022
  ##
-__return_1() {
+__return_1 () {
 	return 1
 }
 
@@ -450,7 +450,7 @@ __return_1() {
  #
  # @since Wednesday, July 27, 2022
  ##
-__return_0() {
+__return_0 () {
 	return 0
 }
 
@@ -461,7 +461,7 @@ __return_0() {
  #
  # @since Monday, October 11, 2021
  ##
-watchfext() {
+watchfext () {
 
 	clear
 	watchexec --watch "$1" -e "$2" "$3" -c -p
@@ -476,7 +476,7 @@ watchfext() {
  #
  # @since Monday, October 11, 2021
  ##
-hideindock() {
+hideindock () {
 	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" &> /dev/null
 }
 	alias hide-in-dock='hideindock'
@@ -488,7 +488,7 @@ hideindock() {
  #
  # @since Monday, October 11, 2021
  ##
-showindock() {
+showindock () {
 	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" &> /dev/null
 }
 	alias show-in-dock="showindock"
@@ -500,7 +500,7 @@ showindock() {
  #
  # @since Sunday, July 3, 2022
  ##
-screenc() {
+screenc () {
 	screen -S "$@" -d -m zsh -c "$@"
 }
 
@@ -509,7 +509,7 @@ screenc() {
  #
  # @since Sunday, July 3, 2022
  ##
-bg() {
+bg () {
 	builtin bg % "$@"
 }
 
@@ -518,7 +518,7 @@ bg() {
  #
  # @since Sunday, July 3, 2022
  ##
-fg() {
+fg () {
 	builtin fg % "$@"
 }
 
@@ -527,7 +527,7 @@ fg() {
  #
  # @since Sunday, July 3, 2022
  ##
-sus() {
+sus () {
 	kill -STOP "$@"
 }
 
@@ -536,7 +536,7 @@ sus() {
  #
  # @since Sunday, July 3, 2022
  ##
-jobs() {
+jobs () {
 
 	if [ -z "$1" ]; then
 		builtin jobs -l
@@ -550,7 +550,7 @@ jobs() {
  #
  # @since Sunday, July 3, 2022
  ##
-cont() {
+cont () {
 	kill -CONT "$@"
 }
 
@@ -559,7 +559,7 @@ cont() {
  #
  # @since Thursday, July 14, 2022
  ##
-fdf() {
+fdf () {
 
 	local depth
 	local file
@@ -589,7 +589,7 @@ fdf() {
  #
  # @since Tuesday, July 26, 2022
  ##
-sysnpm() {
+sysnpm () {
 	( cd "$HOME" && n auto )
 }
 
@@ -602,7 +602,7 @@ sysnpm() {
  #
  # @since Tuesday, July 26, 2022
  ##
-affwprb() {
+affwprb () {
 
 	if [ ! -e "affiliate-wp.php" ]; then
 
