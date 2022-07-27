@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###
  # My Commands
@@ -328,7 +328,8 @@ gharchive() {
 
 	gh repo archive -y
 	gh api "repos/aubreypwd/${PWD##*/}/transfer" -f new_owner=4ubr3ypwd
-	rm -Rf $(pwd)
+
+	rm -Rf "$(pwd)"
 
 	exit
 }
@@ -354,8 +355,17 @@ wpdbsw() {
 	dbs
 	echo "Current DB_NAME: $(wpdbn)"
 
-	vared -p 'Which DB?: ' -c wpdbsw_db && \
-		wpdbs $wpdbsw_db
+	local wpdbsw_db=""
+
+	vared -p 'Which DB?: ' -c wpdbsw_db
+
+	if [ -e "$wpdbsw_db" ]; then
+
+		echo "No DB specified."
+		return 0
+	fi
+
+	wpdbs "$wpdbsw_db"
 }
 
 ###
@@ -427,16 +437,37 @@ rfinder() {
 }
 
 ###
- # Watch files.
+ # False (an error).
+ #
+ # @since Wednesday, July 27, 2022
+ ##
+__return_1() {
+	return 1
+}
+
+###
+ # True (no error).
+ #
+ # @since Wednesday, July 27, 2022
+ ##
+__return_0() {
+	return 0
+}
+
+###
+ # Watch files by extension
  #
  # E.g: watchf ./ js,css,php "cmd"
  #
  # @since Monday, October 11, 2021
  ##
-watchf() {
+watchfext() {
+
 	clear
 	watchexec --watch "$1" -e "$2" "$3" -c -p
 }
+
+	alias watchf-ext='watchfext'
 
 ###
  # Hide an app from the Dock.
@@ -506,6 +537,7 @@ sus() {
  # @since Sunday, July 3, 2022
  ##
 jobs() {
+
 	if [ -z "$1" ]; then
 		builtin jobs -l
 	else
@@ -527,7 +559,10 @@ cont() {
  #
  # @since Thursday, July 14, 2022
  ##
-fdf() (
+fdf() {
+
+	local depth
+	local file
 
 	if ! [ -x "$(command -v fzf)" ]; then
 		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
@@ -537,14 +572,14 @@ fdf() (
 		echo "Requires find command." >&2 && return
 	fi
 
-	DEPTH=1000
+	depth=1000
 
 	if [ -n "$1" ]; then
-		DEPTH="$1"
+		depth="$1"
 	fi
 
-	FILE=$( find -L ./* -maxdepth "$DEPTH" -type f -print 2> /dev/null | fzf-tmux ) && cd "$(dirname "$FILE")" && ls -lh "$(basename "$FILE")"
-)
+	file=$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux ) && cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
+}
 
 	# Aliases for fdf
 	alias fd-f="fdf"
