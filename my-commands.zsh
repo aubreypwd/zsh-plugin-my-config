@@ -652,10 +652,19 @@ affwp () {
 			;;
 
 			# Default
-			* ) echo "Sub-commands: reset, sdbi" && return 1;;
+			* ) echo "Sub-commands: reset, si, s" && return 1;;
 
 		esac
 	fi
 
 	__affwp "$@" # Not my custom subcommands, use the one from the package.
+}
+
+###
+ # Run a command in a directory.
+ #
+ # @since Thursday, July 28, 2022
+ ##
+rid () {
+	( cd "$1" && "${@:2}" )
 }
