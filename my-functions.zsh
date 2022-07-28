@@ -18,7 +18,7 @@
 __affwp_sdbi () {
 
 	test -e "$2" || return 1 # Does the zip file exist?
-	wpdbs "$1" || true # Pass no matter what, switching might fail due to wp option get home.
+	wpdbs "$(nwd)@$1" || true # Pass no matter what, switching might fail due to wp option get home.
 	wp db create || true # Also pass, the DB may already exist.
 	wpdbi "$2" || return 1 # Import the DB into the new database.
 
