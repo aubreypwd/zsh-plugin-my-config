@@ -651,8 +651,17 @@ affwp () {
 						return 0;
 			;;
 
+			###
+			 # Switch the db to the current git branch.
+			 #
+			 # affwp db gb $3{affwp-dev}
+			 #
+			 # @since Thursday, July 28, 2022
+			 ##
+			'gb' ) risd "$3" affwp db s "$(git b)" ;;
+
 			# Default
-			* ) echo "Sub-commands: reset, si, s" && return 1;;
+			* ) echo "Sub-commands: reset, si, s, gb" && return 1;;
 
 		esac
 	fi
@@ -667,4 +676,13 @@ affwp () {
  ##
 rid () {
 	( cd "$1" && "${@:2}" )
+}
+
+###
+ # Run a command in a site directory.
+ #
+ # @since Thursday, July 28, 2022
+ ##
+risd () {
+	rid "$HOME/Sites/$1" "${@:2}"
 }
