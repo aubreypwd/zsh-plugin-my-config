@@ -615,10 +615,14 @@ affwp () {
 
 		case "$2" in
 
-			# Build all the thingz.
+			###
+			 # Reset using the reset tar that should be in dbx.
+			 #
+			 # @since Thursday, July 28, 2022
+			 ##
 			'reset' )
-				test -e 'dbx/affwp-dev@reset.tar.gz' || return 1 && \
-					wpdbi 'dbx/affwp-dev@reset.tar.gz' && \
+				test -e "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" || return 1 && \
+					wpdbi "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" && \
 						return 0
 							;;
 
