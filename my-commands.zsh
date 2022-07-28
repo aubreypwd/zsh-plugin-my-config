@@ -599,27 +599,41 @@ sysnpm () {
 	alias sys-npm='sysnpm'
 
 ###
- # Build AffiliateWP
+ # My custom affwp commands.
  #
- # @since Tuesday, July 26, 2022
+ # If my custom sub-commands aren't here,
+ # then they are in https://github.com/aubreypwd/zsh-plugin/affwp.
+ #
+ # Many of these are here because they rely on my system command/etc.
+ #
+ # @since Thursday, July 28, 2022
  ##
-affwprb () {
+affwp () {
 
-	if [ "$(isaffwp)" ]; then
+	## Site controls.
+	if [ "$1" = 'site' ] || [ "$1" = 's' ]; then
 
-		echo "Not the AffiliateWP repository"
-		return 1
+		case "$2" in
+
+			# Build all the thingz.
+			'reset' )
+				test -e 'dbx/affwp-dev@reset.tar.gz' || return 1 && \
+					wpdbi 'dbx/affwp-dev@reset.tar.gz' && \
+						return 0
+							;;
+
+			###
+			 # affwp s sdbi $3{DB_NAME} $4{foo.tar.gz}
+			 #
+			 # @since Thursday, July 28, 2022
+			 ##
+			'sdbi' ) __affwp_sdbi "$3" "$4" && return 0;;
+
+			# Default
+			* ) echo "Sub-commands: reset, sdbi" && return 1;;
+
+		esac
 	fi
 
-	n 12 || nvm use 12
-
-	if [ ! -e "node_modules" ]; then
-		( npm ci || npm i ) # Install with npm 12.
-	fi
-
-	# Build
-	npm run build
-
-	# Switch back to system npm
-	sysnpm
+	__affwp "$@" # Not my custom subcommands, use the one from the package.
 }
