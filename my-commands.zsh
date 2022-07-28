@@ -605,10 +605,10 @@ sysnpm () {
  ##
 affwprb () {
 
-	if [ ! -e "affiliate-wp.php" ]; then
+	if [ "$(isaffwp)" ]; then
 
 		echo "Not the AffiliateWP repository"
-		return
+		return 1
 	fi
 
 	n 12 || nvm use 12
