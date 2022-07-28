@@ -22,5 +22,7 @@ __affwp_sdbi () {
 	wp db create || true # Also pass, the DB may already exist.
 	wpdbi "$2" || return 1 # Import the DB into the new database.
 
+	wp option set blogname "$(wpdbn)" # Rename the site title to the DB name, so it's easlier to see.
+
 	return 0
 }

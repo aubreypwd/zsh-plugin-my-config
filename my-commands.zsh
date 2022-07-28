@@ -623,8 +623,9 @@ affwp () {
 			'reset' )
 				test -e "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" || return 1 && \
 					wpdbi "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" && \
-						return 0
-							;;
+						wp option set blogname "$(wpdbn)" && \
+							return 0
+			;;
 
 			###
 			 # affwp s sdbi $3{DB_NAME} $4{foo.tar.gz}
