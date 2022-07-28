@@ -183,6 +183,8 @@ mysql-dropdb () {
 
 	# Shortcuts
 	alias dbd='mysql-dropdb'
+	alias rmdb='mysql-dropdb'
+	alias dropdb='mysql-dropdb'
 
 ###
  # Open a new screen by session name.
