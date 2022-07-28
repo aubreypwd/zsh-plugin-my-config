@@ -610,8 +610,8 @@ sysnpm () {
  ##
 affwp () {
 
-	## Site controls.
-	if [ "$1" = 'site' ] || [ "$1" = 's' ]; then
+	# Database controls.
+	if [ "$1" = 'db' ]; then
 
 		case "$2" in
 
@@ -628,11 +628,26 @@ affwp () {
 			;;
 
 			###
-			 # affwp s sdbi $3{DB_NAME} $4{foo.tar.gz}
+			 # Switch DB and Import file.
+			 #
+			 # affwp db si $3{DB_NAME} $4{foo.tar.gz}
 			 #
 			 # @since Thursday, July 28, 2022
 			 ##
-			'sdbi' ) __affwp_sdbi "$3" "$4" && return 0;;
+			'si' ) __affwp_sdbi "$3" "$4" && return 0;;
+
+			###
+			 # Switch to another DB.
+			 #
+			 # Just a wrapper of wpdbs
+			 #
+			 # @since Thursday, July 28, 2022
+			 ##
+			's' )
+				wpdbs "$(nwd)@$3" &&
+					( wp db create || true ) && \
+						return 0;
+			;;
 
 			# Default
 			* ) echo "Sub-commands: reset, sdbi" && return 1;;
