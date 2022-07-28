@@ -658,7 +658,10 @@ affwp () {
 			 #
 			 # @since Thursday, July 28, 2022
 			 ##
-			'gb' ) risd "$3" affwp db s "$(git b)" ;;
+			'gb' )
+				risd "$3" affwp db s "$(git b)" && \
+					risd "$3" wp option set blogname "$3@$(git b)"
+			;;
 
 			# Default
 			* ) echo "Sub-commands: reset, si, s, gb" && return 1;;
