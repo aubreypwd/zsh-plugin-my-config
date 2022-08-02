@@ -116,6 +116,17 @@ alias n14='n 14'
 alias n16='n 14'
 
 ###
+ # Open a .sublime-project
+ #
+ # Staring with the current directory.
+ #
+ # @since Tuesday, August 2, 2022
+ ##
+sublp () {
+	subl "$( find '.' -type f -name '*.sublime-project' | fzf )"
+}
+
+###
  # Open Sublime Project
  #
  # Must contain a project.sublime-project file in the directory.
@@ -124,15 +135,18 @@ alias n16='n 14'
  ##
 subl. () {
 
-	local PROJECT='' && PROJECT="project.sublime-project"
+	local SUBL_PROJECT='' && SUBL_PROJECT="project.sublime-project"
 
-	if [ ! -e "$PROJECT" ]; then
+	if [ -e "$SUBL_PROJECT" ]; then
 
-		echo "Cannot find $PROJECT project file!"
+		echo "Found $SUBL_PROJECT, opening..."
+
+		subl --project "$SUBL_PROJECT"
+
 		return 1
 	fi
 
-	subl --project "$PROJECT"
+	sublp
 }
 
 ###
