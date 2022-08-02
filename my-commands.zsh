@@ -116,6 +116,26 @@ alias n14='n 14'
 alias n16='n 14'
 
 ###
+ # Open Sublime Project
+ #
+ # Must contain a project.sublime-project file in the directory.
+ #
+ # @since Tuesday, August 2, 2022
+ ##
+subl. () {
+
+	local PROJECT='' && PROJECT="project.sublime-project"
+
+	if [ ! -e "$PROJECT" ]; then
+
+		echo "Cannot find $PROJECT project file!"
+		return 1
+	fi
+
+	subl --project "$PROJECT"
+}
+
+###
  # Get the PHP version running.
  #
  # @usedby sysinfo()
