@@ -124,6 +124,13 @@ alias n16='n 14'
  ##
 sublop () {
 
+	if [ -e "$1" ]; then
+
+		subl --project "$1"
+
+		return 0
+	fi
+
 	local SUBL_PROJECT_FILE='' && \
 		SUBL_PROJECT_FILE="$( find '.' -type f -name '*.sublime-project' | fzf )"
 
