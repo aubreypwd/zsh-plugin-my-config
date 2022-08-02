@@ -82,8 +82,7 @@ alias b="bell"
 
 # diff folders
 alias diffd="diff -rq" # Diff a directory.
-
-# There are aliases in my-repos.zsh
+	alias diffdir="diffd"
 
 # Misc
 alias matrix='cmatrix'
@@ -94,40 +93,15 @@ alias wpdbn="wp config get DB_NAME" # What is the database name
 
 # xattr
 alias clearatts="xattr -cr"
-
-# Databases
-alias db='mycli -u root -h 127.0.0.1'
-alias dbs="mysql -u root -e 'show databases;'"
-
-# Finder
-alias finder='open -F -a Finder' # Open Finder but remember the window size when you open.
+	alias catts="clearatts"
 
 # DNS
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
-# PHP
-alias php5="/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php"
-alias php7="/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php"
-alias php8="/opt/homebrew/Cellar/php/8.1.7/bin/php"
-alias phpv="php -r 'echo phpversion() . \"\n\";' | sed 's/ *$//g'" # Get just the version number.
-
-	# PHP switching
-	alias php@5="brew unlink php && brew unlink php@5.6 && brew link --overwrite php@5.6 --force && composer global update && php --version"
-	alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
-	alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
-	alias php@sys="php@7" # The version I want to use on my system.
-
-	# PHP -S
-	alias serve="sudo php -S localhost:80"
-	alias serve5="sudo /opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php -S localhost:80"
-	alias serve7="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S localhost:80"
-	alias serve8="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S localhost:80"
-
-		# Multisite
-		alias servemu="sudo php -S mu.localhost:80"
-		alias serve5mu="sudo /opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php -S mu.localhost:80"
-		alias serve7mu="sudo /opt/homebrew/Cellar/php@7.4/7.4.30/bin/php -S mu.localhost:80"
-		alias serve8mu="sudo /opt/homebrew/Cellar/php/8.1.7/bin/php -S mu.localhost:80"
+# PHP switching
+alias php@5="brew unlink php && brew unlink php@5.6 && brew link --overwrite php@5.6 --force && composer global update && php --version"
+alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
+alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
 
 # Screens
 alias screens="screen -ls"
@@ -135,11 +109,22 @@ alias xd="screen -d" # Just detach from the screen.
 
 # Node
 alias na='n auto'
-alias nl='n lts'
+alias nlts='n lts'
 alias n12='n 12'
 alias n10='n 10'
 alias n14='n 14'
 alias n16='n 14'
+
+###
+ # Get the PHP version running.
+ #
+ # @usedby sysinfo()
+ #
+ # @since Tuesday, August 2, 2022
+ ##
+phpv () {
+	php -r 'echo phpversion() . "\n";' | sed 's/ *$//g'
+}
 
 ###
  # Go to one of my plugins (Antigen)
@@ -160,63 +145,61 @@ brewd () {
 }
 
 ###
- # Execute SQL in MySQL.
- #
- # @since Wednesday, July 13, 2022
- ##
-mysql-exec () {
-	mysql -u root -e "$@"
-}
-
-	# Shortcuts
-	alias mysqlx='mysql-exec'
-	alias dbx='mysql-exec'
-
-###
- # Delete a databse.
- #
- # @since Wednesday, July 13, 2022
- ##
-mysql-dropdb () {
-	mysql-exec "DROP DATABASE $1;"
-}
-
-	# Shortcuts
-	alias dbd='mysql-dropdb'
-	alias rmdb='mysql-dropdb'
-	alias dropdb='mysql-dropdb'
-
-###
- # Open a new screen by session name.
- #
- # @since Thursday, July 7, 2022
- ##
-oscreen () {
-	screen -r "$ITERM_SESSION_ID" || screen -S "$ITERM_SESSION_ID"
-}
-
-###
- # Open a new screen by name.
- #
- # @since Thursday, July 7, 2022
- ##
-oScreen () {
-	screen -r "$1" || screen -S "$1"
-}
-
-###
  # Easy way to configure WP CLI in LocalWP.
- #
- # E.g: lwpcliconfig ".../Library/Application Support/Local/run/6vRk6evkc/mysql/mysqld.sock"
  #
  # @since Thursday, April 7, 2022
  ##
-lwpcliconfig () {
+lwpclisock () {
 
-	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.php" "./"
-	cp "/Users/aubreypwd/Documents/Development/wp-cli.local/wp-cli.local.yml" "./"
+	if [ ! -e './app' ]; then
 
-	echo "$1" > "wp-cli.local.sock"
+		echo "Please run in the site root (where app folder is, but not inside)."
+		return 1
+	fi
+
+	if [ -z "$( antigendir || false )" ]; then
+
+		echo "antigendir command not found."
+		return 1
+	fi
+
+	local ANTIGENDIR && ANTIGENDIR="$( antigendir )"
+
+	if [ -z "$1" ]; then
+
+		echo "Please supply a sock file as the first argument."
+		return 1
+	fi
+
+	if [ ! -e "$1" ]; then
+
+		echo "Sock file $1 does not exist, please copy sock path from LocalWP."
+		return 1
+	fi
+
+	local LWP_ASSETS_DIR="$ANTIGENDIR/bundles/aubreypwd/zsh-plugin-my-config/assets/localwp/"
+
+	if [ ! -e "$LWP_ASSETS_DIR" ]; then
+
+		echo "$LWP_ASSETS_DIR missing!"
+		return 1
+	fi
+
+	cp "$LWP_ASSETS_DIR/wp-cli.local.php" "./"
+	cp "$LWP_ASSETS_DIR/wp-cli.local.yml" "./"
+
+	echo "$1" > "./wp-cli.local.sock"
+
+	wp option get home
+}
+
+###
+ # Get the .antigen directory.
+ #
+ # @since Tuesday, August 2, 2022
+ ##
+antigendir () {
+	echo "$HOME/.antigen";
 }
 
 ###

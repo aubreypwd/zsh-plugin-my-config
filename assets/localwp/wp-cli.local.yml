@@ -1,0 +1,8 @@
+###
+ # WP-CLI + LocalWP Configuration (yml)
+ #
+ # @since Tuesday, August 2, 2022
+ ##
+path: app/public
+require:
+  - wp-cli.local.php
