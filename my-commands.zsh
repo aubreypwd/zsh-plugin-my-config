@@ -141,9 +141,7 @@ subl. () {
 
 		echo "Found $SUBL_PROJECT, opening..."
 
-		subl --project "$SUBL_PROJECT"
-
-		return 1
+		subl --project "$SUBL_PROJECT" || return 0
 	fi
 
 	sublp
