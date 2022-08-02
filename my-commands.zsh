@@ -144,12 +144,12 @@ subl. () {
 		subl --project "$SUBL_PROJECT" || return 0
 	fi
 
-	sublp
+	sublp || return 1
 }
 
 ###
  # Get the PHP version running.
- #
+ #g
  # @usedby sysinfo()
  #
  # @since Tuesday, August 2, 2022
