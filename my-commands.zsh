@@ -127,24 +127,36 @@ sublop () {
 	if [ -e "$1" ]; then
 
 		subl --project "$1"
+		return 0
+	fi
+
+	if ls ./*.sublime-project || false; then
+
+		local SUBL_PROJECT_FILE='' && \
+			SUBL_PROJECT_FILE="$( find '.' -type f -name '*.sublime-project' | fzf )"
+
+		if [ -z "$SUBL_PROJECT_FILE" ]; then
+
+			echo "No *.sublime-project selected, opening $(nwd) in Sublime Text..."
+
+			subl -n .
+
+			return 0
+		fi
+
+		echo "Opening $SUBL_PROJECT_FILE in SublimeText..."
+
+		subl --project "$SUBL_PROJECT_FILE"
 
 		return 0
 	fi
 
-	local SUBL_PROJECT_FILE='' && \
-		SUBL_PROJECT_FILE="$( find '.' -type f -name '*.sublime-project' | fzf )"
+	echo "No *.sublime-project files, opening $(nwd) in Sublime Text..."
 
-	if [ -z "$SUBL_PROJECT_FILE" ]; then
-
-		echo "No *.sublime-project found, opening folder in Sublime Text (consider making one)..."
-
-		subl -n .
-
-		return 0
-	fi
-
-	subl --project "$SUBL_PROJECT_FILE"
+	subl -n .
 }
+
+	alias subl.='sublop'
 
 ###
  # Get the PHP version running.
