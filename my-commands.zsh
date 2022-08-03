@@ -288,17 +288,17 @@ iwpdebug () {
 	wp config set WP_MEMORY_LIMIT 4096 --raw
 
 	# Debugging plugins.
-	wp plugin install --activate debug-bar
-	wp plugin install --activate debug-bar-console
-	wp plugin install --activate debug-bar-shortcodes
-	wp plugin install --activate debug-bar-constants
-	wp plugin install --activate debug-bar-post-types
-	wp plugin install --activate debug-bar-cron
-	wp plugin install --activate debug-bar-actions-and-filters-addon
-	wp plugin install --activate debug-bar-transients
-	wp plugin install --activate debug-bar-list-dependencies
-	wp plugin install --activate debug-bar-remote-requests
-	wp plugin install --activate query-monitor
+	wp plugin install debug-bar
+	wp plugin install debug-bar-console
+	wp plugin install debug-bar-shortcodes
+	wp plugin install debug-bar-constants
+	wp plugin install debug-bar-post-types
+	wp plugin install debug-bar-cron
+	wp plugin install debug-bar-actions-and-filters-addon
+	wp plugin install debug-bar-transients
+	wp plugin install debug-bar-list-dependencies
+	wp plugin install debug-bar-remote-requests
+	wp plugin install query-monitor
 }
 
 ###
