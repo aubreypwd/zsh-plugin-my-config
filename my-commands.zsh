@@ -18,11 +18,11 @@ fi
 alias e="edit"
 
 # Editing Config Files
-alias edit-zsh="edit ~/.zshrc"
+alias edit-zsh="edit $HOME/.zshrc"
 	alias ezsh="edit-zsh"
-alias edit-git="edit ~/.gitconfig"
+alias edit-git="edit $HOME/.gitconfig"
 	alias egit="edit-git"
-alias edit-ssh="edit ~/.ssh/config"
+alias edit-ssh="edit $HOME/.ssh/config"
 	alias essh="edit-ssh"
 
 # Basics
@@ -53,27 +53,9 @@ alias fd~="fd 50" # Super deep.
 
 # Misc.
 alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
-alias repo="cd ~/Repos && fdd" # An easy way to get to a repo using my ffd command.
-alias loc="cd ~/Sites/Local && fd && cd app/public || true" # Quick way to get to a site
-alias site="cd ~/Sites && fd || true"
-alias antigenfd="cd ~/.antigen/bundles/aubreypwd && fd" # An easy way to get to a bundle.
-alias locals="cd ~/Sites/Local && fd 3" # An easy way to get to a local.
+alias repo="cd $HOME/Repos && fdd" # An easy way to get to a repo using my ffd command.
+alias site="cd $HOME/Sites && fd && cd 'app/public' || true" # Quick way to get to a site
 alias high='highlight -O ansi'
-
-# Installs (NPM)
-alias npmai="n auto && npm i"
-alias npmaci="n auto && npm ci"
-
-# Build (NPM)
-alias npmcib="npmaci && npmrb && b"
-alias npmib="npmai && npmrb && b"
-alias npmrb="npm run build && b"
-
-# Dev (NPM)
-alias npmcid="npmaci && npmrd"
-alias npmid="npmai && npmrd"
-alias npmibd="npmai && npmrb && npmrd"
-alias npmrd="npm run dev || npm run watch || npm run start || true"
 
 # Sounds
 alias bell="tput bel"
@@ -108,12 +90,13 @@ alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
 
 # Node
-alias na='n auto'
-alias nlts='n lts'
-alias n12='n 12'
-alias n10='n 10'
-alias n14='n 14'
-alias n16='n 14'
+alias n@a='n auto'
+	alias na='n@a'
+alias n@lts='n lts'
+alias n@12='n 12'
+alias n@10='n 10'
+alias n@14='n 14'
+alias n@16='n 14'
 
 ###
  # Open a .sublime-project
