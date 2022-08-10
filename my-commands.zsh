@@ -177,9 +177,9 @@ brewd () {
  ##
 lwpclisock () {
 
-	if [ ! -e './app' ]; then
+	if [ ! -e './wp-content' ]; then
 
-		echo "Please run in the site root (where app folder is, but not inside)."
+		echo "Please run in the site root (where the wp-content/ folder is, but not inside)."
 		return 1
 	fi
 
