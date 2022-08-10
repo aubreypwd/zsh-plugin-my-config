@@ -35,5 +35,6 @@
 	defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
+	defaults write com.apple.finder CreateDesktop false # No desktop icons.
 
 } &> /dev/null &!
