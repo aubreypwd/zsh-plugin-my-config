@@ -443,8 +443,21 @@ wpdbi () {
  #
  # @since Tuesday, December 21, 2021
  ##
-rfinder () {
+rmds_store () {
 	find "$HOME" -name ".DS_Store" -depth -exec rm {} \;
+}
+
+###
+ # Open finder in the Terminal.
+ #
+ # This works because we always open Finder in the ~ folder, which
+ # opens a normal window. Then we open a new window (tab) in Finder.
+ #
+ # @since Aug 11, 2022
+ ##
+finder () {
+	open -a Finder && \
+		open .
 }
 
 ###
