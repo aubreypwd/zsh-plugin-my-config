@@ -15,6 +15,7 @@ else
 	alias edit="vim"
 fi
 
+alias s="say"
 alias e="edit"
 
 # Editing Config Files
