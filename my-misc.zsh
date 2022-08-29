@@ -32,7 +32,7 @@
 	chflags nohidden "$HOME/Library"
 	chflags nohidden "$HOME/Documents"
 	chflags hidden "$HOME/Desktop"
-	chflags hidden "$HOME/Music"
+	chflags nohidden "$HOME/Music"
 	chflags hidden "$HOME/Public"
 	chflags nohidden "$HOME/Sites/Local"
 	chflags hidden "$HOME/Applications (Parallels)"
