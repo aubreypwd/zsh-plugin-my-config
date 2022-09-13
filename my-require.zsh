@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/bin/sh
 
-if [[ $(pwd) == "$HOME" ]]; then
+if [ "$(pwd)" = "$HOME" ]; then
 
 	###
 	 # Required Commands
@@ -11,13 +11,13 @@ if [[ $(pwd) == "$HOME" ]]; then
 	 # @since Friday, 10/2/2020                               The initial ones.
 	 # @since Tuesday, April 19, 2022.                        Moved to own plugin.
 	 ##
-	if [[ ! $( command -v require ) ]]; then
+	if [ ! "$( command -v require )" ]; then
 
 		echo "Could not find the 'require' function."
 		echo "  Please install: https://github.com/aubreypwd/zsh-plugin-require"
 	else
 
-		() {
+		( (
 
 			###
 			 # Install homebrew itself.
@@ -60,11 +60,11 @@ if [[ $(pwd) == "$HOME" ]]; then
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
 
-			# PHP Versions
-			require "/opt/homebrew/Cellar/php@7.4/7.4.30/bin/php" "brew reinstall php@7.4" "brew"
-			require "/opt/homebrew/Cellar/php/8.1.7/bin/php" "brew reinstall php@8.1" "brew"
-			require "/opt/homebrew/Cellar/php@5.6/5.6.40_4/bin/php" "brew tap shivammathur/php && brew reinstall php@5.6" "brew"
+			if [ ! "$( command -v php )" ]; then
+				echo "Please install php."
+			fi
 
-		} &> /dev/null &!
+		) 1>&- 2>&- & )
+
 	fi
 fi
