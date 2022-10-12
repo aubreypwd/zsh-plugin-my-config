@@ -360,8 +360,6 @@ wpdbx () {
 ###
  # Switch databases (by name).
  #
- # E.g: wpdbs DB_NAME
- #
  # @since Wednesday, July 6, 2022
  # @since Oct 12, 2022            Refactored to work with files vs internally switching.
  ##
@@ -370,6 +368,7 @@ wpdbs () {
 	local target_db="$1"
 	local export_db="$2"
 
+	# Keep the URL the same as the current install.
 	local install_url=""
 		install_url="$(wp option get home)"
 
@@ -391,7 +390,7 @@ wpdbs () {
 
 	mkdir -p "dbs"
 
-	# If they supply an export db name...
+	# If they supply an export DB name...
 	if [ -n "$export_db" ]; then
 
 		# Export the db first, if they want to do that (will overwrite).
@@ -399,20 +398,25 @@ wpdbs () {
 		wpdbx "dbs/$export_db"
 	fi
 
+	# Import or create a DB...
 	if [ -e "dbs/$target_db.tar.gz" ]; then
 
 		# Import a DB tar that has the same name already in dbs/...
-		echo "Importing dbs/$target_db.tar.gz"
+		echo "Importing dbs/$target_db.tar.gz instead of creating new install."
 		wpdbi "dbs/$target_db.tar.gz"
 
 	else
 
+		echo "dbs/$target_db.tar.gz does not exist."
+
 		if [ -e "dbs/reset.tar.gz" ]; then
 
 			# They have a dbs/reset.tar.gz file, use that as a base instead.
-			echo "Importing dbs/reset.tar.gz"
+			echo "You have dbs/reset.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
 			wpdbi "dbs/reset.tar.gz"
 		else
+
+			echo "Creating new install..."
 
 			# Multisite.
 			if [ '1' = "$(wp config get MULTISITE)" ]; then
