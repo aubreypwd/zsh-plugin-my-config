@@ -358,38 +358,81 @@ wpdbx () {
 }
 
 ###
- # Switch database (interactive)
- #
- # @since Tuesday, July 26, 2022
- ##
-wpdbsw () {
-
-	dbs
-	echo "Current DB_NAME: $(wpdbn)"
-
-	local wpdbsw_db=""
-
-	vared -p 'Which DB?: ' -c wpdbsw_db
-
-	if [ -e "$wpdbsw_db" ]; then
-
-		echo "No DB specified."
-		return 0
-	fi
-
-	wpdbs "$wpdbsw_db"
-}
-
-###
  # Switch databases (by name).
  #
  # E.g: wpdbs DB_NAME
  #
  # @since Wednesday, July 6, 2022
+ # @since Oct 12, 2022            Refactored to work with files vs internally switching.
  ##
 wpdbs () {
-	wp config set DB_NAME "$1" && \
-		wp option get home
+
+	local target_db="$1"
+	local export_db="$2"
+
+	local install_url=""
+		install_url="$(wp option get home)"
+
+	if [ -z "$install_url" ]; then
+
+		echo "Could not determine install's current URL, can't continue (maybe you have a single site DB but have multisite on?)."
+		return 1
+	fi
+
+	if [ -z "$target_db" ]; then
+
+		echo "Please supply new DB name (if dbs/<db>.tar.gz exists it will be imported instead."
+		echo
+		echo "Usage: wpdbs <db name> <export name>"
+		echo
+
+		return 1
+	fi
+
+	mkdir -p "dbs"
+
+	# If they supply an export db name...
+	if [ -n "$export_db" ]; then
+
+		# Export the db first, if they want to do that (will overwrite).
+		echo "Exporting DB to dbs/$export_db.tar.gz"
+		wpdbx "dbs/$export_db"
+	fi
+
+	if [ -e "dbs/$target_db.tar.gz" ]; then
+
+		# Import a DB tar that has the same name already in dbs/...
+		echo "Importing dbs/$target_db.tar.gz"
+		wpdbi "dbs/$target_db.tar.gz"
+
+	else
+
+		if [ -e "dbs/reset.tar.gz" ]; then
+
+			# They have a dbs/reset.tar.gz file, use that as a base instead.
+			echo "Importing dbs/reset.tar.gz"
+			wpdbi "dbs/reset.tar.gz"
+		else
+
+			# Multisite.
+			if [ '1' = "$(wp config get MULTISITE)" ]; then
+
+				# Create a new multisite install.
+				wp db reset --yes &&
+					wp core multisite-install --title="$target_db" --url="$install_url" --admin_user="admin" --admin_password="password" --admin_email="localdev@spacehotline.com" --skip-email --skip-config
+
+			# Single-site.
+			else
+
+				# Create an entirely new single-site install.
+				wp db reset --yes &&
+					wp core install --title="$target_db" --url="$install_url" --admin_user="admin" --admin_email="localdev@spacehotline.com" &&
+						wp user update admin --user_pass="password"
+			fi
+		fi
+	fi
+
+	wp option get home
 }
 
 ###
@@ -410,7 +453,7 @@ wpci () {
 	wpdbs "$1"
 
 	wp db create && \
-		wp core install --title="$1" --url="https://$(nwd).test" --admin_user="admin" --admin_email="aubreypwd@icloud.com" && \
+		wp core install --title="$1" --url="https://$(nwd).test" --admin_user="admin" --admin_email="localdev@spacehotline.com" && \
 			wp user update admin --user_pass=password && \
 				wp option get home
 }
