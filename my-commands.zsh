@@ -15,18 +15,15 @@ else
 	alias edit="vim"
 fi
 
+# Aliases
 alias s="say"
 alias e="edit"
-
-# Editing Config Files
 alias edit-zsh="edit $HOME/.zshrc"
 	alias ezsh="edit-zsh"
 alias edit-git="edit $HOME/.gitconfig"
 	alias egit="edit-git"
 alias edit-ssh="edit $HOME/.ssh/config"
 	alias essh="edit-ssh"
-
-# Basics
 alias cat="bat"
 alias nw='ttab -w' # New window.
 alias nt='ttab ' # New tab.
@@ -34,63 +31,34 @@ alias ntx="nt && x"
 alias c=clear
 alias tower='gittower'
 alias fakedata="fakedata --limit 1"
-
-# Easy composer commands.
-#alias cu="composer uninstall"
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
 alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install.
-# alias crd="composer uninstall && composer install --prefer-dist" # reinstall with dist.
-# alias crs="composer uninstall && composer install --prefer-source" # reinstall with source.
 alias ccc="composer clearcache && composer global clearcache"
-
-# Composer versions
 alias c@2="composer self-update --2"
 alias c@1="composer self-update --1"
-
-# Fuzzy find at certain levels easily.
 alias fdd="fd 2" # Two levels.
 alias fd!="fd 10" # Deeper.
 alias fd~="fd 50" # Super deep.
-
-# Misc.
 alias vim="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias repo="cd $HOME/Repos && fdd" # An easy way to get to a repo using my ffd command.
 alias site="cd $HOME/Sites && fd && cd 'app/public' || true" # Quick way to get to a site
 alias high='highlight -O ansi'
-
-# Sounds
 alias bell="tput bel"
 alias beep="bell"
 alias b="bell"
-
-# diff folders
 alias diffd="diff -rq" # Diff a directory.
 	alias diffdir="diffd"
-
-# Misc
 alias matrix='cmatrix'
-
-# WP-CLI
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 alias wpdbn="wp config get DB_NAME" # What is the database name
-
-# xattr
 alias clearatts="xattr -cr"
 	alias catts="clearatts"
-
-# DNS
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-
-# PHP switching
 alias php@5="brew unlink php && brew unlink php@5.6 && brew link --overwrite php@5.6 --force && composer global update && php --version"
 alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
 alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
-
-# Screens
 alias screens="screen -ls"
 alias xd="screen -d" # Just detach from the screen.
-
-# Node
 alias n@a='n auto'
 	alias na='n@a'
 alias n@lts='n lts'
@@ -140,8 +108,6 @@ sublop () {
 	subl -n .
 }
 
-	alias subl.='sublop'
-
 ###
  # Get the PHP version running.
  #g
@@ -157,8 +123,9 @@ phpv () {
  # Go to one of my plugins (Antigen)
  #
  # @since Tuesday, July 26, 2022
+ # @since Oct 13, 2022           Renamed to gotoplugin.
  ##
-plugin () {
+gotoplugin () {
 	cd "$HOME/.antigen/bundles/aubreypwd" || false && fd
 }
 
@@ -169,64 +136,6 @@ plugin () {
  ##
 brewd () {
 	brew bundle dump --file="$HOME/.Brewfile" --verbose --all --describe --force --no-lock "$@"
-}
-
-###
- # Easy way to configure WP CLI in LocalWP.
- #
- # @since Thursday, April 7, 2022
- ##
-lwpclisock () {
-
-	if [ ! -e './wp-content' ]; then
-
-		echo "Please run in the site root (where the wp-content/ folder is, but not inside)."
-		return 1
-	fi
-
-	if [ -z "$( antigendir || false )" ]; then
-
-		echo "antigendir command not found."
-		return 1
-	fi
-
-	local ANTIGENDIR && ANTIGENDIR="$( antigendir )"
-
-	if [ -z "$1" ]; then
-
-		echo "Please supply a sock file as the first argument."
-		return 1
-	fi
-
-	if [ ! -e "$1" ]; then
-
-		echo "Sock file $1 does not exist, please copy sock path from LocalWP."
-		return 1
-	fi
-
-	local LWP_ASSETS_DIR="$ANTIGENDIR/bundles/aubreypwd/zsh-plugin-my-config/assets/localwp/"
-
-	if [ ! -e "$LWP_ASSETS_DIR" ]; then
-
-		echo "$LWP_ASSETS_DIR missing!"
-		return 1
-	fi
-
-	cp "$LWP_ASSETS_DIR/wp-cli.local.php" "./"
-	cp "$LWP_ASSETS_DIR/wp-cli.local.yml" "./"
-
-	echo "$1" > "./wp-cli.local.sock"
-
-	wp option get home
-}
-
-###
- # Get the .antigen directory.
- #
- # @since Tuesday, August 2, 2022
- ##
-antigendir () {
-	echo "$HOME/.antigen";
 }
 
 ###
@@ -255,7 +164,7 @@ sysinfo () {
  #
  # @since Thursday, June 30, 2022
  ##
-iwpdebug () {
+wpdebugi () {
 
 	# Debugging constants.
 	wp config set BP_DEFAULT_COMPONENT 'staging-area'
@@ -298,55 +207,6 @@ iwpdebug () {
 }
 
 ###
- # Setup composer for WordPress.
- #
- # @since Thursday, June 30, 2022
- ##
-scomposerwp () {
-
-	composer init --name "aubreypwd/$(nwd)" --require "spatie/ray:^1.0" --require "aubreypwd/php-s-wp:dev-main@dev" --no-interaction
-	composer install --no-interaction
-
-	wp config set '__SPATIE_RAY' "require __DIR__ . '/vendor/autoload.php'" --raw --type='variable'
-}
-
-###
- # New php -S WordPress site.
- #
- # Create a directory and run this command inside it.
- #
- # @since Thursday, June 30, 2022
- ##
-newphpswp () {
-
-	wp core download
-	wp config create --dbname="$(nwd)" --dbuser="root"
-	wp db create
-	wp core install --url="http://localhost" --title="$(nwd)" --admin_email="code@aubreypwd.com" --admin_user="admin"
-	wp user update admin --user_pass="password"
-
-	scomposerwp
-	iwpdebug
-}
-
-###
- # Easy way to archive a repo and transfer it to 4ubr3ypwd.
- #
- # E.g: gharchive
- #
- # @since Wednesday, June 29, 2022
- ##
-gharchive () {
-
-	gh repo archive -y
-	gh api "repos/aubreypwd/${PWD##*/}/transfer" -f new_owner=4ubr3ypwd
-
-	rm -Rf "$(pwd)"
-
-	exit
-}
-
-###
  # Export a DB using WP-CLI.
  #
  # ...and compress.
@@ -358,12 +218,13 @@ wpdbx () {
 }
 
 ###
- # Switch databases (by name).
+ # Switch databases (by name) in LocalWP.
  #
  # @since Wednesday, July 6, 2022
  # @since Oct 12, 2022            Refactored to work with files vs internally switching.
+ # @since Oct 13, 2022            Renamed to lwpdbs.
  ##
-wpdbs () {
+lwpdbs () {
 
 	local target_db="$1"
 	local export_db="$2"
@@ -440,29 +301,6 @@ wpdbs () {
 }
 
 ###
- # wp core install (Automated)
- #
- # E.g: wpci "name-of-database"
- #
- # @since Wednesday, July 6, 2022
- ##
-wpci () {
-
-	if [ ! -e "wp-config.php" ]; then
-
-		echo "Not an active WordPress install, use wp config create first."
-		return
-	fi
-
-	wpdbs "$1"
-
-	wp db create && \
-		wp core install --title="$1" --url="https://$(nwd).test" --admin_user="admin" --admin_email="localdev@spacehotline.com" && \
-			wp user update admin --user_pass=password && \
-				wp option get home
-}
-
-###
  # Import a DB using WP-CLI.
  #
  # ...that's compressed.
@@ -509,39 +347,6 @@ finder () {
 }
 
 ###
- # False (an error).
- #
- # @since Wednesday, July 27, 2022
- ##
-__return_1 () {
-	return 1
-}
-
-###
- # True (no error).
- #
- # @since Wednesday, July 27, 2022
- ##
-__return_0 () {
-	return 0
-}
-
-###
- # Watch files by extension
- #
- # E.g: watchf ./ js,css,php "cmd"
- #
- # @since Monday, October 11, 2021
- ##
-watchfext () {
-
-	clear
-	watchexec --watch "$1" -e "$2" "$3" -c -p
-}
-
-	alias watchf-ext='watchfext'
-
-###
  # Hide an app from the Dock.
  #
  # E.g: hideindock "Tower"
@@ -551,7 +356,6 @@ watchfext () {
 hideindock () {
 	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" &> /dev/null
 }
-	alias hide-in-dock='hideindock'
 
 ###
  # Show an app in the Dock.
@@ -563,7 +367,6 @@ hideindock () {
 showindock () {
 	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" &> /dev/null
 }
-	alias show-in-dock="showindock"
 
 ###
  # Run a command in a detached screen.
@@ -683,58 +486,15 @@ sysnpm () {
 affwp () {
 
 	# Database controls.
-	if [ "$1" = 'db' ]; then
-
+	if [ "$1" = 'sub-command' ]; then
 		case "$2" in
-
-			###
-			 # Reset using the reset tar that should be in dbx.
-			 #
-			 # @since Thursday, July 28, 2022
-			 ##
-			'reset' )
-				test -e "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" || return 1 && \
-					wpdbi "$HOME/Databases/Exports/mysql/affwp-dev@reset.tar.gz" && \
-						wp option set blogname "$(wpdbn)" && \
-							return 0
-			;;
-
-			###
-			 # Switch DB and Import file.
-			 #
-			 # affwp db si $3{DB_NAME} $4{foo.tar.gz}
-			 #
-			 # @since Thursday, July 28, 2022
-			 ##
-			'si' ) __affwp_sdbi "$3" "$4" && return 0;;
-
-			###
-			 # Switch to another DB.
-			 #
-			 # Just a wrapper of wpdbs
-			 #
-			 # @since Thursday, July 28, 2022
-			 ##
-			's' )
-				wpdbs "$(nwd)@$3" &&
-					( wp db create || true ) && \
-						return 0;
-			;;
-
-			###
-			 # Switch the db to the current git branch.
-			 #
-			 # affwp db gb $3{affwp-dev}
-			 #
-			 # @since Thursday, July 28, 2022
-			 ##
-			'gb' )
-				risd "$3" affwp db s "$(git b)" && \
-					risd "$3" wp option set blogname "$3@$(git b)"
+			'sub-sub-command' )
+				echo "Re-factor this into a sub-command." && \
+					return 0
 			;;
 
 			# Default
-			* ) echo "Sub-commands: reset, si, s, gb" && return 1;;
+			* ) echo "Sub-commands: none" && return 1;;
 
 		esac
 	fi
@@ -749,13 +509,4 @@ affwp () {
  ##
 rid () {
 	( cd "$1" && "${@:2}" )
-}
-
-###
- # Run a command in a site directory.
- #
- # @since Thursday, July 28, 2022
- ##
-risd () {
-	rid "$HOME/Sites/$1" "${@:2}"
 }

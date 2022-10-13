@@ -7,22 +7,44 @@
  ##
 useinstead () {
 
-	echo "Use [$1] instead, this command has been deprecated."
+	echo "Use [$1] instead, this command has been deprecated. $2"
 	return 1
 }
 
+###
+ # Deprecated Notice.
+ #
+ # @since Oct 13, 2022
+ ##
+deprecated () {
+
+	echo "This command has been deprecated, and is no longer in use. $1"
+	return 1
+}
 
 ###
  # Aliases
  ##
-alias valet@7="echo 'From within a site directory, use [valet isolate php@7.x] instead.' && (exit 3)"
-alias valet@8="echo 'From within a site directory, use [valet isolate php@8.x] instead.' && (exit 3)"
-alias valetv="echo 'No alternative.' && (exit 33)" # A way to see what version valet is running at.
-alias valets="echo 'localtunnel is unreliable, use [valet share] instead' && (exit 3)" # valet share, but just with localtunnel.
-alias wpdbsw="echo 'deprecated on Oct 12, 2022, no longer in use.' && (exit 3)"
+alias valet@7="useinstead 'valet isolate php@7.x'"
+alias valet@8="useinstead 'valet isolate php@8.x'"
+alias valetv="deprecated"
+alias valets="useinstead 'valet share'"
+alias wpdbsw="deprecated"
+alias wpci="deprecated"
+alias __affwp_sdbi="deprecated"
+alias watchfext="deprecated"
+alias watchf-ext="deprecated"
+alias risd="deprecated"
+alias hide-in-dock="useinstead 'hideindock'"
+alias show-in-dock="useinstead 'showindock'"
+alias subl.="useinstead 'sublop'"
 
 ###
  # Functions
  ##
 vu () { useinstead "valet isolate php@x.x"; }
 watchf () { useinstead "watchfext"; }
+plugin () { useinstead "gotoplugin"; }
+iwpdebug () { useinstead "wpdebugi"; }
+lwpclisock () { deprecated ''; }
+antigendir () { deprecated ''; }
