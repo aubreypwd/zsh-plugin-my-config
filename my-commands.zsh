@@ -226,6 +226,13 @@ wpdbx () {
  ##
 lwpdbs () {
 
+	# Please run this in the root.
+	if [ ! -e "wp-config.php" ]; then
+
+		echo "Sorry, but you have to run this in the root of the install."
+		return 1
+	fi
+
 	local target_db="$1"
 	local export_db="$2"
 
