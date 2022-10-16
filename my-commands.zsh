@@ -264,6 +264,11 @@ lwpdbs () {
 		# Export the db first, if they want to do that (will overwrite).
 		echo "Exporting DB to dbs/$export_db.tar.gz"
 		wpdbx "dbs/$export_db"
+	else
+
+		# Use the blogname to export the DB.
+		echo "Exporting DB to dbs/$(wp option get blogname).tar.gz"
+		wpdbx "dbs/$(wp option get blogname)"
 	fi
 
 	# Import or create a DB...
@@ -282,6 +287,9 @@ lwpdbs () {
 			# They have a dbs/reset.tar.gz file, use that as a base instead.
 			echo "You have dbs/reset.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
 			wpdbi "dbs/reset.tar.gz"
+
+			# Set the blogname to the target db when importing a reset so we can export it next time.
+			wp option set blogname "$target_db" --url="$install_url"
 		else
 
 			echo "Creating new install..."
