@@ -68,6 +68,24 @@ alias n@14='n 14'
 alias n@16='n 14'
 
 ###
+ # Get the site name from the database for this install.
+ #
+ # @since Oct 18, 2022
+ ##
+wpblogname () {
+	wp option get blogname
+}
+
+###
+ # Get the home url from the database for this install.
+ #
+ # @since Oct 18, 2022;
+ ##
+wpurl () {
+	wp option get home
+}
+
+###
  # Open a .sublime-project
  #
  # Staring with the current directory.
