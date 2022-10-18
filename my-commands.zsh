@@ -81,7 +81,7 @@ wpblogname () {
  #
  # @since Oct 18, 2022;
  ##
-wpurl () {
+wphome () {
 	wp option get home
 }
 
