@@ -28,13 +28,11 @@
 	 #
 	 # @since Thursday, 10/1/2020
 	 ##
-	chflags hidden "$HOME/Applications"
-	chflags nohidden "$HOME/Library"
-	chflags nohidden "$HOME/Documents"
-	chflags hidden "$HOME/Desktop"
-	chflags nohidden "$HOME/Music"
-	chflags hidden "$HOME/Public"
-	chflags nohidden "$HOME/Sites/Local"
 	chflags hidden "$HOME/Applications (Parallels)"
+	chflags hidden "$HOME/Applications"
+	chflags hidden "$HOME/Desktop"
+	chflags hidden "$HOME/Documents"
+	chflags hidden "$HOME/Public"
+	chflags nohidden "$HOME/Library"
 
 } &> /dev/null &!
