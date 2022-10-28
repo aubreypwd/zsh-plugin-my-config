@@ -230,24 +230,14 @@ wpdebugi () {
 }
 
 ###
- # Export a DB using WP-CLI.
- #
- # ...and compress.
- #
- # @since Monday, April 25, 2022
- ##
-wpdbx () {
-	wp db export - | gzip -9 -f > "$1.tar.gz"
-}
-
-###
- # Switch databases (by name) in LocalWP.
+ # Switching Databases
  #
  # @since Wednesday, July 6, 2022
  # @since Oct 12, 2022            Refactored to work with files vs internally switching.
  # @since Oct 13, 2022            Renamed to lwpdbs.
+ # @since Oct 28, 2022            Renamed to wpdbs since it always works with the dbs/ folder.
  ##
-lwpdbs () {
+wpdbs () {
 
 	# Please run this in the root.
 	if [ ! -e "wp-config.php" ]; then
@@ -305,37 +295,40 @@ lwpdbs () {
 
 		echo "dbs/$target_db.tar.gz does not exist."
 
-		if [ -e "dbs/reset.tar.gz" ]; then
+		if [ -e "dbs/init.tar.gz" ]; then
 
-			# They have a dbs/reset.tar.gz file, use that as a base instead.
-			echo "You have dbs/reset.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
-			wpdbi "dbs/reset.tar.gz"
+			# They have a dbs/init.tar.gz file, use that as a base instead.
+			echo "You have dbs/init.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
+			wpdbi "dbs/init.tar.gz"
 
 			# Set the blogname to the target db when importing a reset so we can export it next time.
 			wp option set blogname "$target_db" --url="$install_url"
 		else
 
-			echo "Creating new install..."
+			echo "Creating new install with a blank DB..."
 
 			# Multisite.
 			if [ '1' = "$(wp config get MULTISITE)" ]; then
 
 				# Create a new multisite install.
-				wp db reset --yes &&
+				wp db reset --yes && \
 					wp core multisite-install --title="$target_db" --url="$install_url" --admin_user="admin" --admin_password="password" --admin_email="localdev@spacehotline.com" --skip-email --skip-config
 
 			# Single-site.
 			else
 
 				# Create an entirely new single-site install.
-				wp db reset --yes &&
-					wp core install --title="$target_db" --url="$install_url" --admin_user="admin" --admin_email="localdev@spacehotline.com" &&
+				wp db reset --yes && \
+					wp core install --title="$target_db" --url="$install_url" --admin_user="admin" --admin_email="localdev@spacehotline.com" && \
 						wp user update admin --user_pass="password"
 			fi
 		fi
 	fi
 
-	wp option get home
+	echo
+	echo "Done!"
+	echo
+	echo "URL: $(wp option get home)"
 }
 
 ###
@@ -347,6 +340,17 @@ lwpdbs () {
  ##
 wpdbi () {
 	gzip -c -d "$1" | wp db import -
+}
+
+###
+ # Export a DB using WP-CLI.
+ #
+ # ...and compress.
+ #
+ # @since Monday, April 25, 2022
+ ##
+wpdbx () {
+	wp db export - | gzip -9 -f > "$1.tar.gz"
 }
 
 ###
