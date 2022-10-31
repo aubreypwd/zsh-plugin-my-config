@@ -325,10 +325,9 @@ wpdbs () {
 		fi
 	fi
 
-	echo
 	echo "Done!"
-	echo
-	echo "URL: $(wp option get home)"
+	echo "URL:      $(wp option get home)"
+	echo "blogname: $(wp option get blogname)"
 }
 
 ###
