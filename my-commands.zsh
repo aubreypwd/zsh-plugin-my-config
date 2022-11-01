@@ -325,6 +325,10 @@ wpdbs () {
 		fi
 	fi
 
+	# Make sure our blogname matches what we imported.
+	wp option set blogname "$target_db"
+
+	# Done
 	echo "Done!"
 	echo "URL:      $(wp option get home)"
 	echo "blogname: $(wp option get blogname)"
@@ -349,7 +353,9 @@ wpdbi () {
  # @since Monday, April 25, 2022
  ##
 wpdbx () {
-	wp db export - | gzip -9 -f > "$1.tar.gz"
+
+	mkdir -p "$(dirname $1)" && \
+		wp db export - | gzip -9 -f > "$1.tar.gz"
 }
 
 ###
