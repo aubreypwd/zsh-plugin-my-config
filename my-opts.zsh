@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 ###
  # My unsetopt's and setopt's.
