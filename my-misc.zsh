@@ -37,4 +37,4 @@
 ) 1>&- 2>&- & )
 
 # Automatically choose suggestion in zsh-autosuggestions using TAB.
-bindkey '	' autosuggest-accept
+bindkey '^[[Z' autosuggest-accept
