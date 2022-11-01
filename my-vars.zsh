@@ -34,3 +34,6 @@ export PYTHON='/opt/homebrew/bin/python3'
 # Fix wordpress-develop
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+
+# zsh-autosuggestions strategy.
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)

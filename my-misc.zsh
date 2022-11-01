@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 ###
  # Misc Stuff
@@ -6,8 +6,7 @@
  # @since Wednesday, June 29, 2022
  ##
 
-
-() {
+( (
 
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
@@ -35,4 +34,7 @@
 	chflags hidden "$HOME/Public"
 	chflags nohidden "$HOME/Library"
 
-} &> /dev/null &!
+) 1>&- 2>&- & )
+
+# Automatically choose suggestion in zsh-autosuggestions using TAB.
+bindkey '	' autosuggest-accept
