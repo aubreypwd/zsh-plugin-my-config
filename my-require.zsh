@@ -59,6 +59,7 @@ if [ "$(pwd)" = "$HOME" ]; then
 			require "watchexec" "brew reinstall watchexec" "brew"
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
+			require "duti" "brew reinstall duti" "brew" # Used to keep file associations.
 
 			if [ ! "$( command -v php )" ]; then
 				echo "Please install php."
