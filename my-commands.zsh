@@ -48,6 +48,7 @@ alias j10="jrnl -n 10 -s"
 alias j20="jrnl -n 20 -s"
 alias j!="jrnl -n 9999999 -s"
 alias J!="jrnl -n 999999"
+alias lg="lazygit"
 alias matrix='cmatrix'
 alias n@10='n 10'
 alias n@12='n 12'
