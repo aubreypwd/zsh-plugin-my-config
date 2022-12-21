@@ -14,7 +14,7 @@
 
 	for version in "${php_versions[@]}"; do
 		for conf_file in "${conf_files[@]}"; do
-			ln -sf "$HOME/Sites/conf.d/$conf_file" "/opt/homebrew/etc/php/$version/conf.d/z-$conf_file"
+			ln -sf "$HOME/.config/php/conf.d/$conf_file" "/opt/homebrew/etc/php/$version/conf.d/z-$conf_file"
 		done
 	done
 
