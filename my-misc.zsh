@@ -38,3 +38,16 @@
 
 # Automatically choose suggestion in zsh-autosuggestions using TAB.
 bindkey '^[[Z' autosuggest-accept
+
+# Make sure all the PHP versions have config files symlinked.
+( (
+
+	php_versions=(7.3 7.4 8.0 8.1 8.2)
+	files=( 'php.ini' 'xdebug-3.ini' )
+
+	for version in "${php_versions[@]}"; do
+		for file in "${files[@]}"; do
+			ln -sf "$HOME/Sites/conf.d/$file" "/opt/homebrew/etc/php/$version/conf.d/z-$file"
+		done
+	done
+) 1>&- 2>&- & )
