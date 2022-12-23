@@ -10,7 +10,7 @@
 ( (
 
 	php_versions=(7.3 7.4 8.0 8.1 8.2)
-	conf_files=( 'php.ini' 'xdebug-3.ini' )
+	conf_files=( 'php.ini' 'xdebug-3.ini' ) # In ~/.config/php/conf.d/
 
 	for version in "${php_versions[@]}"; do
 		for conf_file in "${conf_files[@]}"; do
