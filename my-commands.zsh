@@ -28,6 +28,7 @@ alias ccc="composer clearcache && composer global clearcache"
 alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install.
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
 alias clearatts="xattr -cr"
+alias cwd="pwdcp"
 alias diffd="diff -rq" # Diff a directory.
 alias diffdir="diffd"
 alias e="edit"
@@ -558,4 +559,56 @@ affwp () {
  ##
 rid () {
 	( cd "$1" && "${@:2}" )
+}
+
+###
+ # Convert any video file to a DVD-ready MPG.
+ #
+ # This not only converts any file to ~4.7GB it also outputs it to
+ # NTSC in MPG format at 720p resolution.
+ #
+ # @see https://unix.stackexchange.com/a/598360
+ #
+ # @since Dec 30, 2022
+ ##
+todvd () {
+
+	local file="$1"
+	local target_size_mb=4650 # DVD = 4700 MB
+	local target_size=$(( $target_size_mb * 1000 * 1000 * 8 )) # target size in bits
+	local length=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$file"`
+	local length_round_up=$(( ${length%.*} + 1 ))
+	local total_bitrate=$(( $target_size / $length_round_up ))
+	local audio_bitrate=$(( 128 * 1000 )) # 128k bit rate
+	local video_bitrate=$(( $total_bitrate - $audio_bitrate ))
+
+	ffmpeg -i "$file" -b:v "$video_bitrate" -maxrate:v "$video_bitrate" -bufsize:v "$(( $target_size / 20 ))" -b:a "$audio_bitrate" -vf scale=-1:720 -target ntsc-dvd "${file}-${target_size_mb}MB.mpg"
+}
+
+###
+ # Get how many frames a video has.
+ #
+ # @since Dec 30, 2022
+ # @see   https://stackoverflow.com/a/28376817/1436129
+ ##
+frames () {
+	ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 "$1"
+}
+
+###
+ # Use a GUI to manage public VCSH.
+ #
+ # @since Jan 6, 2023;
+ ##
+publg () {
+	vcsh pub lg
+}
+
+###
+ # Use a GUI to manage private VCSH.
+ #
+ # @since Jan 6, 2023;
+ ##
+privlg () {
+	vcsh priv lg
 }
