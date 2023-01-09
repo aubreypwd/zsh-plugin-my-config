@@ -36,6 +36,7 @@
 	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
 	defaults write com.apple.finder CreateDesktop false # No desktop icons.
-	defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
+	defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
+	defaults write com.sublimetext ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 
 } &> /dev/null &!
