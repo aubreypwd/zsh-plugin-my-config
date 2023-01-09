@@ -70,6 +70,7 @@ alias screens="screen -ls"
 alias site="cd $HOME/Sites && fd && cd 'app/public' || true" # Quick way to get to a site
 alias tower='gittower'
 alias tunnel="cloudflared tunnel run"
+alias vimi="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias wp="$(brew --prefix php@7.4)/bin/php /opt/homebrew/bin/wp"
 alias wpdbn="wp config get DB_NAME" # What is the database name
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
