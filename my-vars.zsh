@@ -25,8 +25,8 @@ export MANPAGER='ul | cat -s' # Don't use less.
  #
  # @since Thursday, 5/13/2021
  ##
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='micro'
+export VISUAL='micro'
 
 # Python
 export PYTHON='/opt/homebrew/bin/python3'

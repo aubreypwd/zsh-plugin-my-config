@@ -12,7 +12,7 @@
 if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
 	alias edit="subl -n -w"
 else
-	alias edit="vim"
+	alias edit="micro"
 fi
 
 # Aliases
