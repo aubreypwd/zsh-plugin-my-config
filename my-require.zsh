@@ -2,6 +2,16 @@
 
 if [ "$(pwd)" = "$HOME" ]; then
 
+	( (
+
+		# Secretly keep these up to date because they are annoying and nag.
+
+		brew update
+		brew upgrade gh
+		brew upgrade n
+
+	) 1>&- 2>&- & )
+
 	###
 	 # Required Commands
 	 #
@@ -61,11 +71,10 @@ if [ "$(pwd)" = "$HOME" ]; then
 			require "wp" "brew reinstall wp-cli" "brew"
 			require "duti" "brew reinstall duti" "brew" # Used to keep file associations.
 
-			if [ ! "$( command -v php )" ]; then
-				echo "Please install php."
-			fi
-
 		) 1>&- 2>&- & )
 
+		if [ ! "$( command -v php )" ]; then
+			echo "Please install php"
+		fi
 	fi
 fi
