@@ -2,7 +2,7 @@
 
 if [ "$(pwd)" = "$HOME" ]; then
 
-	( (
+	( ( # Quietly in the background...
 
 		# Secretly keep these up to date because they are annoying and nag.
 
@@ -27,7 +27,7 @@ if [ "$(pwd)" = "$HOME" ]; then
 		echo "  Please install: https://github.com/aubreypwd/zsh-plugin-require"
 	else
 
-		( (
+		( ( # Quietly in the background...
 
 			###
 			 # Install homebrew itself.
@@ -39,7 +39,7 @@ if [ "$(pwd)" = "$HOME" ]; then
 			 # @since Friday, 10/2/2020
 			 # @see   https://brew.sh
 			 ##
-			require "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
+			require "brew" "/bin/bash -c $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 			###
 			 # Required packages, and how to install them.
@@ -48,6 +48,7 @@ if [ "$(pwd)" = "$HOME" ]; then
 			 ##
 			require "cmatrix" "brew reinstall cmatrix" "brew" # Easy matrix screensave.
 			require "composer" "brew reinstall composer" "brew" # Composer, @see https://composer.org
+			require "duti" "brew reinstall duti" "brew" # Used to keep file associations.
 			require "exa" "brew reinstall exa" "brew" # Exa makes ls even more awesome.
 			require "ffmpeg" "brew reinstall ffmpeg" "brew"
 			require "fzf" "brew reinstall fzf" "brew"
@@ -69,7 +70,6 @@ if [ "$(pwd)" = "$HOME" ]; then
 			require "watchexec" "brew reinstall watchexec" "brew"
 			require "wget" "brew reinstall wget" "brew"
 			require "wp" "brew reinstall wp-cli" "brew"
-			require "duti" "brew reinstall duti" "brew" # Used to keep file associations.
 
 		) 1>&- 2>&- & )
 
