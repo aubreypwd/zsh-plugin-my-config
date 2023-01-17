@@ -6,7 +6,7 @@
  # @since Jan 16, 2023
  ##
 
-( (
+( ( # Quietly run in the background...
 
 	# Keep sublime associated with these extensions.
 	for ext in php js json yml md sh zsh html; do
