@@ -9,7 +9,7 @@
  ##
 
 # Editor
-if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
+if test "$TERM_PROGRAM" = "Terminus-Sublime"; then
 	alias edit="subl -n -w"
 else
 	alias edit="micro"
@@ -105,7 +105,7 @@ wphome () {
  ##
 sublop () {
 
-	if [ -e "$1" ]; then
+	if test -e "$1"; then
 
 		subl --project "$1"
 		return 0
@@ -246,7 +246,7 @@ wpdebugi () {
 wpdbs () {
 
 	# Please run this in the root.
-	if [ ! -e "wp-config.php" ]; then
+	if test ! -e "wp-config.php"; then
 
 		echo "Sorry, but you have to run this in the root of the install."
 		return 1
@@ -259,13 +259,13 @@ wpdbs () {
 	install_url=""
 		install_url="$(wp option get home)"
 
-	if [ -z "$install_url" ]; then
+	if test -z "$install_url"; then
 
 		echo "Could not determine install's current URL, can't continue (maybe you have a single site DB but have multisite on?)."
 		return 1
 	fi
 
-	if [ -z "$target_db" ]; then
+	if test -z "$target_db"; then
 
 		echo "Please supply new DB name (if dbs/<db>.tar.gz exists it will be imported instead."
 		echo
@@ -278,7 +278,7 @@ wpdbs () {
 	mkdir -p "dbs"
 
 	# If they supply an export DB name...
-	if [ -n "$export_db" ]; then
+	if test -n "$export_db"; then
 
 		# Export the db first, if they want to do that (will overwrite).
 		echo "Exporting DB to dbs/$export_db.tar.gz"
@@ -291,7 +291,7 @@ wpdbs () {
 	fi
 
 	# Import or create a DB...
-	if [ -e "dbs/$target_db.tar.gz" ]; then
+	if test -e "dbs/$target_db.tar.gz"; then
 
 		# Import a DB tar that has the same name already in dbs/...
 		echo "Importing dbs/$target_db.tar.gz instead of creating new install."
@@ -301,7 +301,7 @@ wpdbs () {
 
 		echo "dbs/$target_db.tar.gz does not exist."
 
-		if [ -e "dbs/init.tar.gz" ]; then
+		if test -e "dbs/init.tar.gz"; then
 
 			# They have a dbs/init.tar.gz file, use that as a base instead.
 			echo "You have dbs/init.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
@@ -314,7 +314,7 @@ wpdbs () {
 			echo "Creating new install with a blank DB..."
 
 			# Multisite.
-			if [ '1' = "$(wp config get MULTISITE)" ]; then
+			if test '1' = "$(wp config get MULTISITE)"; then
 
 				# Create a new multisite install.
 				wp db reset --yes && \
@@ -372,7 +372,16 @@ wpdbx () {
  # @since
  ##
 not () {
-	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop"
+
+	if test ! -x "$(command -v "terminal-notifier")"; then
+
+		echo "Please install terminal-notifier."
+		return 1
+	fi
+
+	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop" || \
+		echo "Unable to push to notifications." && \
+			return 1;
 }
 
 ###
