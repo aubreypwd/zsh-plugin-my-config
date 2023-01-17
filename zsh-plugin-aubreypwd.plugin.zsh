@@ -5,8 +5,8 @@
  #
  # @since Wednesday, June 29, 2022
  ##
-source 'my-functions.zsh'
-source 'my-commands.zsh'
+source 'my-functions.sh'
+source 'my-commands.sh'
 source 'my-mac-defaults.zsh'
 source 'my-misc.zsh'
 source 'my-opts.zsh'

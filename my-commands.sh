@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ###
  # My Commands
@@ -32,16 +32,16 @@ alias cwd="pwdcp"
 alias diffd="diff -rq" # Diff a directory.
 alias diffdir="diffd"
 alias e="edit"
-alias edit-git="edit $HOME/.gitconfig"
-alias edit-ssh="edit $HOME/.ssh/config"
-alias edit-zsh="edit $HOME/.zshrc"
+alias edit-git="edit \$HOME/.gitconfig"
+alias edit-ssh="edit \$HOME/.ssh/config"
+alias edit-zsh="edit \$HOME/.zshrc"
 alias egit="edit-git"
 alias essh="edit-ssh"
 alias ezsh="edit-zsh"
 alias fakedata="fakedata --limit 1"
-alias fd!="fd 10" # Deeper.
-alias fdd="fd 2" # Two levels.
-alias fd~="fd 50" # Super deep.
+alias fd2="fd 2" # Two levels.
+alias fd10="fd 10" # Deeper.
+alias fd50="fd 50" # Super deep.
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias high='highlight -O ansi'
 alias j='jrnl'
@@ -64,14 +64,16 @@ alias nw='ttab -w' # New window.
 alias php@5="brew unlink php && brew unlink php@5.6 && brew link --overwrite php@5.6 --force && composer global update && php --version"
 alias php@7="brew unlink php && brew unlink php@7.4 && brew link --overwrite php@7.4 --force && composer global update && php --version"
 alias php@8="brew unlink php && brew unlink php@8.1 && brew link --overwrite php@8.1 --force && composer global update && php --version"
-alias repo="cd $HOME/Repos && fdd" # An easy way to get to a repo using my ffd command.
+alias publg="vcsh pub lg"
+alias privlg="vcsh priv lg"
+alias repo="cd \$HOME/Repos && fdd" # An easy way to get to a repo using my ffd command.
 alias s="say"
 alias screens="screen -ls"
-alias site="cd $HOME/Sites && fd || true" # Quick way to get to a site
+alias site="cd \$HOME/Sites && fd || true" # Quick way to get to a site
 alias tower='gittower'
 alias tunnel="cloudflared tunnel run"
 alias vimi="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
-alias wp="$(brew --prefix php@7.4)/bin/php /opt/homebrew/bin/wp"
+alias wp="\$(brew --prefix php@7.4)/bin/php /opt/homebrew/bin/wp"
 alias wpdbn="wp config get DB_NAME" # What is the database name
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 alias xd="screen -d" # Just detach from the screen.
@@ -111,10 +113,10 @@ sublop () {
 
 	if ls ./*.sublime-project || false; then
 
-		local SUBL_PROJECT_FILE='' && \
-			SUBL_PROJECT_FILE="$( find '.' -type f -name '*.sublime-project' | fzf )"
+		subl_project_file='' && \
+			subl_project_file="$( find '.' -type f -name '*.sublime-project' | fzf )"
 
-		if [ -z "$SUBL_PROJECT_FILE" ]; then
+		if [ -z "$subl_project_file" ]; then
 
 			echo "No *.sublime-project selected, opening $(nwd) in Sublime Text..."
 
@@ -123,9 +125,9 @@ sublop () {
 			return 0
 		fi
 
-		echo "Opening $SUBL_PROJECT_FILE in SublimeText..."
+		echo "Opening $subl_project_file in SublimeText..."
 
-		subl --project "$SUBL_PROJECT_FILE"
+		subl --project "$subl_project_file"
 
 		return 0
 	fi
@@ -250,11 +252,11 @@ wpdbs () {
 		return 1
 	fi
 
-	local target_db="$1"
-	local export_db="$2"
+	target_db="$1"
+	export_db="$2"
 
 	# Keep the URL the same as the current install.
-	local install_url=""
+	install_url=""
 		install_url="$(wp option get home)"
 
 	if [ -z "$install_url" ]; then
@@ -358,18 +360,18 @@ wpdbi () {
  ##
 wpdbx () {
 
-	mkdir -p "$(dirname $1)" && \
+	mkdir -p "$(dirname "$1")" && \
 		wp db export - | gzip -9 -f > "$1.tar.gz"
 }
 
 ###
- # Notifications
+ # Notify
  #
  # E.g: not "Title" "SubTitle" "Message"
  #
  # @since
  ##
--- () {
+not () {
 	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop"
 }
 
@@ -393,6 +395,7 @@ rmds_store () {
  # @since Aug 11, 2022
  ##
 finder () {
+
 	open -a Finder "$HOME" && \
 		open .
 }
@@ -405,7 +408,7 @@ finder () {
  # @since Monday, October 11, 2021
  ##
 hideindock () {
-	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" &> /dev/null
+	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" > /dev/null 2>&1
 }
 
 ###
@@ -416,7 +419,7 @@ hideindock () {
  # @since Monday, October 11, 2021
  ##
 showindock () {
-	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" &> /dev/null
+	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" > /dev/null 2>&1
 }
 
 ###
@@ -495,15 +498,14 @@ fdf () {
 		echo "Requires find command." >&2 && return
 	fi
 
-	local depth=1000
+	depth=1000
 
 	if [ -n "$1" ]; then
 		depth="$1"
 	fi
 
-	local file=''
-
-	file=$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux )
+	file='' && \
+		file="$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux )"
 
 	cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
 }
@@ -525,65 +527,12 @@ sysnpm () {
 	alias sys-npm='sysnpm'
 
 ###
- # My custom affwp commands.
- #
- # If my custom sub-commands aren't here,
- # then they are in https://github.com/aubreypwd/zsh-plugin/affwp.
- #
- # Many of these are here because they rely on my system command/etc.
- #
- # @since Thursday, July 28, 2022
- ##
-affwp () {
-
-	# Database controls.
-	if [ "$1" = 'sub-command' ]; then
-		case "$2" in
-			'sub-sub-command' )
-				echo "Re-factor this into a sub-command." && \
-					return 0
-			;;
-
-			# Default
-			* ) echo "Sub-commands: none" && return 1;;
-
-		esac
-	fi
-
-	__affwp "$@" # Not my custom subcommands, use the one from the package.
-}
-
-###
  # Run a command in a directory.
  #
  # @since Thursday, July 28, 2022
  ##
 rid () {
 	( cd "$1" && "${@:2}" )
-}
-
-###
- # Convert any video file to a DVD-ready MPG.
- #
- # This not only converts any file to ~4.7GB it also outputs it to
- # NTSC in MPG format at 720p resolution.
- #
- # @see https://unix.stackexchange.com/a/598360
- #
- # @since Dec 30, 2022
- ##
-todvd () {
-
-	local file="$1"
-	local target_size_mb=4650 # DVD = 4700 MB
-	local target_size=$(( $target_size_mb * 1000 * 1000 * 8 )) # target size in bits
-	local length=`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$file"`
-	local length_round_up=$(( ${length%.*} + 1 ))
-	local total_bitrate=$(( $target_size / $length_round_up ))
-	local audio_bitrate=$(( 128 * 1000 )) # 128k bit rate
-	local video_bitrate=$(( $total_bitrate - $audio_bitrate ))
-
-	ffmpeg -i "$file" -b:v "$video_bitrate" -maxrate:v "$video_bitrate" -bufsize:v "$(( $target_size / 20 ))" -b:a "$audio_bitrate" -vf scale=-1:720 -target ntsc-dvd "${file}-${target_size_mb}MB.mpg"
 }
 
 ###
@@ -594,22 +543,4 @@ todvd () {
  ##
 frames () {
 	ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 "$1"
-}
-
-###
- # Use a GUI to manage public VCSH.
- #
- # @since Jan 6, 2023;
- ##
-publg () {
-	vcsh pub lg
-}
-
-###
- # Use a GUI to manage private VCSH.
- #
- # @since Jan 6, 2023;
- ##
-privlg () {
-	vcsh priv lg
 }
