@@ -553,3 +553,35 @@ rid () {
 frames () {
 	ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 "$1"
 }
+
+###
+ # Install WordPress.
+ #
+ # These uses the current directory name for the domain, title, etc.
+ #
+ # @since Feb 2, 2023
+ ##
+wpi () {
+
+	if test -z "$1"; then
+		echo "Please supply a title: wpi <title>"
+		return 1
+	fi
+
+	wp core install --url="https://$(nwd).test" --title="$1" --admin_user=admin --admin_email="nobody@example.com" --admin_password="password" --skip-email
+}
+
+###
+ # Same as wpi, but for multisite.
+ #
+ # @since Feb 2, 2023
+ ##
+wpimu () {
+
+	if test -z "$1"; then
+		echo "Please supply a title: wpimu <title>."
+		return 1
+	fi
+
+	wp core multisite-install --title="$1" --admin_email="nobody@example.com" --url="https://$(nwd).test" --admin_password="password" --skip-email --skip-config
+}
