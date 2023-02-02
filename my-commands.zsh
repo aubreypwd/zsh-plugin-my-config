@@ -585,3 +585,12 @@ wpimu () {
 
 	wp core multisite-install --title="$1" --admin_email="nobody@example.com" --url="https://$(nwd).test" --admin_password="password" --skip-email --skip-config
 }
+
+###
+ # Reset the database.
+ #
+ # @since Feb 2, 2023
+ ##
+wpdbr () {
+	wp db reset --yes
+}
