@@ -594,3 +594,49 @@ wpimu () {
 wpdbr () {
 	wp db reset --yes
 }
+
+###
+ # Reset DB and install WordPress.
+ #
+ # Pass --mu as "$2" to install as multisite.
+ #
+ # @since Feb 23, 2023
+ ##
+wpdbri () {
+
+	if test -z "$1"; then
+
+		echo "Please supply a title: $0 <title>"
+		return 1
+	fi
+
+	mu='no'
+
+	if [ "--mu" = "$2" ]; then
+		mu='yes'
+	fi
+
+	if test ! -e "wp-config.php"; then
+
+		echo "Please run where wp-config.php is."
+		return 1;
+	fi
+
+	mkdir -p "dbs"
+
+	echo "Exporting current db to dbs/$(wpblogname)..."
+		wpdbx "dbs/$(wpblogname)"
+
+	if [ "yes" = "$mu" ]; then
+
+		wp config set WP_ALLOW_MULTISITE true --raw && \
+			wpdbr && wpimu "$1" && wp rewrite flush
+
+		return 0;
+	fi
+
+	wp config set WP_ALLOW_MULTISITE false --raw && \
+		wpdbr && wpi "$1" &&wp rewrite flush
+
+	return 0;
+}
