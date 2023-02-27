@@ -10,12 +10,13 @@
 
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
+	mkdir -p "$HOME/Pictures/Screenshots/Autosave" # Where we put CleanshotX.
 
 	# Make sure keys and identities make it into keychain.
 	ssh-add -q --apple-load-keychain -k
 
 	if [[ $(pwd) != "$HOME" ]]; then
-		return
+		return # Don't do the below unless we're loading the HOME folder.
 	fi
 
 	touch "$HOME/.hushlogin" # Don't show last login message, e.g. you have mail, etc.
@@ -41,6 +42,10 @@ bindkey '^[[Z' autosuggest-accept
 
 # Make sure all the PHP versions have config files symlinked.
 ( (
+
+	if [[ $(pwd) != "$HOME" ]]; then
+		return # Don't do the below unless we're loading the HOME folder.
+	fi
 
 	php_versions=(7.3 7.4 8.0 8.1 8.2)
 	files=( 'php.ini' 'xdebug-3.ini' )
