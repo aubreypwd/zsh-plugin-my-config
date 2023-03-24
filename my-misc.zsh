@@ -10,7 +10,7 @@
 
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
-	mkdir -p "$HOME/Pictures/Screenshots/Autosave" # Where we put CleanshotX.
+	mkdir -p "$HOME/Pictures/Screenshots/Autosaved" # Where we put CleanshotX.
 
 	# Make sure keys and identities make it into keychain.
 	ssh-add -q --apple-load-keychain -k
