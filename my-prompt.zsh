@@ -1,10 +1,12 @@
 #!/bin/zsh
 
 ###
- # My Repos
+ # My Prompt
  #
- # @since Tuesday, April 19, 2022
+ # @since Apr 6, 2023
  ##
+
+export PS1="%F{black}%~ ❯ %f"
 
 ###
  # Make sure that additonal info isn't shown on prompt.
@@ -14,6 +16,7 @@
 precmd() {
 
 	setopt localoptions nopromptsubst
-	print -P "%F{yellow}$(cmd_exec_time)%f"
-	unset cmd_timestamp # Reset cmd exec time.
+	print -rP "%"
+	# print -P "%F{yellow}$(cmd_exec_time)%f"
+	# unset cmd_timestamp # Reset cmd exec time.
 }

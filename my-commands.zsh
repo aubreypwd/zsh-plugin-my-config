@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 ###
  # My Commands
@@ -10,9 +10,9 @@
 
 # Editor
 if test "$TERM_PROGRAM" = "Terminus-Sublime"; then
-	alias edit="subl -n -w"
+	alias edit="$EDITOR"
 else
-	alias edit="micro"
+	alias edit="$EDITOR"
 fi
 
 # Aliases
