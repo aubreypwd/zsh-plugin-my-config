@@ -12,6 +12,13 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile" # brew nundle nob.
 export HOMEBREW_BUNDLE_NO_LOCK=true; # Don't make a lock file.
 
 ###
+ # aubreypwd/zsh-plugin-require Options.
+ #
+ # @since Apr 7, 2023
+ ##
+export REQUIRE_AUTO_INSTALL="off"
+
+###
  # Misc Nobs
  #
  # @since Friday, 10/2/2020
