@@ -1,12 +1,15 @@
-#!/bin/zsh
+#!/bin/sh
 
 ###
  # My Prompt
  #
  # @since Apr 6, 2023
+ #
+ # shellcheck disable=SC3003
  ##
 
-export PS1="%F{black}%~ ❯ %f"
+export NEWLINE=$'\n'
+export PS1="$NEWLINE%F{black}%~ $NEWLINE%F{brightwhite}❯ %f"
 
 ###
  # Make sure that additonal info isn't shown on prompt.
@@ -16,7 +19,7 @@ export PS1="%F{black}%~ ❯ %f"
 precmd() {
 
 	setopt localoptions nopromptsubst
-	print -rP "%"
+	# print -rP "%"
 	# print -P "%F{yellow}$(cmd_exec_time)%f"
 	# unset cmd_timestamp # Reset cmd exec time.
 }
