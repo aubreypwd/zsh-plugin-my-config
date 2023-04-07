@@ -639,3 +639,36 @@ wpdbri () {
 
 	return 0;
 }
+
+###
+ # Update all the things.
+ #
+ # @since Apr 7, 2023
+ ##
+update () {
+	brew update
+}
+
+###
+ # Upgrade the things I usually want to upgrade.
+ #
+ # @since Apr 7, 2023
+ ##
+upgrade () {
+	brew upgrade gh
+	brew upgrade n
+}
+
+###
+ # Quietly do something in the background.
+ #
+ # @since Apr 7, 2023
+ ##
+quietly () {
+
+	( ( # Quietly....
+
+		eval "$1"
+
+	) 1>&- 2>&- & )
+}
