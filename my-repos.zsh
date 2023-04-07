@@ -42,11 +42,11 @@ alias priv='vcsh priv'
  #
  # Not git pew is an alias in my .gitconfig
  #
- # E.g: checkmyrepos
+ # E.g: check-repos
  #
  # @since Wednesday, April 20, 2022
  ##
-function checkmyrepos {
+function check-repos {
 
 	# Watch these repositories for dirtiness.
 	__watchrepo "$HOME/iCloud/Profile Photos" "photos"
