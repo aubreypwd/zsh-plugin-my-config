@@ -294,7 +294,7 @@ wpdbs () {
 
 		# Import a DB tar that has the same name already in dbs/...
 		echo "Importing dbs/$target_db.tar.gz instead of creating new install."
-		wpdbi "dbs/$target_db.tar.gz"
+		wpdbr && wpdbi "dbs/$target_db.tar.gz"
 
 	else
 
@@ -304,7 +304,7 @@ wpdbs () {
 
 			# They have a dbs/init.tar.gz file, use that as a base instead.
 			echo "You have dbs/init.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
-			wpdbi "dbs/init.tar.gz"
+			wpdbr && wpdbi "dbs/init.tar.gz"
 
 			# Set the blogname to the target db when importing a reset so we can export it next time.
 			wp option set blogname "$target_db" --url="$install_url"
@@ -513,7 +513,7 @@ fdf () {
 	fi
 
 	file='' && \
-		file="$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf-tmux )"
+		file="$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf --height=100% )"
 
 	cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
 }
