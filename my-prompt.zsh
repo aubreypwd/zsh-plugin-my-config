@@ -9,7 +9,7 @@
  ##
 
 export NEWLINE=$'\n'
-export PS1="$NEWLINE%F{black}%~ $NEWLINE%F{brightwhite}❯ %f"
+export PS1="$NEWLINE%F{black}%~ $NEWLINE%F{black}❯ %f"
 
 ###
  # Make sure that additonal info isn't shown on prompt.
