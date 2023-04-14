@@ -672,3 +672,14 @@ quietly () {
 
 	) 1>&- 2>&- & )
 }
+
+###
+ # Slugify a string.
+ #
+ # @since Apr 14, 2023
+ ##
+slugit () {
+
+	# shellcheck disable=SC2018,SC2019
+	echo "$1" | iconv -c -t ascii//TRANSLIT | sed -E 's/[~^]+//g' | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z
+}
