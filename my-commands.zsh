@@ -44,6 +44,7 @@ alias fd10="fd 10" # Deeper.
 alias fd50="fd 50" # Super deep.
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias high='highlight -O ansi'
+alias home='cd ~'
 alias j='jrnl'
 alias j10="jrnl -n 10 -s"
 alias j20="jrnl -n 20 -s"
