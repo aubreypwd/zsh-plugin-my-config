@@ -3,12 +3,12 @@
 ###
  # My File Extension Associations
  #
- # @since Tuesday, April 19, 2022
+ # @since Jul 14, 2023
  ##
 
 ( (
 
-	# Sublime Text 4
+	# Sublime Text 4: com.sublimetext.4
 	duti -s com.sublimetext.4 .php all
 	duti -s com.sublimetext.4 .js all
 	duti -s com.sublimetext.4 .jsx all
