@@ -16,7 +16,7 @@
 	duti -s com.sublimetext.4 .css all
 	duti -s com.sublimetext.4 .scss all
 	duti -s com.sublimetext.4 .sass all
-	duti -s com.sublimetext.4 .tx all
+	duti -s com.sublimetext.4 .tsx all
 	duti -s com.sublimetext.4 .sublime-project all
 	duti -s com.sublimetext.4 .sublime-workspace all
 	duti -s com.sublimetext.4 .json all
