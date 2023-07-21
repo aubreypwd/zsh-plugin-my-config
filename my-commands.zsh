@@ -684,3 +684,42 @@ slugit () {
 	# shellcheck disable=SC2018,SC2019
 	echo "$1" | iconv -c -t ascii//TRANSLIT | sed -E 's/[~^]+//g' | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z
 }
+
+###
+ # Delete .DS_Store in a folder (recursive).
+ #
+ # @since Jul 21, 2023
+ ##
+deldstore () {
+
+	dir="$1"
+
+	if [ ! -d "$dir" ] || [ -L "$dir" ]; then
+
+		echo "Sorry, but $dir does not exist (or it is a symlink)."
+		return 1
+	fi
+
+	find "$dir" -name ".DS_Store" -delete
+
+	killall Finder
+
+	echo "Done cleaning $dir of .DS_Store files (recursively)."
+}
+
+###
+ # Reset Finder to my default view.
+ #
+ # @since Jul 21, 2023
+ ##
+resetfinderv () {
+
+	deldstore "$HOME"
+
+	# Tell finder to use column view by default, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
+	defaults write com.apple.Finder FXPreferredViewStyle clmv
+
+	killall Finder
+
+	echo "Done resetting Finder default view."
+}
