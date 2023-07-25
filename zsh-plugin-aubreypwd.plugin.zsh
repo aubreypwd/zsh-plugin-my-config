@@ -7,6 +7,7 @@
  #
  # shellcheck disable=SC3046
  ##
+source 'my-path.zsh'
 source 'my-functions.zsh'
 source 'my-commands.zsh'
 source 'my-mac-defaults.zsh'
