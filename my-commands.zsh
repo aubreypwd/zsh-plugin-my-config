@@ -404,9 +404,7 @@ rmds_store () {
  # @since Aug 11, 2022
  ##
 finder () {
-
-	open -a Finder "$HOME" && \
-		open .
+	open -a Finder .
 }
 
 ###
