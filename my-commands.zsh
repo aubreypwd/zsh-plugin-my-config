@@ -385,17 +385,6 @@ not () {
 }
 
 ###
- # Reset Finder
- #
- # E.g: rfinder
- #
- # @since Tuesday, December 21, 2021
- ##
-rmds_store () {
-	find "$HOME" -name ".DS_Store" -depth -exec rm {} \;
-}
-
-###
  # Open finder in the Terminal.
  #
  # This works because we always open Finder in the ~ folder, which
@@ -517,21 +506,14 @@ fdf () {
 	cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
 }
 
-	# Aliases for fdf
-	alias fd-f="fdf"
-
 ###
  # Switch to the system preferred npm.
  #
  # @since Tuesday, July 26, 2022
  ##
-sysnpm () {
+mpm@sys () {
 	( cd "$HOME" && n auto )
 }
-
-	# Aliases for sysnpm
-	alias npm@sys='sysnpm'
-	alias sys-npm='sysnpm'
 
 ###
  # Run a command in a directory.
@@ -562,6 +544,7 @@ frames () {
 wpi () {
 
 	if test -z "$1"; then
+
 		echo "Please supply a title: wpi <title>"
 		return 1
 	fi
@@ -677,7 +660,7 @@ quietly () {
  #
  # @since Apr 14, 2023
  ##
-slugit () {
+slugify () {
 
 	# shellcheck disable=SC2018,SC2019
 	echo "$1" | iconv -c -t ascii//TRANSLIT | sed -E 's/[~^]+//g' | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z
@@ -688,7 +671,7 @@ slugit () {
  #
  # @since Jul 21, 2023
  ##
-deldstore () {
+rmdstore () {
 
 	dir="$1"
 
@@ -710,9 +693,9 @@ deldstore () {
  #
  # @since Jul 21, 2023
  ##
-resetfinderv () {
+resetfinderview () {
 
-	deldstore "$HOME"
+	rmdstore "$HOME"
 
 	# Tell finder to use column view by default, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
 	defaults write com.apple.Finder FXPreferredViewStyle clmv
@@ -720,4 +703,35 @@ resetfinderv () {
 	killall Finder
 
 	echo "Done resetting Finder default view."
+}
+
+###
+ # Restart Finder.
+ #
+ # @since Jul 28, 2023
+ ##
+restartfinder () {
+
+	killall Finder
+	finder "$HOME"
+}
+
+###
+ # Slugify the current branch.
+ #
+ # @since Aug 4, 2023
+ #
+ # shellcheck disable=SC2005
+ ##
+slugifyb () {
+	echo "$(slugify "$(git b)")"
+}
+
+###
+ # Slugify the current branch and copy to the clipboard.
+ #
+ # @since Aug 4, 2023
+ ##
+slugifybc () {
+	slugifyb | pbcopy
 }
