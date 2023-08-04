@@ -12,3 +12,6 @@ unsetopt SHARE_HISTORY
 setopt MONITOR
 setopt POSIX_JOBS
 setopt LONG_LIST_JOBS
+
+# Stops digital envelope routines::unsupported error.
+export NODE_OPTIONS=--openssl-legacy-provider
