@@ -735,3 +735,54 @@ slugifyb () {
 slugifybc () {
 	slugifyb | pbcopy
 }
+
+###
+ # Turn WP_DEBUG on or off.
+ #
+ # E.g.
+ #    wpdebug on
+ #    wpdebug off
+ #
+ # @since Aug 15, 2023
+ ##
+wpdebug () {
+
+	switch="$1"
+
+	if [ "$switch" = 'on' ]; then
+		switch="true"
+	else
+		switch="false"
+	fi
+
+	wp config set "WP_DEBUG" "$switch" --raw
+}
+
+###
+ # Set the AffiliateWP License.
+ #
+ # E.g. affwpsl pro
+ # E.g. affwpsl personal
+ #
+ # @since Aug 15, 2023
+ ##
+affwpsl () {
+	wp config set 'AFFWP_LICENSE' "$1"
+}
+
+###
+ # Turn multisite on or off.
+ #
+ # E.g. mu on
+ # E.g. mu off
+ #
+ # @since Aug 15, 2023
+ ##
+mu () {
+
+	if [ 'on' = "$1" ]; then
+		wp config set 'WP_ALLOW_MULTISITE' true --raw
+	else
+		wp config set 'WP_ALLOW_MULTISITE' false --raw
+	fi
+}
