@@ -767,7 +767,23 @@ wpdebug () {
  # @since Aug 15, 2023
  ##
 affwpsl () {
-	wp config set 'AFFWP_LICENSE' "$1"
+
+	if [ 'personal' = "$1" ] || [ '1' = "$1" ]; then
+		wp config set 'AFFWP_LICENSE' "personal"
+		return 0
+	fi
+
+	if [ 'plus' = "$1" ] || [ '2' = "$1" ]; then
+		wp config set 'AFFWP_LICENSE' "plus"
+		return 0
+	fi
+
+	if [ 'pro' = "$1" ] || [ '3' = "$1" ]; then
+		wp config set 'AFFWP_LICENSE' "pro"
+		return 0
+	fi
+
+	echo "No license level set." && return 1
 }
 
 ###
