@@ -740,7 +740,7 @@ slugifybc () {
  # Turn WP_DEBUG on or off.
  #
  # E.g.
- #    wpdebug on
+ #    wpdebug on (default)
  #    wpdebug off
  #
  # @since Aug 15, 2023
@@ -749,10 +749,10 @@ wpdebug () {
 
 	switch="$1"
 
-	if [ "$switch" = 'on' ]; then
-		switch="true"
-	else
+	if [ "$switch" = 'off' ]; then
 		switch="false"
+	else
+		switch="true"
 	fi
 
 	wp config set "WP_DEBUG" "$switch" --raw
@@ -774,15 +774,33 @@ affwpsl () {
  # Turn multisite on or off.
  #
  # E.g. mu on
- # E.g. mu off
+ # E.g. mu off (default)
  #
  # @since Aug 15, 2023
  ##
-mu () {
+wpmu () {
 
 	if [ 'on' = "$1" ]; then
 		wp config set 'WP_ALLOW_MULTISITE' true --raw
 	else
 		wp config set 'WP_ALLOW_MULTISITE' false --raw
+	fi
+}
+
+###
+ # Turn WP Mail on and/or off.
+ #
+ # E.g.
+ #     wpmail on
+ #     wpmail off (default)
+ #
+ # @since Aug 15, 2023
+ ##
+wpmail () {
+
+	if [ 'on' = "$1" ]; then
+		wp config set 'MAIL' true --raw
+	else
+		wp config set 'MAIL' false --raw
 	fi
 }
