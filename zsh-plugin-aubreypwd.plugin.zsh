@@ -19,7 +19,6 @@ source 'my-vars.zsh'
 source 'my-require.zsh' # Must load after vars.zsh.
 source 'my-vcsh.zsh'
 source 'my-ls.zsh'
-source 'my-deprecations.zsh'
 source 'my-php.zsh'
 source 'my-sublime.zsh'
 source 'my-mysql.zsh'
