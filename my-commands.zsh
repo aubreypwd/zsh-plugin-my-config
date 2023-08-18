@@ -22,63 +22,37 @@ alias b="bell"
 alias beep="bell"
 alias bell="tput bel"
 alias c=clear
-alias cu@1="composer self-update --1"
-alias cu@2="composer self-update --2"
+alias c@1="composer self-update --1"
+alias c@2="composer self-update --2"
 alias cat="bat"
-alias catts="clearatts"
 alias ccc="composer clearcache && composer global clearcache"
 alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install.
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
-alias clearatts="xattr -cr"
 alias cwd="pwdcp"
-alias diffd="diff -rq" # Diff a directory.
-alias diffdir="diffd"
 alias e="edit"
-alias edit-git="edit \$HOME/.gitconfig"
-alias edit-ssh="edit \$HOME/.ssh/config"
-alias edit-zsh="edit \$HOME/.zshrc"
-alias egit="edit-git"
-alias essh="edit-ssh"
-alias ezsh="edit-zsh"
-alias fakedata="fakedata --limit 1"
 alias fd2="fd 2" # Two levels.
 alias fd10="fd 10" # Deeper.
 alias fd50="fd 50" # Super deep.
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-alias high='highlight -O ansi'
 alias home='cd ~'
-alias j='jrnl'
-alias j10="jrnl -n 10 -s"
-alias j20="jrnl -n 20 -s"
-alias j!="jrnl -n 9999999 -s"
-alias J!="jrnl -n 999999"
 alias lg="lazygit"
-alias matrix='cmatrix'
+alias ss='cmatrix' # Sceeen Saver
 alias n@10='n 10'
 alias n@12='n 12'
 alias n@14='n 14'
 alias n@16='n 14'
 alias n@18='n 18'
-alias n@a='n auto'
+alias n@sys='n auto'
 alias n@lts='n lts'
 alias nt='ttab ' # New tab.
-alias ntx="nt && x"
 alias nw='ttab -w' # New window.
 alias php@7.4="$(brew --prefix php@7.4)/bin/php"
 alias php@8.2="$(brew --prefix php@8.2)/bin/php"
-alias publg="vcsh pub lg"
-alias privlg="vcsh priv lg"
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
-alias s="say"
-alias screens="screen -ls"
 alias site="cd \$HOME/Sites && fd || true" # Quick way to get to a site
-alias tower='gittower'
 alias tunnel="cloudflared tunnel run"
-alias vimi="vim -c 'startinsert'" # Start Vim in insert mode (mostly for commit writing).
 alias wp="php@7.4 /opt/homebrew/bin/wp"
-alias wpdbn="wp config get DB_NAME" # What is the database name
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
-alias xd="screen -d" # Just detach from the screen.
 
 ###
  # Get the site name from the database for this install.
@@ -99,47 +73,6 @@ wphome () {
 }
 
 ###
- # Open a .sublime-project
- #
- # Staring with the current directory.
- #
- # @since Tuesday, August 2, 2022
- ##
-sublop () {
-
-	if test -e "$1"; then
-
-		subl --project "$1"
-		return 0
-	fi
-
-	if ls ./*.sublime-project || false; then
-
-		subl_project_file='' && \
-			subl_project_file="$( find '.' -type f -name '*.sublime-project' | fzf )"
-
-		if [ -z "$subl_project_file" ]; then
-
-			echo "No *.sublime-project selected, opening $(nwd) in Sublime Text..."
-
-			subl -n .
-
-			return 0
-		fi
-
-		echo "Opening $subl_project_file in SublimeText..."
-
-		subl --project "$subl_project_file"
-
-		return 0
-	fi
-
-	echo "No *.sublime-project files, opening $(nwd) in Sublime Text..."
-
-	subl -n .
-}
-
-###
  # Get the PHP version running.
  #g
  # @usedby sysinfo()
@@ -151,12 +84,13 @@ phpv () {
 }
 
 ###
- # Go to one of my plugins (Antigen)
+ # Go to one of my plugins (Antigen/ZSH)
  #
  # @since Tuesday, July 26, 2022
- # @since Oct 13, 2022           Renamed to gotoplugin.
+ # @since Oct 13, 2022 Renamed to gotoplugin.
+ # @since Aug 18, 2023 Renamed to zplugin.
  ##
-gotoplugin () {
+zplugin () {
 	cd "$HOME/.antigen/bundles/aubreypwd" || false && fd
 }
 
@@ -186,57 +120,9 @@ nwd () {
  # shellcheck disable=SC2028
  ##
 sysinfo () {
-
 	echo "\e[35mƤ PHP:\e[0m   \e[37m$(phpv)\e[0m" # Show the current working directory.
 	echo "\e[32m⊔ Node:\e[0m  \e[37m$(node --version)\e[0m" # Show the current working directory.
 	echo "\e[37m $(pwd)\e[0m" # Show the current working directory.
-}
-
-###
- # Install debugging tools for WordPress.
- #
- # @since Thursday, June 30, 2022
- ##
-wpdebugi () {
-
-	# Debugging constants.
-	wp config set BP_DEFAULT_COMPONENT 'staging-area'
-	wp config set BP_XPROFILE_SLUG 'staging-area'
-	wp config set COMPRESS_CSS false --raw
-	wp config set COMPRESS_SCRIPTS false --raw
-	wp config set CONCATENATE_SCRIPTS false --raw
-	wp config set DISABLE_WP_CRON true --raw
-	wp config set ENFORCE_GZIP false --raw
-	wp config set EP_DASHBOARD_SYNC false --raw
-	wp config set EP_HOST 'http://failed.tld/'
-	wp config set FS_CHMOD_DIR 0775 --raw
-	wp config set FS_CHMOD_FILE 0664 --raw
-	wp config set FS_METHOD 'direct'
-	wp config set JETPACK_DEV_DEBUG true --raw
-	wp config set SAVE_QUERIES true --raw
-	wp config set SCRIPT_DEBUG true --raw
-	wp config set WP_AUTO_UPDATE_CORE false --raw
-	wp config set WP_CACHE false --raw
-	wp config set WP_DEBUG true --raw
-	wp config set WP_DEBUG_DISPLAY false --raw
-	wp config set WP_DEBUG_LOG true --raw
-	wp config set WP_ENVIRONMENT_TYPE local
-	wp config set WP_LOCAL_DEV true --raw
-	wp config set WP_MAX_MEMORY_LIMIT 4096 --raw
-	wp config set WP_MEMORY_LIMIT 4096 --raw
-
-	# Debugging plugins.
-	wp plugin install debug-bar
-	wp plugin install debug-bar-console
-	wp plugin install debug-bar-shortcodes
-	wp plugin install debug-bar-constants
-	wp plugin install debug-bar-post-types
-	wp plugin install debug-bar-cron
-	wp plugin install debug-bar-actions-and-filters-addon
-	wp plugin install debug-bar-transients
-	wp plugin install debug-bar-list-dependencies
-	wp plugin install debug-bar-remote-requests
-	wp plugin install query-monitor
 }
 
 ###
@@ -369,26 +255,6 @@ wpdbx () {
 }
 
 ###
- # Notify
- #
- # E.g: not "Title" "SubTitle" "Message"
- #
- # @since
- ##
-not () {
-
-	if test ! -x "$(command -v "terminal-notifier")"; then
-
-		echo "Please install terminal-notifier."
-		return 1
-	fi
-
-	terminal-notifier -title "$1" -subtitle "$2" -message "$3" -activate 'com.googlecode.iterm2' --sound "boop" || \
-		echo "Unable to push to notifications." && \
-			return 1;
-}
-
-###
  # Open finder in the Terminal.
  #
  # This works because we always open Finder in the ~ folder, which
@@ -398,125 +264,6 @@ not () {
  ##
 finder () {
 	open -a Finder .
-}
-
-###
- # Hide an app from the Dock.
- #
- # E.g: hideindock "Tower"
- #
- # @since Monday, October 11, 2021
- ##
-hideindock () {
-	/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' "$1/Contents/Info.plist" > /dev/null 2>&1
-}
-
-###
- # Show an app in the Dock.
- #
- # E.g: showindock "Tower"
- #
- # @since Monday, October 11, 2021
- ##
-showindock () {
-	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' "$1/Contents/Info.plist" > /dev/null 2>&1
-}
-
-###
- # Run a command in a detached screen.
- #
- # E.g:
- #
- # @since Sunday, July 3, 2022
- ##
-screenc () {
-	screen -S "$@" -d -m zsh -c "$@"
-}
-
-###
- # Background Job
- #
- # @since Sunday, July 3, 2022
- ##
-bg () {
-	builtin bg % "$@"
-}
-
-###
- # Foreground Job
- #
- # @since Sunday, July 3, 2022
- ##
-fg () {
-	builtin fg % "$@"
-}
-
-###
- # Suspend Job
- #
- # @since Sunday, July 3, 2022
- ##
-sus () {
-	kill -STOP "$@"
-}
-
-###
- # Jobs
- #
- # @since Sunday, July 3, 2022
- ##
-jobs () {
-
-	if [ -z "$1" ]; then
-		builtin jobs -l
-	else
-		builtin jobs -l % "$@"
-	fi
-}
-
-###
- # Continue Job
- #
- # @since Sunday, July 3, 2022
- ##
-cont () {
-	kill -CONT "$@"
-}
-
-###
- # Find the folder where a file is.
- #
- # @since Thursday, July 14, 2022
- ##
-fdf () {
-
-	if ! [ -x "$(command -v fzf)" ]; then
-		echo "Please install fzf (specifically fzf-tmux) to use fd." >&2 && return
-	fi
-
-	if ! [ -x "$(command -v find)" ]; then
-		echo "Requires find command." >&2 && return
-	fi
-
-	depth=1000
-
-	if [ -n "$1" ]; then
-		depth="$1"
-	fi
-
-	file='' && \
-		file="$( find -L ./* -maxdepth "$depth" -type f -print 2> /dev/null | fzf --height=100% )"
-
-	cd "$(dirname "$file")" && ls -lh "$(basename "$file")"
-}
-
-###
- # Switch to the system preferred npm.
- #
- # @since Tuesday, July 26, 2022
- ##
-mpm@sys () {
-	( cd "$HOME" && n auto )
 }
 
 ###
@@ -643,6 +390,7 @@ update () {
  # @since Apr 7, 2023
  ##
 upgrade () {
+
 	brew upgrade gh
 	brew upgrade n
 }
@@ -699,7 +447,7 @@ rmdstore () {
  #
  # @since Jul 21, 2023
  ##
-resetfinderview () {
+resetfinder () {
 
 	rmdstore "$HOME"
 
@@ -716,7 +464,7 @@ resetfinderview () {
  #
  # @since Jul 28, 2023
  ##
-restartfinder () {
+finderr () {
 
 	killall Finder
 	finder "$HOME"
@@ -738,7 +486,7 @@ slugifyb () {
  #
  # @since Aug 4, 2023
  ##
-slugifybc () {
+slugifycb () {
 	slugifyb | pbcopy
 }
 
@@ -767,12 +515,12 @@ wpdebug () {
 ###
  # Set the AffiliateWP License.
  #
- # E.g. affwpsl pro
- # E.g. affwpsl personal
+ # E.g. affwpl pro
+ # E.g. affwpl personal
  #
  # @since Aug 15, 2023
  ##
-affwpsl () {
+affwpl () {
 
 	if [ 'personal' = "$1" ] || [ '1' = "$1" ]; then
 		wp config set 'AFFWP_LICENSE' "personal"
