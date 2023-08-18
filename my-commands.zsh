@@ -8,6 +8,8 @@
  # @since Wednesday, July 13, 2022 Combined with Aliases + Functions.
  ##
 
+# shellcheck disable=SC2139
+
 # Editor
 if test "$TERM_PROGRAM" = "Terminus-Sublime"; then
 	alias edit="$EDITOR"
@@ -180,6 +182,8 @@ nwd () {
  # System information.
  #
  # @since Thursday, July 7, 2022
+ #
+ # shellcheck disable=SC2028
  ##
 sysinfo () {
 
@@ -519,6 +523,8 @@ mpm@sys () {
  # Run a command in a directory.
  #
  # @since Thursday, July 28, 2022
+ #
+ # shellcheck disable=SC3057
  ##
 rid () {
 	( cd "$1" && "${@:2}" )
