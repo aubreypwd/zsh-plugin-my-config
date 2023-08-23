@@ -8,6 +8,8 @@
 
 ( (
 
+	upgrade # Silently upgrade my most useful tools.
+
 	# Directories I want to exist.
 	mkdir -p "$HOME/Pictures/Screenshots"
 	mkdir -p "$HOME/Pictures/Screenshots/Autosaved" # Where we put CleanshotX.

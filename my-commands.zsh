@@ -388,11 +388,14 @@ update () {
  # Upgrade the things I usually want to upgrade.
  #
  # @since Apr 7, 2023
+ #
+ # @dependency in my-misc.zsh
  ##
 upgrade () {
 
 	brew upgrade gh
 	brew upgrade n
+	brew upgrade lazygit
 }
 
 ###
