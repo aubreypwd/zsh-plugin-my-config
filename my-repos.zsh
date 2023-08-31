@@ -49,17 +49,14 @@ alias priv='vcsh priv'
 function check-repos {
 
 	# Watch these repositories for dirtiness.
-	__watchrepo "$HOME/iCloud/Profile Photos" "photos"
+	__watchrepo "$HOME/Pictures/Profile Photos" "photos"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/Alfred.alfredpreferences" "alfred"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/iTerm2" "iterm"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/safari-user-scripts" "safari"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/subl-snippets" "snippets"
-
-	# My ZSH plugins/configurations.
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/safari-userscripts" "safari"
 	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config" "config"
 
 	if [[ ! $( command -v vcsh ) ]]; then
-
 		echo "vcsh missing, please install so I can watch pub and priv!"
 	else
 
