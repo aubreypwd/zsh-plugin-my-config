@@ -37,6 +37,7 @@ alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias home='cd ~'
 alias lg="lazygit"
 alias ss='cmatrix' # Sceeen Saver
+alias safariextconv='xcrun /Applications/Xcode.app/Contents/Developer/us/bin/safari-web-extension-converter' # Convert Chrome Extensions to Safari Extensions.
 alias n@10='n 10'
 alias n@12='n 12'
 alias n@14='n 14'
