@@ -28,6 +28,7 @@ alias cat="bat"
 alias ccc="composer clearcache && composer global clearcache"
 alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install.
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
+alias cpd="cp -Rfa" # Copy a directory.
 alias cwd="pwdcp"
 alias e="edit"
 alias fd2="fd 2" # Two levels.
@@ -52,7 +53,7 @@ alias php@8.2="$(brew --prefix php@8.2)/bin/php"
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
 alias site="cd \$HOME/Sites && fd || true" # Quick way to get to a site
 alias tunnel="cloudflared tunnel run"
-alias wp="php@7.4 /opt/homebrew/bin/wp"
+alias wp="php@7.4 /opt/homebrew/bin/wp" # Make wp-cli use PHP 7.4.
 alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 
 ###
@@ -450,13 +451,14 @@ rmdstore () {
  # Reset Finder to my default view.
  #
  # @since Jul 21, 2023
+ # @since Sep 6, 2023 Change back to list view, just so much superior.
  ##
 resetfinder () {
 
 	rmdstore "$HOME"
 
-	# Tell finder to use column view by default, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
-	defaults write com.apple.Finder FXPreferredViewStyle clmv
+	# Tell finder to use set view by default, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
+	defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 	killall Finder
 
