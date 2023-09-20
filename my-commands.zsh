@@ -519,34 +519,6 @@ wpdebug () {
 }
 
 ###
- # Set the AffiliateWP License.
- #
- # E.g. affwpl pro
- # E.g. affwpl personal
- #
- # @since Aug 15, 2023
- ##
-affwpl () {
-
-	if [ 'personal' = "$1" ] || [ '1' = "$1" ]; then
-		wp config set 'AFFWP_LICENSE' "personal"
-		return 0
-	fi
-
-	if [ 'plus' = "$1" ] || [ '2' = "$1" ]; then
-		wp config set 'AFFWP_LICENSE' "plus"
-		return 0
-	fi
-
-	if [ 'pro' = "$1" ] || [ '3' = "$1" ]; then
-		wp config set 'AFFWP_LICENSE' "pro"
-		return 0
-	fi
-
-	echo "No license level set." && return 1
-}
-
-###
  # Turn multisite on or off.
  #
  # E.g. mu on
@@ -582,20 +554,49 @@ wpmail () {
 }
 
 ###
- # Create a new affiliate-wp branch.
+ # Wrap all my commands into the affwp command.
+ #
+ # This catches everything else I want to do
  #
  # @since Sep 20, 2023
  ##
-affwpnb () {
+affwp () {
 
-	USAGE="Usage example: affwpnb 'affiliate-wp/4804' 'Refactor Affiliate Group (filters) to result in the new Affiliate_Group_Rate object'"
+	if [ 'nb' = "$1" ]; then
 
-	if [ -z "$1" ] || [ -z "$2" ]; then
+		USAGE="Usage example: affwpnb 'affiliate-wp/4804' 'Refactor Affiliate Group (filters) to result in the new Affiliate_Group_Rate object'"
 
-		echo "$USAGE"
+		if [ -z "$1" ] || [ -z "$2" ]; then
 
+			echo "$USAGE"
+			return 1
+		fi
+
+		git nb "$1-$(slugify "$2" )";
+
+		return 0;
+	fi
+
+	if [ 'l' = "$1" ]; then
+
+		if [ 'personal' = "$1" ] || [ '1' = "$1" ]; then
+			wp config set 'AFFWP_LICENSE' "personal"
+			return 0
+		fi
+
+		if [ 'plus' = "$1" ] || [ '2' = "$1" ]; then
+			wp config set 'AFFWP_LICENSE' "plus"
+			return 0
+		fi
+
+		if [ 'pro' = "$1" ] || [ '3' = "$1" ]; then
+			wp config set 'AFFWP_LICENSE' "pro"
+			return 0
+		fi
+
+		echo "No license level set."
 		return 1
 	fi
 
-	git nb "$1-$(slugify "$2" )";
+	__affwp "$@"
 }
