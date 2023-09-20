@@ -580,3 +580,22 @@ wpmail () {
 		wp config set 'MAIL' false --raw
 	fi
 }
+
+###
+ # Create a new affiliate-wp branch.
+ #
+ # @since Sep 20, 2023
+ ##
+affwpnb () {
+
+	USAGE="Usage example: affwpnb 'affiliate-wp/4804' 'Refactor Affiliate Group (filters) to result in the new Affiliate_Group_Rate object'"
+
+	if [ -z "$1" ] || [ -z "$2" ]; then
+
+		echo "$USAGE"
+
+		return 1
+	fi
+
+	git nb "$1-$(slugify "$2" )";
+}
