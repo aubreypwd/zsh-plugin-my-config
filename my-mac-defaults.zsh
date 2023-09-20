@@ -35,7 +35,7 @@
 	defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
 	defaults write com.apple.dock show-recent-count -int 2 # Show only X recent app by default.
-	defaults write com.apple.finder CreateDesktop false # No desktop icons.
+	defaults write com.apple.finder CreateDesktop true # Desktop icons.
 	defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write com.sublimetext ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
