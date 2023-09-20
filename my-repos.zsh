@@ -28,7 +28,7 @@ function __dirty_message {
 function __watchrepo {
 
 	# Configs & Repos
-	alias "$2"="git -C $1"
+	alias "$2"="git -C "$1""
 
 	git-is-clean "$1" || ( __dirty_message "$1" "$2" )
 }
@@ -42,26 +42,27 @@ alias priv='vcsh priv'
  #
  # Not git pew is an alias in my .gitconfig
  #
- # E.g: check-repos
+ # E.g: checkrepos
  #
  # @since Wednesday, April 20, 2022
+ # @since Sep 20, 2023 Changed to checkrepos
  ##
-function check-repos {
+function checkrepos {
 
 	# Watch these repositories for dirtiness.
-	__watchrepo "$HOME/Pictures/Profile Photos" "photos"
-	__watchrepo "$HOME/Repos/github.com/aubreypwd/Alfred.alfredpreferences" "alfred"
+	# __watchrepo "$HOME/Pictures/Profile Photos" "photos"
+	# __watchrepo "$HOME/Repos/github.com/aubreypwd/Alfred.alfredpreferences" "alfred"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/iTerm2" "iterm"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/subl-snippets" "snippets"
 	__watchrepo "$HOME/Repos/github.com/aubreypwd/safari-userscripts" "safari"
-	__watchrepo "$HOME/.antigen/bundles/aubreypwd/zsh-plugin-my-config" "config"
+	__watchrepo "$HOME/Repos/github.com/aubreypwd/zsh-plugin-my-config" "config"
 
 	if [[ ! $( command -v vcsh ) ]]; then
 		echo "vcsh missing, please install so I can watch pub and priv!"
 	else
 
 		# Then check if we have anything else after that going on with vcsh.
-		vcsh pub diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh pub" "pub"
-		vcsh priv diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh priv" "priv"
+		vcsh pub diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh (Public)" "pub"
+		vcsh priv diff-index --quiet --ignore-submodules HEAD || __dirty_message "vcsh (Private)" "priv"
 	fi
 }
