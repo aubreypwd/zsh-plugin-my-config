@@ -565,13 +565,13 @@ affwp () {
 
 		USAGE="Usage example: affwpnb 'affiliate-wp/4804' 'Refactor Affiliate Group (filters) to result in the new Affiliate_Group_Rate object'"
 
-		if [ -z "$1" ] || [ -z "$2" ]; then
+		if [ -z "$2" ] || [ -z "$3" ]; then
 
 			echo "$USAGE"
 			return 1
 		fi
 
-		git nb "$1-$(slugify "$2" )";
+		git nb "$2-$(slugify "$3" )";
 
 		return 0;
 	fi
