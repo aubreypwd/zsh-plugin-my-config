@@ -26,7 +26,7 @@
 	defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots"
 	defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 	defaults write com.apple.Finder QuitMenuItem 1 # Add quit to Finder
-	defaults write com.apple.dock springboard-columns -int 7
+	defaults write com.apple.dock springboard-columns -int 7 # Launchpad Grid
 	defaults write com.apple.dock springboard-rows -int 7 # Launchpad Grid
 	defaults write com.apple.Dock autohide-delay -float 0 # Show dock after X seconds, e.g. 99 co.
 	defaults write com.apple.dock autohide-time-modifier -int 1 # Also a similar setting.
@@ -39,5 +39,6 @@
 	defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write com.sublimetext ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
+	defaults write com.apple.dock workspaces-edge-delay -float 0.1 # Switch to new space quicker.
 
 } &> /dev/null &!
