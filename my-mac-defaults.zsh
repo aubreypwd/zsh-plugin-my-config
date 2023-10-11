@@ -39,6 +39,6 @@
 	defaults write com.sublimetext.4 ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write com.sublimetext ApplePressAndHoldEnabled -bool false # https://www.sublimetext.com/docs/vintage.html#mac
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
-	defaults write com.apple.dock workspaces-edge-delay -float 0.1 # Switch to new space quicker.
+	defaults write com.apple.dock workspaces-edge-delay -float 0.4 # Switch to new space quicker.
 
 } &> /dev/null &!
