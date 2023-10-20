@@ -51,10 +51,10 @@ alias nw='ttab -w' # New window.
 alias php@7.4="$(brew --prefix php@7.4)/bin/php"
 alias php@8.2="$(brew --prefix php@8.2)/bin/php"
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
-alias site="cd \$HOME/Sites && fd || true" # Quick way to get to a site
-alias tunnel="cloudflared tunnel run"
-alias wp="php@7.4 /opt/homebrew/bin/wp" # Make wp-cli use PHP 7.4.
-alias wpeach='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
+alias site="cd \$HOME/Sites && fd && cd "app/public" || true" # Quick way to get to a site (even with LocalWP).
+alias cftunnel="cloudflared tunnel run"
+# alias wp="php@7.4 /opt/homebrew/bin/wp" # Make wp-cli use PHP 7.4.
+alias wpe='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 
 ###
  # Get the site name from the database for this install.
