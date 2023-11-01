@@ -553,6 +553,57 @@ wpmail () {
 }
 
 ###
+ # Open a project.sublime-project file from LocalWP
+ #
+ # This looks for a project.sublime-project file in a LocalWP app/public
+ # folder. Whatever that site's directory is e.g.
+ #
+ #     <dir>/app/public/
+ #
+ # 1. We rename project.sublime-project to <dir>.sublime-project
+ # 2. We open the <dir>.sublime-project file
+ #
+ # If the <dir>.sublime-project file already exists, we open that.
+ #
+ # Fails if we can't figure out the file to open.
+ #
+ # @since Nov 1, 2023
+ #
+ # shellcheck disable=SC2046
+ ##
+sublop () {
+
+	DIRDIR=$( basename $( pwd ) )
+
+	if [ 'public' != "$DIRDIR" ]; then
+
+		echo "We only do this for LocalWP in the app/public folder."
+		return 1
+	fi
+
+	SUBLPROJECT="project.sublime-project"
+	SITENAME=$( basename $( realpath '../..' ) )
+	SITENAMEPROJECT="$SITENAME.sublime-project"
+
+	if [ -e "$SITENAMEPROJECT" ]; then
+
+		subl -p "$SITENAMEPROJECT" # We already did this.
+		return 0
+	fi
+
+	if [ ! -e "$SUBLPROJECT" ]; then
+
+		echo "No project.sublime-project or $SITENAMEPROJECT file found to open."
+		return 1;
+	fi
+
+	mv "project.sublime-project" "$SITENAMEPROJECT" && \
+		subl -p "$SITENAMEPROJECT"
+
+	return 0
+}
+
+###
  # Wrap all my commands into the affwp command.
  #
  # This catches everything else I want to do
