@@ -196,6 +196,7 @@ wpdbs () {
 
 			# They have a dbs/init.tar.gz file, use that as a base instead.
 			echo "You have dbs/init.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
+
 			wpdbr && wpdbi "dbs/init.tar.gz"
 
 			# Set the blogname to the target db when importing a reset so we can export it next time.
