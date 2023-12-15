@@ -12,6 +12,8 @@ startup-misc () {
 	cleanup
 	brewd
 
+	antigen update
+
 	mkdir -p "$HOME/Pictures/Screenshots"
 	mkdir -p "$HOME/Pictures/Screenshots/Autosaved" # Where we put CleanshotX.
 
