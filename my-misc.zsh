@@ -41,7 +41,7 @@ startup-misc () {
 	chflags nohidden "$HOME/Library"
 	chflags hidden "$HOME/aportwood@awesomemotive.com - Google Drive"
 	chflags hidden "$HOME/aubreypwd@gmail.com - Google Drive"
-
-	# Automatically choose suggestion in zsh-autosuggestions using TAB.
-	bindkey '^[[Z' autosuggest-accept
 }
+
+# Automatically choose suggestion in zsh-autosuggestions using TAB.
+bindkey '^[[Z' autosuggest-accept
