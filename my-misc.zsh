@@ -42,10 +42,6 @@ startup-misc () {
 	chflags hidden "$HOME/aportwood@awesomemotive.com - Google Drive"
 	chflags hidden "$HOME/aubreypwd@gmail.com - Google Drive"
 
-	if [[ $(pwd) != "$HOME" ]]; then
-		return # Don't do the below unless we're loading the HOME folder.
-	fi
-
 	# Automatically choose suggestion in zsh-autosuggestions using TAB.
 	bindkey '^[[Z' autosuggest-accept
 }
