@@ -10,6 +10,7 @@ startup-misc () {
 
 	upgrade
 	cleanup
+	brewd
 
 	mkdir -p "$HOME/Pictures/Screenshots"
 	mkdir -p "$HOME/Pictures/Screenshots/Autosaved" # Where we put CleanshotX.
