@@ -23,3 +23,22 @@ source 'my-php.zsh'
 source 'my-sublime.zsh'
 source 'my-mysql.zsh'
 source 'my-exts.zsh'
+
+###
+ # Startup Operations
+ #
+ # @since Dec 14, 2023
+ ##
+startup () {
+
+	printf "Running Your Startup Commands...\n"
+
+	startup-misc
+	startup-mac-defaults
+	startup-exts
+	startup-php
+	startup-mysql
+
+	printf "\nDone. Press any key to continue..."
+	read -r 1
+}

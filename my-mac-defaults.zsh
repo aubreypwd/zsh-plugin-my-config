@@ -6,17 +6,8 @@
  # @since Tuesday, April 19, 2022
  ##
 
-() {
+startup-mac-defaults () {
 
-	if [[ $(pwd) != "$HOME" ]]; then
-		return
-	fi
-
-	###
-	 # macOS Default Flags
-	 #
-	 # @since Thursday, 10/1/2020
-	 ##
 	defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 	defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 	defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
@@ -41,5 +32,5 @@
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
 	defaults write com.apple.dock workspaces-edge-delay -float 0.4 # Switch to new space quicker.
 	defaults write com.apple.loginwindow DisableScreenLockImmediate -bool yes # Disable the lock key above the delete key.
+}
 
-} &> /dev/null &!

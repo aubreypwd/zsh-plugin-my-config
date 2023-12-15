@@ -1,17 +1,9 @@
-#!/bin/zsh
+#!/bin/bash
 
 ###
  # ls Configuration
  #
  # @since Wednesday, June 29, 2022
- ##
-
-###
- # Terminus for Sublime Text 3 Support
- #
- # @TODO Convert to own plugin.
- #
- # @since Monday, 9/21/2020
  ##
 if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
 

@@ -17,9 +17,5 @@ export PS1="$NEWLINE%F{black}%~ $NEWLINE%F{black}❯ %f"
  # @since  Wednesday, June 29, 2022 (Moved to this file)
  ##
 precmd() {
-
 	setopt localoptions nopromptsubst
-	# print -rP "%"
-	# print -P "%F{yellow}$(cmd_exec_time)%f"
-	# unset cmd_timestamp # Reset cmd exec time.
 }

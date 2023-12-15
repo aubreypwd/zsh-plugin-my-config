@@ -48,13 +48,12 @@ alias n@sys='n auto'
 alias n@lts='n lts'
 alias nt='ttab ' # New tab.
 alias nw='ttab -w' # New window.
-alias php@7.4="$(brew --prefix php@7.4)/bin/php"
-alias php@8.2="$(brew --prefix php@8.2)/bin/php"
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
-alias site="cd \$HOME/Sites && fd && cd "app/public" || true" # Quick way to get to a site (even with LocalWP).
+alias site="cd \$HOME/Sites/Valet && fd || true" # Quick way to get to a site (even with LocalWP).
 alias cftunnel="cloudflared tunnel run"
-# alias wp="php@7.4 /opt/homebrew/bin/wp" # Make wp-cli use PHP 7.4.
 alias wpe='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
+
+## Note PHP aliases are defined in my-php.zsh ##
 
 ###
  # Get the site name from the database for this install.
@@ -398,6 +397,26 @@ upgrade () {
 	brew upgrade gh
 	brew upgrade n
 	brew upgrade lazygit
+	brew upgrade ghq
+	brew upgrade openssl
+
+	for VERSION in "${MY_PHP_VERSIONS[@]}"; do
+		brew upgrade "php@$VERSION"
+	done
+
+	# Update all Cask apps to the latest.
+	brew upgrade --cask
+
+	composer global update laravel/valet:~4.0
+}
+
+###
+ # Cleanup
+ #
+ # @since Dec 14, 2023
+ ##
+cleanup () {
+	brew cleanup
 }
 
 ###

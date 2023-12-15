@@ -5,8 +5,7 @@
  #
  # @since Jul 14, 2023
  ##
-
-( (
+startup-exts () {
 
 	# Sublime Text 4: com.sublimetext.4
 	duti -s com.sublimetext.4 .php all
@@ -20,5 +19,4 @@
 	duti -s com.sublimetext.4 .sublime-project all
 	duti -s com.sublimetext.4 .sublime-workspace all
 	duti -s com.sublimetext.4 .json all
-
-) 1>&- 2>&- & )
+}
