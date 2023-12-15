@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 ###
  # My Repos
@@ -15,13 +15,12 @@
  #
  # @since Friday, August 27, 2021
  ##
-function _repo-is-dirty {
+_repo-is-dirty () {
 
-	full="\e[31m⑂\e[0m \e[33m$1\e[0m is dirty, use \e[32m$2\e[0m to access git."
-	macos="$1 is dirty!"
-	tilde="~"
+	FULL="\e[31m⑂\e[0m \e[33m$1\e[0m is dirty, use \e[32m$2\e[0m to access git."
+	TILDE="~"
 
-	echo -e "${full/$HOME/$tilde}"
+	echo -e "${FULL/$HOME/$TILDE}"
 }
 
 ###
@@ -29,7 +28,7 @@ function _repo-is-dirty {
  #
  # @since Friday, August 27, 2021
  ##
-function repo-status {
+repo-status () {
 
 	# Configs & Repos
 	alias "$2"="git -C "$1""
@@ -45,7 +44,7 @@ function repo-status {
  # @since Wednesday, April 20, 2022
  # @since Sep 20, 2023 Changed to repos
  ##
-function repo-statuses {
+repo-statuses () {
 
 	# Watch these repositories for dirtiness.
 	# repo-status "$HOME/Pictures/Profile Photos" "photos"
