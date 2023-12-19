@@ -670,3 +670,12 @@ affwp () {
 
 	__affwp "$@"
 }
+
+###
+ # Walk a directory using walk.
+ #
+ # @since Dec 19, 2023
+ ##
+lw () {
+	cd "$(walk --icons "$@")" || return 1
+}

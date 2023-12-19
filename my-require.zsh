@@ -70,6 +70,7 @@ requirements () {
 	require "mc" "brew reinstall mc" "brew"
 	require "duti" "brew reinstall duti" "brew" # Used for file extension association.
 	require "pinentry-mac" "brew reinstall pinentry-mac" "brew" # Used for GPG signing.
+	require "walk" "brew reinstall walk" "brew" # Used to cd into folders, etc.
 
 	# Reset REQUIRE_AUTO_INSTALL.
 	export REQUIRE_AUTO_INSTALL="$DEFAULT"
