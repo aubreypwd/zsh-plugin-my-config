@@ -32,7 +32,7 @@ export MANPAGER='ul | cat -s' # Don't use less.
  #
  # @since Thursday, 5/13/2021
  ##
-export EDITOR='subl -n -w'
+export EDITOR='micro --savecursor true --diffgutter false --colorcolumn 80 --ruler true --softwrap false --wordwrap false --eofnewline true --rmtrailingws true --infobar false --clipboard external --autoindent true'
 export VISUAL="$EDITOR"
 
 # Python
