@@ -33,7 +33,6 @@ export MANPAGER='ul | cat -s' # Don't use less.
  # @since Thursday, 5/13/2021
  ##
 export EDITOR='subl -n -w'
-export EDITOR='micro'
 export VISUAL="$EDITOR"
 
 # Python
