@@ -679,3 +679,35 @@ affwp () {
 lw () {
 	cd "$(walk --icons "$@")" || return 1
 }
+
+###
+ # Open a Local Site's WordPress Admin URL
+ #
+ # @since Jan 5, 2024
+ ##
+owpadmin () {
+
+	if [ -z "$1" ]; then
+		SITEURL="$(wp option get siteurl)/wp-admin/"
+	else
+		SITEURL="$1/wp-admin/"
+	fi
+
+	open --url "$SITEURL"
+}
+
+###
+ # Open a Local Site's WordPress URL
+ #
+ # @since Jan 5, 2024
+ ##
+owpurl () {
+
+	if [ -z "$1" ]; then
+		SITEURL="$(wp option get siteurl)/"
+	else
+		SITEURL="$1/"
+	fi
+
+	open --url "$SITEURL"
+}
