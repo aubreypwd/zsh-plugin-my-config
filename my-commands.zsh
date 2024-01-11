@@ -727,11 +727,12 @@ owpurl () {
  ##
 cftunnel () {
 
-	TIME="$1"
+	TIMEOUT="$1"
 
-	if [ -z "$TIME" ]; then
-		TIME="3h" # Don't run for more than 3 hours, unless instructed.
+	if [ -z "$TIMEOUT" ]; then
+		TIMEOUT="3h" # Don't run for more than 3 hours, unless instructed.
 	fi
 
 	timeout "$TIMEOUT" cloudflared tunnel run
+	terminal-notifier -message "Cloudflared Tunneling Timedout" -sender "com.iterm."
 }
