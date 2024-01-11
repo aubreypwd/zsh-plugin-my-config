@@ -734,5 +734,16 @@ cftunnel () {
 	fi
 
 	timeout "$TIMEOUT" cloudflared tunnel run
-	terminal-notifier -message "Cloudflared Tunneling Timedout" -sender "com.iterm."
+	notify "Cloudflared Tunneling Timedout"
+}
+
+###
+ # Send Push Notification
+ #
+ # @arg <$1> The message you want to push to the notification.
+ #
+ # @since Jan 11, 2024
+ ##
+notify () {
+	terminal-notifier -message "$1" -sender "com.iterm."
 }
