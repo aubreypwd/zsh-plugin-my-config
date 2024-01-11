@@ -21,6 +21,7 @@ fi
 alias b="bell"
 alias beep="bell"
 alias bell="tput bel"
+alias blogname="wp option get blogname"
 alias c=clear
 alias c@1="composer self-update --1"
 alias c@2="composer self-update --2"
@@ -51,6 +52,7 @@ alias nw='ttab -w' # New window.
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
 alias site="cd \$HOME/Sites/Valet && fd || true" # Quick way to get to a site (even with LocalWP).
 alias cftunnel="cloudflared tunnel run"
+alias siteurl="wp option get siteurl"
 alias wpe='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 
 ## Note PHP aliases are defined in my-php.zsh ##
