@@ -51,7 +51,6 @@ alias nt='ttab ' # New tab.
 alias nw='ttab -w' # New window.
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
 alias site="cd \$HOME/Sites/Valet && fd || true" # Quick way to get to a site (even with LocalWP).
-alias cftunnel="cloudflared tunnel run"
 alias siteurl="wp option get siteurl"
 alias wpe='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 
@@ -685,6 +684,8 @@ lw () {
 ###
  # Open a Local Site's WordPress Admin URL
  #
+ # @arg <$1> If you supply a URL for a site we'll open /wp-admin/ on that URL instead.
+ #
  # @since Jan 5, 2024
  ##
 owpadmin () {
@@ -700,6 +701,8 @@ owpadmin () {
 
 ###
  # Open a Local Site's WordPress URL
+ #
+ # @arg <$1> If you supply a URL we'll open that instead.
  #
  # @since Jan 5, 2024
  ##
