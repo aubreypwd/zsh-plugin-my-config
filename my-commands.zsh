@@ -734,7 +734,7 @@ cftunnel () {
 	fi
 
 	timeout "$TIMEOUT" cloudflared tunnel run
-	notify "Cloudflared Tunneling Timedout"
+	notify "Cloudflared Tunneling Timeout"
 }
 
 ###
