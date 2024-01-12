@@ -747,3 +747,24 @@ cftunnel () {
 notify () {
 	terminal-notifier -message "$1" -sender "com.iterm."
 }
+
+###
+ # Install WordPress (Reset)
+ #
+ # @arg <$1> The name (and domain) of the site, e.g. "my-site".
+ #           Will create my-site.test and name it my-site.
+ #
+ # @since Jan 12, 2024
+ ##
+wpinstall () {
+
+	wpdbr
+
+	NAME="$1"
+
+	if [ -z "$NAME" ]; then
+		NAME="$(nwd)"
+	fi
+
+	wp core install --url="http://$NAME.test" --admin_user=admin --admin_email="admin@example.com" --admin_password=password --title="$NAME"
+}
