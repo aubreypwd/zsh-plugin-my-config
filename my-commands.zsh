@@ -723,14 +723,14 @@ owpurl () {
  # @arg <$1> How long to run the tunnel (defaults to 3 hours) e.g. 2m, 12s, 24h.
  #
  # @since Jan 10, 2024
- # @since Jan 11, 2024 Updated to just run the command for 3 hours (by default).
+ # @since Jan 11, 2024 Updated to just run the command for 5 hours (by default).
  ##
 cftunnel () {
 
 	TIMEOUT="$1"
 
 	if [ -z "$TIMEOUT" ]; then
-		TIMEOUT="3h" # Don't run for more than 3 hours, unless instructed.
+		TIMEOUT="5h" # Don't run for more than 3 hours, unless instructed.
 	fi
 
 	timeout "$TIMEOUT" cloudflared tunnel run
