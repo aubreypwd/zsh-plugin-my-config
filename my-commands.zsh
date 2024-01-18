@@ -768,3 +768,16 @@ wpinstall () {
 
 	wp core install --url="http://$NAME.test" --admin_user=admin --admin_email="admin@example.com" --admin_password=password --title="$NAME"
 }
+
+###
+ # Change Directory
+ #
+ # This just add addition functionality once you get into the directory.
+ #
+ # @since Jan 18, 2024
+ ##
+cd () {
+
+	builtin cd "$@" && \
+		if [ -e "./.git" ]; then git s; fi
+}
