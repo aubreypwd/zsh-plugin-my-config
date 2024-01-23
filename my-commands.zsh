@@ -778,6 +778,10 @@ wpinstall () {
  ##
 cd () {
 
+	if [ "$(pwd)" = "$HOME" ]; then
+		builtin cd "$@" && return 0
+	fi
+
 	builtin cd "$@" && \
 		if [ -e "./.git" ]; then git s; fi
 }
