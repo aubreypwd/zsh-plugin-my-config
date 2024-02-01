@@ -133,6 +133,7 @@ sysinfo () {
  # @since Oct 12, 2022            Refactored to work with files vs internally switching.
  # @since Oct 13, 2022            Renamed to lwpdbs.
  # @since Oct 28, 2022            Renamed to wpdbs since it always works with the dbs/ folder.
+ # @since Feb 1, 2024             Updated to use dbs/$(nwd) for the init file.
  ##
 wpdbs () {
 
@@ -145,6 +146,7 @@ wpdbs () {
 
 	target_db="$1"
 	export_db="$2"
+	nwd="$(nwd)"
 
 	# Keep the URL the same as the current install.
 	install_url=""
@@ -157,13 +159,7 @@ wpdbs () {
 	fi
 
 	if test -z "$target_db"; then
-
-		echo "Please supply new DB name (if dbs/<db>.tar.gz exists it will be imported instead."
-		echo
-		echo "Usage: wpdbs <db name> <export name>"
-		echo
-
-		return 1
+		target_db="$nwd"
 	fi
 
 	mkdir -p "dbs"
@@ -192,12 +188,12 @@ wpdbs () {
 
 		echo "dbs/$target_db.tar.gz does not exist."
 
-		if test -e "dbs/init.tar.gz"; then
+		if test -e "dbs/$nwd.tar.gz"; then
 
-			# They have a dbs/init.tar.gz file, use that as a base instead.
-			echo "You have dbs/init.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
+			# They have a dbs/$nwd.tar.gz file, use that as a base instead.
+			echo "You have dbs/$nwd.tar.gz, importing it instead of creating new install (delete to ensure new installs are created)."
 
-			wpdbr && wpdbi "dbs/init.tar.gz"
+			wpdbr && wpdbi "dbs/$nwd.tar.gz"
 
 			# Set the blogname to the target db when importing a reset so we can export it next time.
 			wp option set blogname "$target_db" --url="$install_url"
