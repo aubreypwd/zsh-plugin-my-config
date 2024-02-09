@@ -473,12 +473,11 @@ resetfinder () {
 
 	rmdstore "$HOME"
 
-	# Tell finder to use set view by default, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
-	defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+	startup-mac-defaults # Load mac defaults (where finder view is set).
 
 	killall Finder
 
-	echo "Done resetting Finder default view."
+	echo "Done resetting Finder default views, etc."
 }
 
 ###
