@@ -780,3 +780,31 @@ cd () {
 	builtin cd "$@" && \
 		if [ -e "./.git" ]; then git s; fi
 }
+
+###
+ # Run command, after first switching to
+ # preferred npm version, then switch
+ # back to lts.
+ #
+ # @usage nn i
+ # @usage nn run build
+ #
+ # @arg <$*> The npm command to run (passed to eval).
+ #
+ # @since Feb 15, 2024
+ ##
+nn () {
+
+	COMMAND="$*"
+
+	if [ -z "$COMMAND" ]; then
+
+		echo "Usage: nn <npm command>, e.g.: nn install, nn run build, etc."
+		return 1
+	fi
+
+	n auto && \
+		eval "/opt/homebrew/bin/npm $COMMAND"
+
+	n lts
+}
