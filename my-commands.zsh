@@ -796,6 +796,7 @@ cd () {
 nn () {
 
 	COMMAND="$*"
+	NVMRC="./.nvmrc"
 
 	if [ -z "$COMMAND" ]; then
 
@@ -803,8 +804,13 @@ nn () {
 		return 1
 	fi
 
-	n auto && \
-		eval "/opt/homebrew/bin/npm $COMMAND"
+	if [ -e "$NVMRC" ]; then
+		n auto
+	fi
 
-	n lts
+	eval "npm $COMMAND"
+
+	if [ -e "$NVMRC" ]; then
+		n lts
+	fi
 }
