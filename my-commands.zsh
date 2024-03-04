@@ -469,9 +469,13 @@ rmdstore () {
  # @since Jul 21, 2023
  # @since Sep 6, 2023 Change back to list view, just so much superior.
  ##
-resetfinder () {
+reset-finder () {
+
+	echo "Removing .DS_Store in $HOME..."
 
 	rmdstore "$HOME"
+
+	echo "Resetting Defaults..."
 
 	startup-mac-defaults # Load mac defaults (where finder view is set).
 
@@ -485,7 +489,7 @@ resetfinder () {
  #
  # @since Jul 28, 2023
  ##
-finderr () {
+restart-finder () {
 
 	killall Finder
 	finder "$HOME"
@@ -814,3 +818,4 @@ nn () {
 		n lts
 	fi
 }
+
