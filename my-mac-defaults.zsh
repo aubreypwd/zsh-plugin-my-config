@@ -54,11 +54,7 @@ startup-mac-defaults () {
 
 	# Finder
 	defaults write com.apple.Finder QuitMenuItem 1 # Add Quit to Finder
-
-	defaults write com.apple.Finder FXPreferredViewStyle clmv # Tell Finder what view style to use, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
-
-
-
+	defaults write com.apple.Finder FXPreferredViewStyle Nlsv # Tell Finder what view style to use, see https://www.defaults-write.com/change-default-view-style-in-os-x-finder/
 	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false # Disable the warning when changing a file extension
 	defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
