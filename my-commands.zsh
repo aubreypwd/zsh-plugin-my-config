@@ -819,3 +819,28 @@ nn () {
 	fi
 }
 
+###
+ # Run a command in a directory.
+ #
+ # @arg <$@> Arguments for gh copilot explain.
+ #
+ # @usage explain "How do I create a new file in PHP?"
+ #
+ # @since Feb 15, 2024
+ ##
+explain () {
+	gh copilot explain "$@"
+}
+
+###
+ # Suggest a Command
+ #
+ # @arg <$1> The arguments for gh copilot suggest.
+ #
+ # @usage suggest "How do I create a new file in PHP?"
+ #
+ # @since Feb 15, 2024
+ ##
+suggest () {
+	gh copilot suggest "$@"
+}
