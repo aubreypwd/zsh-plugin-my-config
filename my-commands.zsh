@@ -923,36 +923,46 @@ alfzipr () {
 		return 1
 	fi
 
-	if [ ! -e "$1" ]; then
+	if [ ! -e "./$1" ]; then
 		
-		echo "$1 does not exist, download it from https://github.com/awesomemotive/affiliate-wp"
+		echo "./$1 does not exist, download it from https://github.com/awesomemotive/affiliate-wp"
 		
 		return 1
 	fi
 
-	if [ -d "${1//.zip/}" ]; then
+	if [ -d "./${1//.zip/}" ]; then
 
-		echo "Removing ${1//.zip/} so we can unzip fresh $1..."
+		echo "Removing directory ./${1//.zip/} so we can unzip $1..."
 
 		read "?Press any key to continue or CTRL+c to exit now..."
 
-		rm -Rf "${1//.zip/}"
+		rm -Rf "./${1//.zip/}"
 	fi
 
-	unzip -q "$1"
+	unzip -q "./$1"
 
-	if [ ! -d "${1//.zip/}/$3" ]; then
+	if [ ! -d "./${1//.zip/}/$3" ]; then
 		
-		echo "${1//.zip/}/$3 does not exist, try again with the correct sub-folder."
+		echo "./${1//.zip/}/$3 does not exist, try again with the correct sub-folder."
 		
 		return 1
 	fi
 
-	echo "Deleting old affiliatewp-$2.zip so we can create a new one..."
+	if [ -e "./affiliatewp-$2.zip" ]; then
+			echo "Deleting existing ZIP ./affiliatewp-$2.zip so we can create a new one..."
 
+			read "?Press any key to continue or CTRL+c to exit now..."
+			
+			rm -f "./affiliatewp-$2.zip"
+	fi
+
+	cd "./${1//.zip/}" && \
+		zip -rq "../affiliatewp-$2.zip" "$3" -x "*.DS_Store" && \
+		cd ..
+
+	echo "Delete ./${1//.zip/} and ./$1?"
 	read "?Press any key to continue or CTRL+c to exit now..."
 
-	rm -f "affiliatewp-$2.zip"
-
-	cd "${1//.zip/}" && zip -rq "../affiliatewp-$2.zip" "$3" -x "*.DS_Store" && cd ..
+ trash -Rf "./${1//.zip/}"
+ trash -Rf "./$1"
 }
