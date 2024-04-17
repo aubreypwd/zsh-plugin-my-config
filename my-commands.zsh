@@ -844,3 +844,61 @@ explain () {
 suggest () {
 	gh copilot suggest "$@"
 }
+
+###
+ # Split terminal into (3) horizontal panes (including the current one).
+ #
+ # @usage 3vp
+ #
+ # @since Apr 17, 2024
+ ##
+3hp () {
+	
+	osascript \
+		-e 'tell application "iTerm"' \
+			-e 'tell current window' \
+				-e 'tell current session' \
+					-e 'split horizontally with default profile' \
+					-e 'split horizontally with default profile' \
+				-e 'end tell' \
+			-e 'end tell' \
+		-e 'end tell'
+}
+
+###
+ # Split terminal into (2) horizontal panes (including the current one).
+ #
+ # @usage 3vp
+ #
+ # @since Apr 17, 2024
+ ##
+2hp () {
+	
+	osascript \
+		-e 'tell application "iTerm"' \
+			-e 'tell current window' \
+				-e 'tell current session' \
+					-e 'split horizontally with default profile' \
+				-e 'end tell' \
+			-e 'end tell' \
+		-e 'end tell'
+}
+
+###
+ # Split terminal into (2) vertical panes (including the current one).
+ #
+ # @usage 3vp
+ #
+ # @since Apr 17, 2024
+ ##
+2vp () {
+	
+	osascript \
+		-e 'tell application "iTerm"' \
+			-e 'tell current window' \
+				-e 'tell current session' \
+					-e 'split vertically with default profile' \
+				-e 'end tell' \
+			-e 'end tell' \
+		-e 'end tell'
+}
