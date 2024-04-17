@@ -63,6 +63,9 @@ alfzipr () {
 		zip -rq "../affiliatewp-$2.zip" "$3" -x "*.DS_Store" && \
 		cd ..
 
+	zipinfo *.zip > zipinfo.txt && \
+		cat zipinfo.txt
+
 	echo "Delete ./${1//.zip/} and ./$1?"
 	read "?Press any key to continue or CTRL+c to exit now..."
 
