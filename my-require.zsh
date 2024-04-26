@@ -72,6 +72,8 @@ requirements () {
 	require "pinentry-mac" "brew reinstall pinentry-mac" "brew" # Used for GPG signing.
 	require "walk" "brew reinstall walk" "brew" # Used to cd into folders, etc.
 	require "terminal-notifier" "brew reinstall terminal-notifier" "brew" # Used for notifications.
+	require "7z" "brew reinstall p7zip" "brew" # Used to compress things better.
+	require "trash" "brew reinstall trash-cli" "brew" # Move to trash instead of rm -Rf.
 
 	# Reset REQUIRE_AUTO_INSTALL.
 	export REQUIRE_AUTO_INSTALL="$DEFAULT"
