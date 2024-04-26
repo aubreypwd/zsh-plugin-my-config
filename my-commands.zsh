@@ -903,4 +903,78 @@ suggest () {
 		-e 'end tell'
 }
 
+###
+ # Archive A Site
+ # 
+ # @usage asite
+ #
+ # @since Apr 26, 2024
+ ##
+asite () {
+
+	require "trash" "brew reinstall trash" "brew"
+	require "7z" "brew reinstall p7zip" "brew"
+	require "wp" "brew reinstall wp-cli" "brew"
+	require "tag" "brew reinstall tag" "brew"
+
+	SITENAME="$(nwd)"
+
+	echo "Exporting DB to dbs/$SITENAME.tar.gz..."
+	wpdbx "./dbs/$SITENAME"
+
+	if [ ! -e "./dbs/$SITENAME.tar.gz" ]; then
+	
+		echo "DB Export didn't complete! Exiting now."
+		return 1
+	fi
+
+	echo "Dropping the DB now that it's exported..."
+	wp db drop --yes || return 1
+
+	cd ..
+
+	if [ ! -d "./$SITENAME" ]; then
+
+		echo "Directory ./$SITENAME does not exist to compress, exiting now."
+		return 1
+	fi
+
+	echo "Creating ZIP ./$SITENAME.7z..."
+	7Z "$SITENAME" "./$SITENAME" || return 1
+
+	if [ ! -e "./$SITENAME.7z" ]; then
+		
+		echo "./$SITENAME.7z was not created (compression failed), exiting now."
+		return 1
+	fi
+
+	echo "Tagging ./$SITENAME.7z with 'Archive' Tag in macOS for later..."
+	tag -a 'Archive' "./$SITENAME.7z"
+
+	echo "Deleting ./$SITENAME..."
+	trash "./$SITENAME" || rm -Rf "./$SITENAME"
+}
+
+###
+ # Compress a file using 7z with MAXIMUM compression.
+ #
+ # @usage 7Z <file or directory>
+ #
+ # @since Apr 26, 2024
+ ##
+7Z () {
+	7z a -t7z -mx=9 -m0=lzma2 -ms=on "$1.7z" "./$1"
+}
+
+###
+ # Compress a file using 7z with MAXIMUM compression and delete the original.
+ #
+ # @usage 7Zd <file or directory>
+ #
+ # @since Apr 26, 2024
+ ##
+7Zd () {
+	7Z "$1" && trash "./$1"
+}
+
 source 'my-alf-commands.zsh'
