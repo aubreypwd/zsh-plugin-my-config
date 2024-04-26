@@ -16,6 +16,6 @@ if [ "$TERM_PROGRAM" = "Terminus-Sublime" ]; then
 else
 
 	# Use exa outside of Terminus.
-	alias ls='exa -l -g --icons --tree --level=1 -a' # Enhance exa ls defaults.
-	alias ll='exa -l -g --icons --tree --level=2 -a' # Enhance exa ls defaults, but show 2 levels deep.
+	alias ls='exa -l -g --icons --tree --level=1 -a --group-directories-first' # Enhance exa ls defaults.
+	alias ll='exa -l -g --icons --tree --level=2 -a --group-directories-first' # Enhance exa ls defaults, but show 2 levels deep.
 fi
