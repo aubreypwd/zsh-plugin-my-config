@@ -51,16 +51,16 @@ alfzipr () {
 		return 1
 	fi
 
-	if [ -e "./affiliatewp-$2.zip" ]; then
-			echo "Deleting existing ZIP ./affiliatewp-$2.zip so we can create a new one..."
+	if [ -e "./affiliate-wp-$2.zip" ]; then
+			echo "Deleting existing ZIP ./affiliate-wp-$2.zip so we can create a new one..."
 
 			read "?Press any key to continue or CTRL+c to exit now..."
 			
-			rm -f "./affiliatewp-$2.zip"
+			rm -f "./affiliate-wp-$2.zip"
 	fi
 
 	cd "./${1//.zip/}" && \
-		zip -rq "../affiliatewp-$2.zip" "$3" -x "*.DS_Store" && \
+		zip -rq "../affiliate-wp-$2.zip" "$3" -x "*.DS_Store" && \
 		cd ..
 
 	zipinfo *.zip > zipinfo.txt && \
