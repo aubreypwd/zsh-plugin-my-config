@@ -72,3 +72,27 @@ alfzipr () {
 	trash "./${1//.zip/}" || rm -Rf "./${1//.zip/}" 
 	trash "./$1" || rm -Rf "./$1"
 }
+
+###
+ # AffiliateWP: Update @since AFFWPN with a version number.
+ # 
+ # @usage affwpn <version>
+ #
+ # @since Apr 26, 2024
+ ##
+affwpn () {
+
+	if [ -z "$1" ]; then
+
+		echo "Usage: affwpn <version>"
+		echo "Eg.: affwpn '2.24.2'"
+
+		return 1
+	fi
+
+	R1='s/(@since\s*)(AFFWPN)/${1}'
+	R2="$1"
+	R3='/g'
+
+	find . -type d \( -name "vendor" -o -name "node_modules" -o -name "dist" \) -prune -o -type f \( -name "*.php" -o -name "*.js" \) -print0 | xargs -0 perl -pi -e "$R1$R2$R3"
+}
