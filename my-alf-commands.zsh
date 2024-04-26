@@ -15,6 +15,7 @@
  # @usage alfzipr <source zip file> <version> <directory to zip>
  #
  # @since Apr 17, 2024
+ # @since Apr 26, 2024 Updated to create affiliate-wp-x.x.x file not affiliatewp-x.x.x file.
  ##
 alfzipr () {
 
