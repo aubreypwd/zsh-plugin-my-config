@@ -11,7 +11,7 @@
  #
  # @since Dec 14, 2023
  ##
-MY_PHP_VERSIONS=(7.4 8.0 8.2 8.3)
+MY_PHP_VERSIONS=(7.4 8.0 8.1 8.2 8.3)
 
 startup-php () {
 	setup-php
