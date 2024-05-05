@@ -676,7 +676,7 @@ affwp () {
  #
  # @since Dec 19, 2023
  ##
-ww () {
+wd () {
 	cd "$(walk --icons "$@")" || return 1
 }
 
