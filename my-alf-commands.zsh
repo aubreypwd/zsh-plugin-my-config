@@ -106,7 +106,7 @@ affwpn () {
  #
  # @since May 17, 2024
  ##
-affwpnd () {
+affwpndev () {
 
 	if [ "Valet" != "$(nwd)" ]; then
 		
