@@ -119,7 +119,7 @@ affwpndev () {
 	USAGE="Usage: affwpndev <new-directory>"
 	
 	DEV_SITE_PATH="$HOME/Sites/Valet/affiliatewp-dev"
-	DEV_SITE_DB="$DEV_SITE_PATH/dbs/affiliatewp-dev.tar.gz"
+	DEV_SITE_DB="$DEV_SITE_PATH/db.sql"
 	DEV_SITE_DOMAIN='affiliatewp-dev.test'
 
 	if [ ! -e "$DEV_SITE_PATH" ]; then
@@ -179,19 +179,18 @@ affwpndev () {
 
 	wp db create --path="./$NEW_DIR" || wp db reset --yes --path="./$NEW_DIR"
 
-	wp core install --url="http://$(nwd).test" \
+	wp core install --url="http://$NEW_DIR.test" \
 		--admin_user=admin \
 		--admin_email="nobody@example.com" \
 		--admin_password=password \
-		--title="$(nwd)" \
+		--title="$NEW_DIR" \
 		--path="./$NEW_DIR" \
 			|| return 1
 
 	wp core update --force --path="./$NEW_DIR/" || return 1
 
-	gzip -c -d "$DEV_SITE_DB" | wp db import --path="./$NEW_DIR/" -  && \
-		wp search-replace "$DEV_SITE_DOMAIN" "$(nwd).test" --all-tables \
-			--path="./$NEW_DIR/"
+	wp db import "$DEV_SITE_DB" --path="./$NEW_DIR/" && \
+		wp search-replace "$DEV_SITE_DOMAIN" "$NEW_DIR.test" --all-tables --path="./$NEW_DIR/"
 	
 	cd "./$NEW_DIR"
 }
