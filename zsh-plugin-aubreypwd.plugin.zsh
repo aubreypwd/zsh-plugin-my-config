@@ -35,8 +35,8 @@ startup () {
 
 	startup-misc
 	startup-mac-defaults
-	startup-exts
 	startup-php
+	startup-exts
 	startup-mysql
 
 	printf "\nDone. Press any key to continue..."

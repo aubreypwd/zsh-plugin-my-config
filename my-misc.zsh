@@ -5,7 +5,6 @@
  #
  # @since Wednesday, June 29, 2022
  ##
-
 startup-misc () {
 
 	upgrade
