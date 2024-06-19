@@ -16,14 +16,14 @@
  #
  # @since Apr 17, 2024
  # @since Apr 26, 2024 Updated to create affiliate-wp-x.x.x file not affiliatewp-x.x.x file.
- # @since May 17, 2024 Renamed to affwpzipr
+ # @since May 17, 2024 Renamed to affwpbuildr
  ##
-affwpzipr () {
+affwpbuildr () {
 
 	if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 
-		echo "Usage: alfzr <source zip file> <version> <sub-directory to zip>"
-		echo "Eg.: alfzr affiliate-wp-master.zip '2.24.2' 'affiliate-wp'"
+		echo "Usage: affwpbuildr <source zip file> <version> <sub-directory to zip>"
+		echo "Eg.: affwpbuildr affiliate-wp-master.zip '2.24.2' 'affiliate-wp'"
 
 		return 1
 	fi
@@ -31,7 +31,6 @@ affwpzipr () {
 	if [ ! -e "./$1" ]; then
 		
 		echo "./$1 does not exist, download it from https://github.com/awesomemotive/affiliate-wp"
-		
 		return 1
 	fi
 
@@ -39,37 +38,39 @@ affwpzipr () {
 
 		echo "Removing directory ./${1//.zip/} so we can unzip $1..."
 
-		read "?Press any key to continue or CTRL+c to exit now..."
+		read "?Press [Enter] to continue or [CTRL+C] to exit now..."
 
-		rm -Rf "./${1//.zip/}"
+		trash "./${1//.zip/}" || rm -Rf "./${1//.zip/}"
 	fi
 
-	unzip -q "./$1"
+	unzip -o -qq "$1"
 
 	if [ ! -d "./${1//.zip/}/$3" ]; then
 		
 		echo "./${1//.zip/}/$3 does not exist, try again with the correct sub-folder."
-		
 		return 1
 	fi
 
-	if [ -e "./affiliate-wp-$2.zip" ]; then
-			echo "Deleting existing ZIP ./affiliate-wp-$2.zip so we can create a new one..."
-
-			read "?Press any key to continue or CTRL+c to exit now..."
+	if [ -e "./$2.zip" ]; then
 			
-			rm -f "./affiliate-wp-$2.zip"
+		echo "Deleting existing ZIP ./$2.zip so we can create a new one..."
+
+		read "?Press [Enter] to continue or [CTRL+C] to exit now..."
+		
+		trash "./$2.zip" || rm -Rf "./$2.zip"
 	fi
 
+	echo "Creating ZIP ./$2.zip..."
+
 	cd "./${1//.zip/}" && \
-		zip -rq "../affiliate-wp-$2.zip" "$3" -x "*.DS_Store" && \
+		zip -r -q -9 "../$2.zip" "$3" -x "*.DS_Store" || cd .. && \
 		cd ..
 
 	zipinfo *.zip > zipinfo.txt && \
-		cat zipinfo.txt
+		cat zipinfo.txt | bat zipinfo.txt
 
-	echo "Delete ./${1//.zip/} and ./$1?"
-	read "?Press any key to continue or CTRL+c to exit now..."
+	echo "Delete ./${1//.zip/} and ./$1 ???"
+	read "?Press [Enter] to continue or [CTRL+C] to exit now..."
 
 	trash "./${1//.zip/}" || rm -Rf "./${1//.zip/}" 
 	trash "./$1" || rm -Rf "./$1"
