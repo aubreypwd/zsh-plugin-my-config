@@ -50,7 +50,7 @@ alias n@lts='n lts'
 alias nt='ttab ' # New tab.
 alias nw='ttab -w' # New window.
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
-alias site="cd \$HOME/Sites/Valet && fd || true" # Quick way to get to a site (even with LocalWP).
+alias site="cd \$HOME/Sites/LocalWP && fd && cd app/public || true" # Quick way to get to a site (even with LocalWP).
 alias siteurl="wp option get siteurl"
 alias wpe='wp site list --field=url | xargs -n1 -I % wp --url=%' # On each subsite, run a command.
 
