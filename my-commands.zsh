@@ -977,4 +977,15 @@ asite () {
 	7Z "$1" && trash "./$1"
 }
 
+###
+ # Get the Bundle ID of an app.
+ #
+ # @usage bundle "Safari"
+ #
+ # @since Jun 2, 2024
+ ##
+bundle () {
+	osascript "-e id of app '$1'"
+}
+
 source 'my-alf-commands.zsh'
