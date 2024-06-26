@@ -10,6 +10,16 @@
 
 # shellcheck disable=SC2139
 
+###
+ # Editors.
+ #
+ # @since Thursday, 5/13/2021
+ ##
+# export EDITOR='micro --savecursor true --diffgutter false --colorcolumn 80 --ruler true --softwrap false --wordwrap false --eofnewline true --rmtrailingws true --infobar false --clipboard external --autoindent true'
+# export EDITOR='vim'
+export EDITOR='code -n -w --disable-extension shevaua.phpcs'
+export VISUAL="$EDITOR"
+
 # Editor
 if test "$TERM_PROGRAM" = "Terminus-Sublime"; then
 	alias edit="$EDITOR"
@@ -31,7 +41,6 @@ alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
 alias cpd="cp -Rfa" # Copy a directory.
 alias cwd="pwdcp"
-alias edit="$EDITOR"
 alias e="edit"
 alias fd2="fd 2" # Two levels.
 alias fd10="fd 10" # Deeper.
