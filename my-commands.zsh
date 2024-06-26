@@ -31,6 +31,7 @@ alias cid="composer install --prefer-dist --ignore-platform-reqs" # dist install
 alias cis="composer install --prefer-source --ignore-platform-reqs" # source install.
 alias cpd="cp -Rfa" # Copy a directory.
 alias cwd="pwdcp"
+alias edit="$EDITOR"
 alias e="edit"
 alias fd2="fd 2" # Two levels.
 alias fd10="fd 10" # Deeper.
