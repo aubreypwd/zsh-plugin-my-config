@@ -60,5 +60,8 @@ startup-mac-defaults () {
 	defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 	defaults write com.apple.finder CreateDesktop false # Desktop icons.
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
+
+	# Safari
+	defaults write NSGlobalDomain WebKitDebugDeveloperExtrasEnabled -bool YES # Allow inspecting the web inspector.
 }
 
