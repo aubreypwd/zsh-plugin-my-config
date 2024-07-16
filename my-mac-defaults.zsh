@@ -65,7 +65,7 @@ startup-mac-defaults () {
 	defaults write NSGlobalDomain WebKitDebugDeveloperExtrasEnabled -bool YES # Allow inspecting the web inspector.
 
 	# WindowsManger (Stage Manager)
-	defaults write com.apple.WindowManager AutoHideDelay -int 5 # Wait 5 seconds to show Stage Manager.
+	defaults write com.apple.WindowManager AutoHideDelay -int 1 # Wait 1-2 seconds to show Stage Manager.
 }
 
 
