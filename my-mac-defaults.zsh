@@ -67,6 +67,9 @@ startup-mac-defaults () {
 	# WindowsManger (Stage Manager)
 	defaults write com.apple.WindowManager AutoHideDelay -int 1 # Wait 1-2 seconds to show Stage Manager.
 	defaults write com.apple.WindowManager StageFrameMinimumHorizontalInset -int 0 # See https://www.reddit.com/r/MacOS/comments/ydgi9z/stage_manager_causes_new_windows_to_not_be/
+
+	# Screenshots (Native)
+	defaults write com.apple.screencaptureui "thumbnailExpiration" -float 9999 # Keep the floating thumbnail up indefinitly.
 }
 
 
