@@ -27,11 +27,6 @@ startup-mac-defaults () {
 
 	# Keyboard
 	defaults write com.apple.loginwindow DisableScreenLockImmediate -bool yes # Disable the lock key above the delete key.
-
-	# Screenshots
-	defaults write com.apple.screencapture type jpg # Take jpg screenshots.
-	defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots/Autosaved"
-
 	defaults write com.googlecode.iterm2 "Secure Input" 0 # Tell iterm2 to allow non-secure input for escape
 
 	# Sublime Text
@@ -70,6 +65,8 @@ startup-mac-defaults () {
 
 	# Screenshots (Native)
 	defaults write com.apple.screencaptureui "thumbnailExpiration" -float 9999 # Keep the floating thumbnail up indefinitly.
+	defaults write com.apple.screencapture type png # Take jpg screenshots.
+	defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots/Autosaved"
 }
 
 
