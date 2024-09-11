@@ -46,7 +46,7 @@ requirements () {
 	require "cmatrix" "brew reinstall cmatrix" "brew" # Easy matrix screensave.
 	require "composer" "brew reinstall composer" "brew" # Composer, @see https://composer.org
 	require "duti" "brew reinstall duti" "brew" # Used to keep file associations.
-	require "exa" "brew reinstall exa" "brew" # Exa makes ls even more awesome.
+	require "eza" "brew reinstall eza" "brew" # Eza makes ls even more awesome (exa fork).
 	require "ffmpeg" "brew reinstall ffmpeg" "brew"
 	require "fzf" "brew reinstall fzf" "brew"
 	require "ghq" "brew reinstall ghq" "brew" # required by git get alias.
