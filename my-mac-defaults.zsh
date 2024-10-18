@@ -8,6 +8,9 @@
 
 startup-mac-defaults () {
 
+	# iTerm2
+	defaults write com.googlecode.iterm2 OpenFileInNewWindows -bool false # false always opens in a tab, true opens a new window
+
 	# Misc
 	defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 	defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
@@ -57,10 +60,12 @@ startup-mac-defaults () {
 	defaults write NSGlobalDomain "NSToolbarTitleViewRolloverDelay" -float "0" # When hovering over the folder in finder, show the icon immediately.
 
 	# Safari
-	defaults write NSGlobalDomain WebKitDebugDeveloperExtrasEnabled -bool YES # Allow inspecting the web inspector.
+	defaults write com.apple.Safari WebKitDebugDeveloperExtrasEnabled -bool true # Allow inspecting the web inspector.
+	defaults write com.apple.Safari IncludeInternalDebugMenu -bool false # Don't show the debug menu in normal Safari.
+	defaults write com.apple.SafariTechnologyPreview IncludeInternalDebugMenu -bool true # But show it in STP.
 
 	# WindowsManger (Stage Manager)
-	defaults write com.apple.WindowManager AutoHideDelay -int 5 # Wait X seconds to show Stage Manager.
+	defaults write com.apple.WindowManager AutoHideDelay -int 9999 # Wait X seconds to show Stage Manager.
 	defaults write com.apple.WindowManager StageFrameMinimumHorizontalInset -int 0 # See https://www.reddit.com/r/MacOS/comments/ydgi9z/stage_manager_causes_new_windows_to_not_be/
 
 	# Screenshots (Native)
