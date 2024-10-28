@@ -44,3 +44,7 @@ startup-misc () {
 
 # Automatically choose suggestion in zsh-autosuggestions using TAB.
 bindkey '^[[Z' autosuggest-accept
+
+if command -v pyenv 1>/dev/null 2>&1; then
+	eval "$(pyenv init --path)"
+fi
