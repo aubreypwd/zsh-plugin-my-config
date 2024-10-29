@@ -50,15 +50,17 @@ alias home='cd ~'
 alias lg="lazygit"
 alias ss='cmatrix' # Sceeen Saver
 alias safariextconv='xcrun /Applications/Xcode.app/Contents/Developer/us/bin/safari-web-extension-converter' # Convert Chrome Extensions to Safari Extensions.
-alias n@10='n 10'
-alias n@12='n 12'
-alias n@14='n 14'
-alias n@16='n 14'
-alias n@18='n 18'
-alias n@sys='n auto'
-alias n@lts='n lts'
+
+alias nvm10='nvm install 10 && nvm use 10'
+alias nvm12='nvm install 12 && nvm use 12'
+alias nvm14='nvm install 14 && nvm use 14'
+alias nvm16='nvm install 14 && nvm use 14'
+alias nvm18='nvm install 18 && nvm use 18'
+alias nvml='nvm install node && nvm use node'
+
 alias nt='ttab ' # New tab.
 alias nw='ttab -w' # New window.
+
 alias repo="cd \$HOME/Repos && fd 2" # An easy way to get to a repo using my ffd command.
 alias site="cd \$HOME/Sites/LocalWP && fd && cd app/public || true" # Quick way to get to a site (even with LocalWP).
 alias siteurl="wp option get siteurl"
@@ -806,26 +808,27 @@ cd () {
  # @arg <$*> The npm command to run (passed to eval).
  #
  # @since Feb 15, 2024
+ # @since Tuesday, October 29, 2024 Renamed to nvmdo
  ##
-nn () {
+nvmdo () {
 
 	COMMAND="$*"
 	NVMRC="./.nvmrc"
 
 	if [ -z "$COMMAND" ]; then
 
-		echo "Usage: nn <npm command>, e.g.: nn install, nn run build, etc."
+		echo "Usage: nvmas <npm command>, e.g.: nvmas install, nvmas run build, etc."
 		return 1
 	fi
 
 	if [ -e "$NVMRC" ]; then
-		n auto
+		nvm use # Use the version in .nvmrc.
 	fi
 
-	eval "npm $COMMAND"
+	eval "npm $COMMAND" # Run the command
 
 	if [ -e "$NVMRC" ]; then
-		n lts
+		nvm use node # Switch back to the default version if we switch to nvmrc version.
 	fi
 }
 

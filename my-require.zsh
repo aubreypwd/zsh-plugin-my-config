@@ -55,7 +55,7 @@ requirements () {
 	require "http" "brew install httpie" "brew" # Better than curl, replaces curl.
 	require "m" "brew install m-cli" "brew" # Love m-cli!
 	require "mycli" "brew reinstall mycli" "brew" # Better than mysql
-	require "n" "brew reinstall n" "brew" # n auto, n lts, etc
+	#require "nvm" "brew reinstall nvm" "brew" # nvm
 	require "npm" "brew reinstall node" "brew" # Also installs node.
 	require "python" "brew reinstall python" "brew" # Installs pip3 and easy_install
 	require "ruby" "brew reinstall ruby" "brew" # Installs gems
