@@ -65,7 +65,7 @@ startup-mac-defaults () {
 	defaults write com.apple.SafariTechnologyPreview IncludeInternalDebugMenu -bool true # But show it in STP.
 
 	# WindowsManger (Stage Manager)
-	defaults write com.apple.WindowManager AutoHideDelay -int 9999 # Wait X seconds to show Stage Manager.
+	defaults write com.apple.WindowManager AutoHideDelay -int 0 # Wait X seconds to show Stage Manager.
 	defaults write com.apple.WindowManager StageFrameMinimumHorizontalInset -int 0 # See https://www.reddit.com/r/MacOS/comments/ydgi9z/stage_manager_causes_new_windows_to_not_be/
 
 	# Screenshots (Native)
