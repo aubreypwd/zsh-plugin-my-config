@@ -72,6 +72,7 @@ startup-mac-defaults () {
 	defaults write com.apple.screencaptureui "thumbnailExpiration" -float 9999 # Keep the floating thumbnail up indefinitly.
 	defaults write com.apple.screencapture type png # Take jpg screenshots.
 	defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots/Autosaved"
+
+	# Repeat key mode for VIM emulation in VSCode.
+	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false # For VS Code
 }
-
-
